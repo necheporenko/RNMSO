@@ -1,0 +1,814 @@
+@import "vars"
+/*==========  Desktop First  ==========*/
+// ≥1200px
+
++media-breakpoint-down(lg)
+	.home	
+		.header
+			background-position: 95% 90%, 0 0
+			background-size: auto, auto
+	.main__list 
+		a
+			font-size: 13px
+	.header__title
+		padding: 0
+		&::before
+			display: none
+		&::after
+			display: none
+	.act
+		font-size: 25px
+		&::before
+			display: none
+	.program__list
+		display: flex
+		justify-content: space-between
+	.block__top-line
+		padding-left: 0
+	.popap__video
+		img
+			&:hover
+				transform: none
+	.partners-link
+		margin-bottom: 119px
+	
+	.participant__progress--modal
+		display: block
+	.event__cart--hidden-lg
+		display: none
+	.calendar-slider__mounth
+		flex-wrap: wrap
+	.slider-mounth__day
+		display: none
+	.calendar-slider__date
+		cursor: pointer
+		color: $accent
+		text-decoration: underline
+		text-align: right
+		padding-right: 25px
+		&:hover
+			color: $accent
+			text-decoration: underline
+		
+	.calendar-slider__nav 
+		.calendar-slider__arrow--prev
+			left: -95px
+	.calendar--program
+		.page__title--program
+			font-size: 24px
+	.affiche__comeback
+		display: block
+		margin: 50px 0 40px
+		display: flex
+		justify-content: space-between
+		width: 100%
+		position: relative
+		a
+			font-size: 13px
+			color: $text
+			text-decoration: none
+			border-bottom: 1px solid #000
+			margin-bottom: 3px
+			&:hover
+				color: $accent
+		.event__toglle
+			position: relative
+		.prev__event
+			margin-left: 40px
+			&::before
+				content: '\e809'
+				font-family: 'fontello'
+				display: block
+				position: absolute
+				left: -40px
+				top: 1px
+		.next__event
+			margin-right: 40px
+			&::after
+				content: '\e80a'
+				font-family: 'fontello'
+				position: absolute
+				right: -40px
+				top: 1px
+		.affiche__comeback-link
+			position: absolute
+			left: 194px
+	.affiche__comeback--second
+		margin: 0
+		position: absolute
+		.affiche__comeback-link
+			display: none
+	.program-button__wrapper--second
+		display: flex
+		height: 100%
+		align-items: center
+	.program__place
+		margin: 31px 0 37px
+	.program__short-descriotion
+		p
+			font-size: 16px
+			line-height: 23px
+			margin-bottom: 12px
+	.in-program
+		font-size: 14px
+		line-height: 20px
+		.in-program__title
+			font-size: 14px
+			margin-bottom: 10px
+		.in-program__list
+			li
+				margin-bottom: 12px
+	.program__photo-wrapper
+		margin-top: 30px
+		a
+		.popap__video::before
+			width: 40px
+			height: 40px
+			font-size: 40px
+	.page__flex-wrap
+		flex-basis: 30%
+		&:last-child
+			flex-basis: 70%
+// ≥992px
++media-breakpoint-down(md)
+	.top__line
+		margin: 0
+	.logo__group
+		img
+			display: block
+			max-width: 100%
+			height: auto
+	.logo__linl--RNYSO
+		padding-right: 30px
+		&::before
+			height: 100%
+			right: 22px
+			transform: rotate(0deg)
+	.menu__wrapper
+		display: none
+	.main__list
+		&:hover
+			.hidden__list
+	.menu__toggle
+		display: flex
+		justify-content: flex-end
+		align-items: center
+		height: 100%
+		padding-top: 30px
+		cursor: pointer
+	.second-floor
+		border-bottom:  1px solid #c4c4c4
+		border-right:  1px solid #c4c4c4
+		background: #ffffff
+		a
+			padding-left: 16px
+			text-align: left
+	.page__title-line
+		margin: 40px 0
+	.calendar__wrapper
+		margin: 50px 0 0
+	.language__toggle
+		border-bottom: 1px solid #c4c4c4
+		border-right:  1px solid #c4c4c4
+		background: #ffffff
+		flex-direction: row
+		justify-content: center
+		padding: 0 16px
+	.language__btn:first-child
+		border-bottom: none
+	.header__title
+		text-align: center
+	.events__calendar
+		flex-direction: column
+		align-items: center
+	.events__date
+		margin-bottom: 20px
+		flex-wrap: wrap
+		li
+			margin-bottom: 12px
+	.owl-dots
+		display: flex
+	.slide__nav
+		display: none
+	.slider__item
+	.slider__content
+		padding-top: 25px
+	.slider__program
+		text-align: center
+		margin-bottom: 15px
+	.program__list
+		justify-content: space-around
+	.footer__link-block
+		align-items: center
+	.page__title-line
+		&::before
+			content: none
+	.page__list
+		display: none
+	.m-before 
+		.page__title-line
+			margin-bottom: 57px
+	.m-persona
+		.page__title-line
+			margin-bottom: 0
+	.m-press
+		.page__title-line
+			margin-bottom: 55px
+		article
+			padding-right: 0px
+		.article__title
+			font-size: 20px
+		.article__text
+			font-size: 14px
+			line-height: 20px
+		.article__more
+			font-size: 14px
+	.main__video
+		margin-bottom: 53px
+	.video__basis
+		flex-basis: 45%
+	.top__cart
+		margin-top: 51px
+		.video__title
+			font-size: 24px
+		.video__text
+			font-size: 14px
+			line-height: 20px
+			margin-bottom: 12px
+	.video__title
+		font-size: 18px
+	.video__text
+		margin-bottom: 8px
+	.album__waves
+		display: none
+	.reserve__participant
+		flex-basis: 22%
+	.short__news
+		margin-bottom: 50px
+	.news__day
+		font-size: 16px
+	.full-link__title
+		font-size: 17px
+		margin-bottom: 12px
+	.news__full-link--img
+		img
+			margin-bottom: 12px
+	.short-news__text
+		margin-bottom: 12px
+		font-size: 14px
+		line-height: 20px
+	.affiche__comeback--second
+		.affiche__comeback-link
+			display: none
+	.pedagog-cart__description
+		a
+			font-size: 16px
+			line-height: 23px
+	.pedagog-cart__description--team
+		padding: 0
+	.symphonic-academy__title
+		margin: 35px -0 24px
+	.page__flex-wrap
+		flex-basis: 100%
+		&:last-child
+			flex-basis: 0
+	.page__title-line--orchestra 
+		.page__title--long, .page__title
+			transform: translate(0, 0)
+	.waves__title
+		&::before
+			display: none
+	.form__block
+		margin-top: 35px
+// ≥768px
++media-breakpoint-down(sm)
+	p
+		font-size: 14px
+		line-height: 20px
+		margin-bottom: 10px
+	.home	
+		.header
+			min-height: auto
+			padding-bottom: 50px
+			background: none, url(../img/header_bg.jpg)
+			background-repeat: no-repeat
+			background-size: cover
+	.menu__visible
+		left: 0
+	.second-floor
+		justify-content: center
+		a
+			border: none
+	main
+		margin-bottom: 70px
+	.slide__right
+		display: none
+	.slider__left
+		padding-right: 
+		width: 100%
+		text-align: center
+	.act
+		padding-left: 0
+	.s-video
+		padding: 0
+	.block__top-line
+		margin-bottom: 20px
+		align-items: flex-end
+	h4
+		padding-left: 0
+		background: none
+		line-height: 19px
+		letter-spacing: 0.5em
+	.reserve__participant
+		flex-basis: 43%
+	.controls--reserve
+		.filter__btn
+			margin-bottom: 10px
+			text-align: left
+	.affiche__comeback-link
+		display: none
+	.affiche__comeback--second
+		margin: 0
+		position: relative
+		.affiche__comeback-link
+			display: inline-block
+			text-align: right
+			position: absolute
+			left: 100%
+			top: -60px
+			transform: translate(-100%, 0)
+			border-bottom: none
+			text-decoration: underline
+	.calendar--program 
+		.page__title--program
+			margin-top: 14px
+	.ordercol
+		order: 2
+	.program__place
+		margin: 17px 0 14px
+	.program-button__wrapper--second
+		margin-bottom: 32px
+	.program__photo-wrapper 
+	.popap__video--program-page
+		&::before
+			width: 25px
+			height: 25px
+			font-size: 25px
+	.program__short-descriotion
+		margin-bottom: 40px
+	.in-program
+		margin-bottom: 40px
+	.main__video 
+		.popap__video::before
+				top: 35%
+	.photo-gallery__item
+		width: 48%	
+// ≥576px
++media-breakpoint-down(xs)
+	main
+		margin-bottom: 40px
+	.menu__toggle
+		justify-content: flex-start
+		span
+			width: 23px
+			height: 3px
+			&::before
+				left: 0
+				top: 7px
+				width: 23px
+				height: 3px
+			&::after
+				left: 0
+				bottom: 7px
+				width: 23px
+				height: 3px
+	.header__title
+		font-size: 22px
+		line-height: 28px
+	.act
+		padding-top: 25px
+		font-size: 19px
+		text-align: center
+	.act__btn
+		font-size: 16px
+		line-height: 21px
+		padding: 10px 30px
+		letter-spacing: 1px
+	.slider__left
+		padding: 0
+	.date__day
+		line-height: 22px
+		margin-bottom: 10px
+		font-size: 30px
+	.date__time 
+		.time
+			font-size: 16px
+	.slider__site
+		line-height: 1.4
+	.slider__title
+		font-size: 20px
+		line-height: 1.4
+		margin-bottom: 15px
+	.slider__participants
+		font-size: 15px
+		margin-bottom: 10px
+	.program__list 
+		flex-wrap: wrap
+		li
+			font-size: 15px
+			padding-right: 15px
+			&:last-child
+				padding-right: 0
+	.block__top-line
+		justify-content: center
+	h4
+		display: none
+	
+	.video__title
+		font-size: 16px
+	.video__carts
+		display: none
+	.video-slider
+		display: block!important
+		margin-bottom: 20px
+	.popap__video::before
+		top: 45%
+	.s-news
+		padding-bottom: 25px
+	.news-cart
+		border: none
+	.news-cart__title
+		a
+			padding: 15px 0
+	
+	.news-cart__text
+		padding: 15px 0
+		font-size: 14px
+	.news-cart__more
+		padding: 5px 22px 0 0
+		font-size: 22px
+		&::before
+			right: -11px
+			top: 6px
+	.footer__title-block
+		p
+			a
+				display: inline
+	.footer__social
+		width: 100%
+		justify-content: flex-start
+		margin-top: 20px
+		a
+			margin-right: 35px
+			&:last-child
+				margin-right: 0
+	.footer__logo
+		flex-direction: row
+		justify-content: flex-start
+		width: 100%
+		padding-top: 50px
+		a
+			margin-right: 35px
+			&:last-child
+				margin-right: 0
+	.page__title
+		font-size: 24px	
+		line-height: 1.3
+	.page__title--reserve
+		margin: 40px 0 0
+	.controls--reserve
+		margin: 25px 0 48px 0
+	.m-press
+		.page__title-line
+			margin-bottom: 35px
+	.gallery__title
+		font-size: 20px
+	.gallery__quantity
+		font-size: 12px
+	.m-video
+		.video__carts
+			display: block
+	.video__basis
+		flex-basis: 100%
+	.main__video
+		.popap__video
+			&::before
+				top: 35%
+				font-size: 32px
+				text-align: center
+				width: 64px
+				height: 64px
+			&::after
+				content: 'Фильм об оркестре'
+				position: absolute
+				text-align: center
+				top: 44%
+				color: #fff
+				text-transform: uppercase
+				font-size: 18px
+				letter-spacing: 1px
+				
+	.m-before 
+		.page__title-line
+			margin-bottom: 34px
+	.m-persona
+		.page__title-line
+			margin-bottom: 24px
+	.come-back
+		margin-top: 36px
+		margin-bottom: 29px
+	.album__title
+		font-size: 24px
+		line-height: 29px
+		margin-bottom: 18px
+	.album__quantity
+		font-size: 12px
+		line-height: 15px
+		margin-bottom: 18px
+	.album__description
+		font-size: 12px
+		line-height: 18px
+		margin-bottom: 25px
+	.reserve__title-text
+		display: none
+	.reserve__section-title
+		font-size: 18px
+		line-height: 22px
+	.participant__name
+		font-size: 14px
+		line-height: 18px
+	.remodal
+		padding-bottom: 100px
+	.remodal-close
+		top: 90%
+		right: 50%
+		margin-right: -17px
+		&::after
+			top: 16px
+			left: 3px
+		&::before
+			top: 16px
+			left: 3px
+	.modal__left
+		width: 100%
+	.modal__photo
+		float: left
+		margin-bottom: 25px
+	.modal__name
+		font-size: 16px
+		line-height: 20px
+		margin-bottom: 10px
+	.modal__right
+		font-size: 14px
+		line-height: 18px
+		margin-left: 0
+	.modal__participated
+		font-size: 14px
+		line-height: 18px
+	.news__year
+		font-size: 10px
+		&::after
+			right: -11px
+			width: 40px
+	.news__day
+		font-size: 14px
+	.full-link__title
+		font-size: 15px
+		margin-bottom: 12px
+	.news__full-link--img
+		img
+			margin-bottom: 12px
+	.m-before 
+		.article__more
+			font-size: 14px
+			&::before
+				top: -1px
+	.paginator
+		position: relative
+	.paginator__flex-item--1
+		flex: 0 0 50%
+		display: flex
+		justify-content: flex-start
+	.paginator__flex-item--2
+		flex: 0 0 50%
+		order: 2
+		display: flex
+		justify-content: flex-end
+	.paginator__flex-item--3
+		flex: 0 0 100%
+		order: 3
+		display: flex
+		justify-content: center
+		margin-top: 48px
+	.news-page__top-line
+		padding: 45px 0 15px 0
+	.news__date
+		margin-top: 32px
+	.news-page__top-line 
+		.come-back
+			text-align: left
+			margin-left: 32px
+	.news-page__title
+		font-size: 16px
+		line-height: 20px
+		margin-bottom: 15px
+	.full-news__img
+		margin-bottom: 15px
+	.mycol
+		padding: 0
+	.event__cart--hidden-md
+		display: none
+	.calendar-slider__nav
+		display: none
+	.page__title--calendar
+		margin: 0
+	.title-calendar
+		margin: 34px 0 17px 0
+	.calendar__wrapper
+		margin: 34px 0 17px 0
+	.calendar-slider__date
+		padding: 0
+		margin: 0
+		padding-top: 6px
+		font-size: 16px
+	.event__cart
+		padding: 9px 0
+		border-top: 6px solid #f0f0f0
+		margin-bottom: 48px
+		.event-cart__date
+			padding: 0 13px
+		.event-cart__room
+			padding: 0 13px
+		.event__participant-wrapper
+			padding: 0 13px
+		.event-cart__title
+			a
+				padding: 0 13px
+	.event__cart img
+		width: 100%
+	.affiche__comeback 
+		a
+			font-size: 12px
+		.prev__event
+			margin-left: 34px
+			&::before
+				left: -30px
+		.next__event
+			margin-right: 34px
+			&::after
+				right: -30px
+	.affiche__comeback--second 
+		.affiche__comeback-link
+			padding-right: 15px
+	.program__place
+		font-size: 12px
+	.program-button__wrapper--second
+		margin: 0
+	.act__btn--program-page
+		font-size: 12px
+		padding: 7px 18px
+		margin: 7px 0 40px
+	.program__short-descriotion
+		p
+			font-size: 14px
+			line-height: 20px
+			margin-bottom: 10px
+	.in-program .in-program__title
+		font-size: 12px
+		line-height: 18px
+		margin-bottom: 10px
+	.in-program
+		p
+			font-size: 12px
+			line-height: 18px
+			margin-bottom: 10px
+	.program__description 
+		p
+			font-size: 14px
+			line-height: 20px
+			margin-bottom: 10px
+	.program-button__wrapper--bottom
+		margin-top: 22px
+	.program-page__carousel
+		.popap__video--program-page::before
+			width: 40px
+			height: 40px
+			font-size: 40px
+	.pedagog-cart__description 
+		a, p
+			font-size: 14px
+			line-height: 20px
+	.symphonic-academy__title
+		font-size: 18px
+	.symphonic-academy__cart
+		border-right: none
+		border-left: none
+		.symphonic-cart__title
+			font-size: 18px
+			margin-bottom: 10px
+		.symphonic-cart__participants
+			font-size: 16px
+			margin-bottom: 14px
+			span
+				font-size: 14px
+		.events__date
+			li
+			a
+				width: 100%
+				display: inline-block
+				white-space: nowrap
+				padding: 7px 9px
+				margin-left: 5px
+				margin-bottom: 10px
+				font-size: 12px
+				height: auto
+	.application__title
+		font-size: 18px
+	.application__form 
+		label 
+			span
+				font-size: 14px
+				line-height: 20px
+	.application__form label 
+		.additional-description
+			font-size: 11px
+	.application__form .radio__button .checkbox__label .label
+		font-size: 12px
+		line-height: 16px
+	.contacts__title
+		font-size: 16px
+		line-height: 20px
+		margin-bottom: 16px
+	.question__mail
+		margin-bottom: 16px
+		span
+			font-size: 16px
+			line-height: 20px
+			display: block
+			white-space: nowrap
+	a
+		font-size: 16px
+	.persona__title
+		font-size: 18px
+	.r-master-class
+		padding: 20px 0
+	.master-class__list
+		li
+			font-size: 18px	
+	.persona-concert__date
+		font-size: 18px
+	.persona-concert__place
+		font-size: 12px	
+	.concert__name
+		a
+			font-size: 20px
+			line-height: 26px
+	.concert__participants-name
+		font-size: 16px
+		line-height: 26px
+	.concert__participants-instrument
+		font-size: 13px
+		line-height: 20px
+	.r-slider
+		margin-bottom: 30px
+	.main__video .popap__video::after
+		font-size: 16px
+	.video__carts
+		.link__frame
+			border: none
+			margin: 0 -15px
+	.partner__block
+		a
+			border-right: none
+			border-left: none
+			border-radius: 0
+	.m-before .article__logo
+		margin-bottom: 20px
+	.team-academy
+		margin-top: 0
+@media only screen and (max-height : 500px)
+	.scroll
+		box-shadow: none
+	.home
+		margin-top: 0
+	.top__line
+		position: relative
+		background: transparent
+	.bottom__line
+		margin-top: 40px
+	.home
+		.header
+			min-height: 600px
+/*==========  Mobile First  ==========*/
+
+// ≤576px
++media-breakpoint-up(sm)
+
+// ≤768px
++media-breakpoint-up(md)
+
+// ≤992px
++media-breakpoint-up(lg)
+
+// ≤1200px
++media-breakpoint-up(xl)
