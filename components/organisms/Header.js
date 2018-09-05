@@ -23,7 +23,6 @@ const Header = () => (
                     </div>
                     <div className="col-xl-6 col-lg-7 col-12">
                         <div className="menu__line">
-
                             <div className="menu__wrapper">
                                 <div className="menu__wrapper--left">
                                     <div className="first-floor">
@@ -39,7 +38,7 @@ const Header = () => (
                                                         </div>
                                                         <div className="ul__wraper">
                                                             <div className="ul__list">
-                                                                <a href="staf.html">Состав оркестра</a>
+                                                                <Link href="staff"><a>Состав оркестра</a></Link>
                                                             </div>
                                                             <div className="ul__list">
                                                                 <a href="team.html">Команда</a>
@@ -95,7 +94,7 @@ const Header = () => (
                                                     </div>
                                                 </li>
                                                 <li className="main__list main__list--visible">
-                                                    <a href="partners.html" className="hidden-menu__clouse ">Партеры</a>
+                                                    <Link href="partners"><a className="hidden-menu__clouse ">Партнеры</a></Link>
                                                 </li>
                                             </ul>
                                         </nav>
