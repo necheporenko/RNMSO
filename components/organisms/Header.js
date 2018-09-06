@@ -130,7 +130,7 @@ const Header = () => (
                     </div>
                 </div>
                 <div className="main__list main__list--hidden">
-                    <a href="calendar.html" className="hidden__item">Афиша</a>
+                    <Link href={AfishaMenu.href}><a className="hidden__item">{AfishaMenu.name}</a></Link>
                 </div>
                 <div className="main__list main__list--hidden">
                     <span className="hidden-menu__open hidden__item">Медиа
@@ -142,24 +142,17 @@ const Header = () => (
                                 <div className="ul__list menu--return">
                                     <i className="icon-arrow-right"></i>
                                 </div>
-                                <div className="ul__list">
-                                    <a href="news.html">Новости</a>
-                                </div>
-                                <div className="ul__list">
-                                    <a href="video.html">Видео</a>
-                                </div>
-                                <div className="ul__list">
-                                    <a href="photo.html">Фото</a>
-                                </div>
-                                <div className="ul__list">
-                                    <a href="press.html">Пресса</a>
-                                </div>
+                                {MediaMenu.map((menu, index) => (
+                                    <div className="ul__list" key={index}>
+                                        <Link href={menu.href}><a>{menu.name}</a></Link>
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="main__list main__list--hidden">
-                    <a href="partners.html" className="hidden__item">Партеры</a>
+                    <Link href={PartnersMenu.href}><a className="hidden__item">{PartnersMenu.name}</a></Link>
                 </div>
                 <div className="main__list main__list--hidden">
                     <a href="reserve.html" className="hidden__item ">
