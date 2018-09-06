@@ -1,6 +1,25 @@
 import React from 'react';
 import Link from 'next/link';
 
+const OrchestraMenu = [
+    { href: 'staff', name: 'Состав оркестра' },
+    { href: 'team', name: 'КОМАНДА' },
+    { href: 'academy', name: 'СИМФОНИЧЕСКАЯ АКАДЕМИЯ' },
+    { href: 'academy-masters', name: 'ПЕДАГОГИ АКАДЕМИИ' },
+    { href: 'conductors', name: 'ДИРИЖЕРЫ СЕЗОНА 2018-2019' },
+    { href: 'soloists', name: 'СОЛИСТЫ СЕЗОНА 2018-2019' },
+    { href: 'application', name: 'ПОДАТЬ ЗАЯВКУ' },
+    { href: 'contacts', name: 'КОНТАКТЫ' },
+];
+const AfishaMenu = { href: 'calendar', name: 'АФИША' };
+const MediaMenu = [
+    { href: 'news', name: 'НОВОСТИ' },
+    { href: 'video', name: 'ВИДЕО' },
+    { href: 'photo', name: 'ФОТО' },
+    { href: 'press', name: 'ПРЕССА' },
+];
+const PartnersMenu = { href: 'partners', name: 'ПАРТНЕРЫ' };
+
 const Header = () => (
     <div>
         <div className="top__line ">
@@ -37,37 +56,16 @@ const Header = () => (
                                                             <i className="icon-arrow-right"></i>
                                                         </div>
                                                         <div className="ul__wraper">
-                                                            <div className="ul__list">
-                                                                <Link href="staff"><a>Состав оркестра</a></Link>
-                                                            </div>
-                                                            <div className="ul__list">
-                                                                <a href="team.html">Команда</a>
-                                                            </div>
-                                                            <div className="ul__list">
-                                                                <a href="academy.html">Симфоническая академия</a>
-                                                            </div>
-                                                            <div className="ul__list">
-                                                                <a href="academy-masters.html">Педагоги академии</a>
-                                                            </div>
-                                                            <div className="ul__list">
-                                                                <a href="conductors.html">Дирижеры сезона 2018-2019</a>
-                                                            </div>
-                                                            <div className="ul__list">
-                                                                <a href="soloists.html">Солисты сезона 2018-2019</a>
-                                                            </div>
-                                                            <div className="ul__list">
-                                                                <a href="application.html">Подать заявку</a>
-
-                                                            </div>
-                                                            <div className="ul__list">
-                                                                <a href="contacts.html">Контакты</a>
-                                                            </div>
+                                                            {OrchestraMenu.map((menu, index) => (
+                                                                <div className="ul__list" key={index}>
+                                                                    <Link href={menu.href}><a>{menu.name}</a></Link>
+                                                                </div>
+                                                            ))}
                                                         </div>
-
                                                     </div>
                                                 </li>
                                                 <li className="main__list main__list--visible">
-                                                    <a href="calendar.html" className="hidden-menu__clouse">Афиша</a>
+                                                    <Link href={AfishaMenu.href}><a className="hidden-menu__clouse ">{AfishaMenu.name}</a></Link>
                                                 </li>
                                                 <li className="main__list main__list--visible">
                                                     <span className="no-link">Медиа
@@ -78,23 +76,16 @@ const Header = () => (
                                                             <div className="ul__list menu--return">
                                                                 <i className="icon-arrow-right"></i>
                                                             </div>
-                                                            <div className="ul__list">
-                                                                <a href="news.html">Новости</a>
-                                                            </div>
-                                                            <div className="ul__list">
-                                                                <a href="video.html">Видео</a>
-                                                            </div>
-                                                            <div className="ul__list">
-                                                                <a href="photo.html">Фото</a>
-                                                            </div>
-                                                            <div className="ul__list">
-                                                                <a href="press.html">Пресса</a>
-                                                            </div>
+                                                            {MediaMenu.map((menu, index) => (
+                                                                <div className="ul__list" key={index}>
+                                                                    <Link href={menu.href}><a>{menu.name}</a></Link>
+                                                                </div>
+                                                            ))}
                                                         </div>
                                                     </div>
                                                 </li>
                                                 <li className="main__list main__list--visible">
-                                                    <Link href="partners"><a className="hidden-menu__clouse ">Партнеры</a></Link>
+                                                    <Link href={PartnersMenu.href}><a className="hidden-menu__clouse ">{PartnersMenu.name}</a></Link>
                                                 </li>
                                             </ul>
                                         </nav>
@@ -111,14 +102,9 @@ const Header = () => (
                                         <button type="button" className="language__btn language__btn--dot">Eng</button>
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
-
-
                     </div>
-
                 </div>
             </div>
         </div>
@@ -134,31 +120,11 @@ const Header = () => (
                     <div className="hidden__list">
                         <div className="hidden__container">
                             <div className="ul__wraper">
-                                <div className="ul__list">
-                                    <a href="staf.html">Состав оркестра</a>
-                                </div>
-                                <div className="ul__list">
-                                    <a href="team.html">Команда</a>
-                                </div>
-                                <div className="ul__list">
-                                    <a href="academy.html">Симфоническая академия</a>
-                                </div>
-                                <div className="ul__list">
-                                    <a href="academy-masters.html">Педагоги академии</a>
-                                </div>
-                                <div className="ul__list">
-                                    <a href="conductors.html">Дирижеры сезона 2018-2019</a>
-                                </div>
-                                <div className="ul__list">
-                                    <a href="soloists.html">Солисты сезона 2018-2019</a>
-                                </div>
-                                <div className="ul__list">
-                                    <a href="application.html">Подать заявку</a>
-
-                                </div>
-                                <div className="ul__list">
-                                    <a href="contacts.html">Контакты</a>
-                                </div>
+                                {OrchestraMenu.map((menu, index) => (
+                                    <div className="ul__list" key={index}>
+                                        <Link href={menu.href}><a>{menu.name}</a></Link>
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>
@@ -198,7 +164,7 @@ const Header = () => (
                 <div className="main__list main__list--hidden">
                     <a href="reserve.html" className="hidden__item ">
                         Всероссийский симфонический резерв
-				</a>
+				    </a>
                 </div>
                 <div className="main__list main__list--hidden">
                     <div className="hidden__item">
