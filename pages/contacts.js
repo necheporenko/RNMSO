@@ -89,9 +89,7 @@ const Contacts = () => (
               <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A558aa8ed7fb72dcc60fa82209381424f13c9cbed6526279c300e0bb998503930&amp;width=100%25&amp;height=720&amp;lang=ru_RU&amp;scroll=true"></script>
             </div>
           </div>
-
         </div>
-
       </section>
     </main>
   </Layout>
