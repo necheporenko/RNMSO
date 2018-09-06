@@ -1,4 +1,5 @@
 import React from 'react'
+import fetch from 'isomorphic-unfetch'
 import Layout from '../layouts/Main'
 
 const Partners = () => (
@@ -41,5 +42,12 @@ const Partners = () => (
     </main>
   </Layout>
 )
+
+Partners.getInitialProps = async ({ req }) => {
+  const res = await fetch('http://31.192.109.44/api/partners/?limit=10&offset=0', { headers: { 'Access-Control-Allow-Origin': '*' }, mode: 'no-cors' })
+  const json = await res.json()
+  console.log(json)
+  return { partners: json.stargazers_count }
+}
 
 export default Partners
