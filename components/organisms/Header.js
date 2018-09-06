@@ -27,12 +27,16 @@ const Header = () => (
                 <div className="row">
                     <div className="col-xl-6 col-lg-5 col-10">
                         <div className="logo__group">
-                            <a href="/" className="logo__link logo__linl--RNYSO">
-                                <img src="../../static/img/header_logo.png" alt="Российский Национальный Молодёжный Симфоический Оркестр" />
-                            </a>
-                            <a href="#" className="logo__link logo__linl--grants">
-                                <img src="../../static/img/grants_logo.png" alt="Фонд президентских грантов" />
-                            </a>
+                            <Link href='/'>
+                                <a className="logo__link logo__linl--RNYSO">
+                                    <img src="../../static/img/header_logo.png" alt="Российский Национальный Молодёжный Симфоический Оркестр" />
+                                </a>
+                            </Link>
+                            <Link href='/'>
+                                <a className="logo__link logo__linl--grants">
+                                    <img src="../../static/img/grants_logo.png" alt="Фонд президентских грантов" />
+                                </a>
+                            </Link>
                         </div>
                     </div>
                     <div className="col-2 d-block d-lg-none d-xl-none">
