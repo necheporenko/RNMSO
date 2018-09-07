@@ -44,7 +44,11 @@ const Partners = () => (
 )
 
 Partners.getInitialProps = async ({ req }) => {
-  const res = await fetch('http://31.192.109.44/api/partners/?limit=10&offset=0', { headers: { 'Access-Control-Allow-Origin': '*' }, mode: 'no-cors' })
+  const res = await fetch('http://31.192.109.44/api/partners/')
+  // const res = await fetch('http://31.192.109.44/i18n/setlang/', {
+  //   method: 'post',
+  //   body: JSON.stringify({ language: 'en' })
+  // })
   const json = await res.json()
   console.log(json)
   return { partners: json.stargazers_count }
