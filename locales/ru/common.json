@@ -1,10 +1,13 @@
 {
+  "OrchestraName": "Российский национальный молодежный симфонический оркестр",
   "MainMenu": {
     "orchestra": "оркестр",
     "afisha": "афиша",
     "media": "медиа",
     "partners": "партнеры",
-    "reserve": "всероссийский симфонический резерв"
+    "reserve": "всероссийский симфонический резерв",
+    "calendarOfConcerts": "Календарь концертов",
+    "archive": "Архив"
   },
   "OrchestraMenu": {
     "staff": "Состав оркестра",
@@ -22,9 +25,9 @@
     "photo": "фото",
     "press": "пресса"
   },
-  "sample_button": "fire in the wind for de",
-  "link": {
-    "gotoPage2": "Zur Seite 2",
-    "gotoPage3": "Zur Seite 3 (no hoc)"
+  "ContactsPage": {
+    "address": "Концертный комплекс «Филармония-2» Мичуринский проспект, Олимпийская деревня, дом 1",
+    "commonQuestion": "Общие вопросы:",
+    "requestPress": "Запросы прессы:"
   }
 }

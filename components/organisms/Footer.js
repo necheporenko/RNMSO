@@ -1,24 +1,43 @@
 import React from 'react';
+import Link from 'next/link';
+import { withI18next } from '../../lib/withI18next';
 
-const Footer = () => (
+const OrchestraMenu = [
+  { href: 'staff', name: 'OrchestraMenu.staff' },
+  { href: 'team', name: 'OrchestraMenu.team' },
+  { href: 'academy', name: 'OrchestraMenu.academy' },
+  { href: 'academy-masters', name: 'OrchestraMenu.academy-masters' },
+  { href: 'conductors', name: 'OrchestraMenu.conductors' },
+  { href: 'soloists', name: 'OrchestraMenu.soloists' },
+  { href: 'application', name: 'OrchestraMenu.application' },
+  { href: 'contacts', name: 'OrchestraMenu.contacts' },
+];
+const MediaMenu = [
+  { href: 'news', name: 'MediaMenu.news' },
+  { href: 'video', name: 'MediaMenu.video' },
+  { href: 'photo', name: 'MediaMenu.photo' },
+  { href: 'press', name: 'MediaMenu.press' },
+];
+
+const Footer = ({ t }) => (
   <footer className="footer">
     <div className="container">
       <div className="row">
         <div className="col-lg-4 col-sm-6">
           <div className="footer__title-block">
             <b className="footer__title">
-              Российский национальный молодежный симфонический оркестр
+              {t("OrchestraName")}
             </b>
             <p>
-              Концертный комплекс «Филармония-2» Мичуринский проспект, Олимпийская деревня, дом 1
+              {t('ContactsPage.address')}
             </p>
             <p>
-              Общие вопросы:
-            <a href="#" className="mail mail--common">info@site.ru</a>
+              {t('ContactsPage.commonQuestion')}
+              <a href="mailto:info@site.ru" className="mail mail--common">info@site.ru</a>
             </p>
             <p>
-              Запросы прессы:
-            <a href="#" className="mail mail--press">pr@site.ru</a>
+              {t('ContactsPage.requestPress')}
+              <a href="mailto:pr@site.ru" className="mail mail--press">pr@site.ru</a>
             </p>
           </div>
         </div>
@@ -48,71 +67,44 @@ const Footer = () => (
         <div className="col-lg-2 d-none d-lg-block d-xl-block">
           <ul className="footer__menu">
             <li>
-              <span className="footer-menu__title">Оркестр</span>
+              <span className="footer-menu__title">{t("MainMenu.orchestra")}</span>
             </li>
-            <li>
-              <a href="staf.html">Состав оркестра</a>
-            </li>
-            <li>
-              <a href="team.html">Команда</a>
-            </li>
-            <li>
-              <a href="academy.html">Симфоническая академия</a>
-            </li>
-            <li>
-              <a href="academy-masters.html">Педагоги академии</a>
-            </li>
-            <li>
-              <a href="conductors.html">Дирижёры сезона 2018-2019</a>
-            </li>
-            <li>
-              <a href="soloists.html">Солисты сезона 2018-2019</a>
-            </li>
-
-            <li>
-              <a href="application.html">Подать заявку</a>
-            </li>
-            <li>
-              <a href="contacts.html">Контакты</a>
-            </li>
+            {OrchestraMenu.map((menu, index) => (
+              <li key={index}>
+                <Link href={menu.href}><a>{t(menu.name)}</a></Link>
+              </li>
+            ))}
           </ul>
         </div>
         <div className="col-lg-2 d-none d-lg-block d-xl-block">
           <div className="footer-menu__weapper">
             <ul className="footer__menu">
               <li>
-                <span className="footer-menu__title">Афиша</span>
+                <span className="footer-menu__title">{t("MainMenu.afisha")}</span>
               </li>
               <li>
-                <a href="calendar.html">Календарь концертов</a>
+                <Link href="calendar"><a >{t("MainMenu.calendarOfConcerts")}</a></Link>
               </li>
               <li>
-                <a href="calendar.html">Архив</a>
+                <Link href="calendar"><a href="calendar.html">{t("MainMenu.archive")}</a></Link>
               </li>
             </ul>
             <ul className="footer__menu">
               <li>
-                <span className="footer-menu__title ">Медиа</span>
+                <span className="footer-menu__title ">{t("MainMenu.media")}</span>
               </li>
-              <li>
-                <a href="news.html">Новости</a>
-              </li>
-              <li>
-                <a href="video.html">Видео</a>
-              </li>
-              <li>
-                <a href="photo.html">Фото</a>
-              </li>
-              <li>
-                <a href="press.html">Пресса</a>
-              </li>
+              {MediaMenu.map((menu, index) => (
+                <li key={index}>
+                  <Link href={menu.href}><a>{t(menu.name)}</a></Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
         <div className="col-lg-2 d-none d-lg-block d-xl-block">
           <div className="footer__partners">
-            <a href="reserve.html" className="partners-link">Всероссийский Симфонический Резерв</a>
-            <a href="partners.html" className="partners-link footer-menu__title">Партнеры</a>
+            <Link href="reserve"><a className="partners-link">{t("MainMenu.reserve")}</a></Link>
+            <Link href="partners"><a className="partners-link footer-menu__title">{t("MainMenu.partners")}</a></Link>
           </div>
         </div>
       </div>
@@ -120,4 +112,4 @@ const Footer = () => (
   </footer >
 )
 
-export default Footer
+export default withI18next(['common'])(Footer);

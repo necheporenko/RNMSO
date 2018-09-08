@@ -4,6 +4,14 @@
     "afisha": "MainMenu.afisha",
     "media": "MainMenu.media",
     "partners": "MainMenu.partners",
-    "reserve": "MainMenu.reserve"
-  }
+    "reserve": "MainMenu.reserve",
+    "calendarOfConcerts": "MainMenu.calendarOfConcerts",
+    "archive": "MainMenu.archive"
+  },
+  "ContactsPage": {
+    "address": "ContactsPage.address",
+    "commonQuestion": "ContactsPage.commonQuestion",
+    "requestPress": "ContactsPage.requestPress"
+  },
+  "OrchestraName": "OrchestraName"
 }

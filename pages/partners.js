@@ -1,8 +1,10 @@
 import React from 'react'
-import fetch from 'isomorphic-unfetch'
+import Link from 'next/link';
+import { withI18next } from '../lib/withI18next';
+import callApi from '../utils/api';
 import Layout from '../layouts/Main'
 
-const Partners = () => (
+const Partners = ({ t, partners }) => (
   <Layout>
     <main>
       <div className="container">
@@ -10,48 +12,31 @@ const Partners = () => (
           <div className="col-12">
             <div className="page__title-line">
               <h1 className="page__title">
-                Партнеры
+                {t('MainMenu.partners')}
               </h1>
             </div>
           </div>
         </div>
         <div className="row justify-content-center">
-          <div className="col-lg-4 col-sm-7 mycol">
-            <div className="partner__block">
-              <a href="#">
-                <img src="../static/img/partner1.png" alt="Парнер" className="img-responsive partner__logo" />
-              </a>
+          {partners.map(partner => (
+            <div className="col-lg-4 col-sm-7 mycol" key={partner.id}>
+              <div className="partner__block">
+                <Link href={partner.link}>
+                  <a><img src={partner.image} alt="Парнер" className="img-responsive partner__logo" /></a>
+                </Link>
+              </div>
             </div>
-          </div>
-          <div className="col-lg-4 col-sm-7 mycol">
-            <div className="partner__block">
-              <a href="#">
-                <img src="../static/img/partner2.png" alt="Парнер" className="img-responsive partner__logo" />
-              </a>
-            </div>
-          </div>
-          <div className="col-lg-4 col-sm-7 mycol">
-            <div className="partner__block">
-              <a href="#">
-                <img src="../static/img/partner3.png" alt="Парнер" className="img-responsive partner__logo" />
-              </a>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </main>
   </Layout>
 )
 
-Partners.getInitialProps = async ({ req }) => {
-  const res = await fetch('http://31.192.109.44/api/partners/')
-  // const res = await fetch('http://31.192.109.44/i18n/setlang/', {
-  //   method: 'post',
-  //   body: JSON.stringify({ language: 'en' })
-  // })
-  const json = await res.json()
-  console.log(json)
-  return { partners: json.stargazers_count }
+Partners.getInitialProps = async ({ req, res }) => {
+  const language = req || res ? req.language || res.locals.language : null;
+  const response = await callApi('/partners', language)
+  return { partners: response.results }
 }
 
-export default Partners
+export default withI18next(['common'])(Partners);

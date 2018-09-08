@@ -7,7 +7,7 @@ import Submenu from '../components/moleculs/Submenu';
 
 
 const Conductors = ({ t, conductors }) => (
-  <Layout title="Дирижеры">
+  <Layout title={t('OrchestraMenu.conductors')}>
     <main className="m-before m-video">
       <div className="container">
         <div className="row">

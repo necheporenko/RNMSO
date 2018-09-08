@@ -1,10 +1,13 @@
 {
+  "OrchestraName": "Russian National Youth Symphony Orchestra",
   "MainMenu": {
     "orchestra": "Orchestra",
     "afisha": "afisha",
     "media": "media",
     "partners": "partners",
-    "reserve": "All-Russian Symphony Reserve"
+    "reserve": "All-Russian Symphony Reserve",
+    "calendarOfConcerts": "Calendar of concerts",
+    "archive": "Archive"
   },
   "OrchestraMenu": {
     "staff": "Composition of the orchestra",
@@ -21,5 +24,10 @@
     "video": "video",
     "photo": "photo",
     "press": "press"
+  },
+  "ContactsPage": {
+    "address": "Concert Complex «Philharmonia-2» Michurinsky Avenue, Olympic Village, Building 1",
+    "commonQuestion": "General issues:",
+    "requestPress": "Press inquiries:"
   }
 }
