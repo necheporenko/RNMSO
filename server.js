@@ -16,13 +16,23 @@ i18n
   .use(Backend)
   .use(i18nextMiddleware.LanguageDetector)
   .init({
-    fallbackLng: 'ru',
-    preload: ['ru', 'en'], // preload all langages
-    ns: ['common', 'home', 'page2'], // need to preload all the namespaces
     backend: {
       loadPath: path.join(__dirname, '/locales/{{lng}}/{{ns}}.json'),
       addPath: path.join(__dirname, '/locales/{{lng}}/{{ns}}.missing.json')
-    }
+    },
+    detection: {
+      order: ['querystring', 'cookie', 'header'],
+      caches: ['cookie'],
+      lookupQuerystring: 'lng',
+      lookupCookie: 'i18next',
+      lookupSession: 'lng',
+      lookupPath: 'lng',
+      lookupFromPathIndex: 0,
+    },
+    fallbackLng: 'ru',
+    preload: ['en', 'ru'], // preload all langages
+    saveMissing: true,
+    ns: ['common', 'home', 'page2'], // need to preload all the namespaces
   }, () => {
     // loaded translations we can bootstrap our routes
     app.prepare()

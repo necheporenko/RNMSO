@@ -1,0 +1,9 @@
+{
+  "MainMenu": {
+    "orchestra": "MainMenu.orchestra",
+    "afisha": "MainMenu.afisha",
+    "media": "MainMenu.media",
+    "partners": "MainMenu.partners",
+    "reserve": "MainMenu.reserve"
+  }
+}

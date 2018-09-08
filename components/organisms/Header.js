@@ -1,27 +1,37 @@
 import React from 'react';
 import Link from 'next/link';
 import i18n from '../../i18n';
+import { withI18next } from '../../lib/withI18next';
+
 
 const OrchestraMenu = [
-    { href: 'staff', name: 'Состав оркестра' },
-    { href: 'team', name: 'КОМАНДА' },
-    { href: 'academy', name: 'СИМФОНИЧЕСКАЯ АКАДЕМИЯ' },
-    { href: 'academy-masters', name: 'ПЕДАГОГИ АКАДЕМИИ' },
-    { href: 'conductors', name: 'ДИРИЖЕРЫ СЕЗОНА 2018-2019' },
-    { href: 'soloists', name: 'СОЛИСТЫ СЕЗОНА 2018-2019' },
-    { href: 'application', name: 'ПОДАТЬ ЗАЯВКУ' },
-    { href: 'contacts', name: 'КОНТАКТЫ' },
+    { href: 'staff', name: 'OrchestraMenu.staff' },
+    { href: 'team', name: 'OrchestraMenu.team' },
+    { href: 'academy', name: 'OrchestraMenu.academy' },
+    { href: 'academy-masters', name: 'OrchestraMenu.academy-masters' },
+    { href: 'conductors', name: 'OrchestraMenu.conductors' },
+    { href: 'soloists', name: 'OrchestraMenu.soloists' },
+    { href: 'application', name: 'OrchestraMenu.application' },
+    { href: 'contacts', name: 'OrchestraMenu.contacts' },
 ];
-const AfishaMenu = { href: 'calendar', name: 'АФИША' };
+const AfishaMenu = { href: 'calendar', name: 'MainMenu.afisha' };
 const MediaMenu = [
-    { href: 'news', name: 'НОВОСТИ' },
-    { href: 'video', name: 'ВИДЕО' },
-    { href: 'photo', name: 'ФОТО' },
-    { href: 'press', name: 'ПРЕССА' },
+    { href: 'news', name: 'MediaMenu.news' },
+    { href: 'video', name: 'MediaMenu.video' },
+    { href: 'photo', name: 'MediaMenu.photo' },
+    { href: 'press', name: 'MediaMenu.press' },
 ];
-const PartnersMenu = { href: 'partners', name: 'ПАРТНЕРЫ' };
+const PartnersMenu = { href: 'partners', name: 'MainMenu.partners' };
 
-const Header = () => (
+const changeLanguage = lng => {
+    i18n.changeLanguage(lng, (err, t) => {
+        if (err) return console.log('something went wrong loading', err)
+    })
+    document.cookie = `i18next=${lng}`;
+    location.reload();
+}
+
+const Header = ({ t }) => (
     <div>
         <div className="top__line ">
             <div className="container">
@@ -53,8 +63,8 @@ const Header = () => (
                                         <nav className="main__menu">
                                             <ul>
                                                 <li className="main__list main__list--visible">
-                                                    <span className="no-link">Оркестр
-													<i className="icon-bands"></i>
+                                                    <span className="no-link">{t('MainMenu.orchestra')}
+                                                        <i className="icon-bands"></i>
                                                     </span>
                                                     <div className="hidden__list">
                                                         <div className="ul__list menu--return">
@@ -63,18 +73,18 @@ const Header = () => (
                                                         <div className="ul__wraper">
                                                             {OrchestraMenu.map((menu, index) => (
                                                                 <div className="ul__list" key={index}>
-                                                                    <Link href={menu.href}><a>{menu.name}</a></Link>
+                                                                    <Link href={menu.href}><a>{t(menu.name)}</a></Link>
                                                                 </div>
                                                             ))}
                                                         </div>
                                                     </div>
                                                 </li>
                                                 <li className="main__list main__list--visible">
-                                                    <Link href={AfishaMenu.href}><a className="hidden-menu__clouse ">{AfishaMenu.name}</a></Link>
+                                                    <Link href={AfishaMenu.href}><a className="hidden-menu__clouse ">{t(AfishaMenu.name)}</a></Link>
                                                 </li>
                                                 <li className="main__list main__list--visible">
-                                                    <span className="no-link">Медиа
-													<i className="icon-bands"></i>
+                                                    <span className="no-link">{t('MainMenu.media')}
+                                                        <i className="icon-bands"></i>
                                                     </span>
                                                     <div className="hidden__list">
                                                         <div className="ul__wrapper">
@@ -83,22 +93,20 @@ const Header = () => (
                                                             </div>
                                                             {MediaMenu.map((menu, index) => (
                                                                 <div className="ul__list" key={index}>
-                                                                    <Link href={menu.href}><a>{menu.name}</a></Link>
+                                                                    <Link href={menu.href}><a>{t(menu.name)}</a></Link>
                                                                 </div>
                                                             ))}
                                                         </div>
                                                     </div>
                                                 </li>
                                                 <li className="main__list main__list--visible">
-                                                    <Link href={PartnersMenu.href}><a className="hidden-menu__clouse ">{PartnersMenu.name}</a></Link>
+                                                    <Link href={PartnersMenu.href}><a className="hidden-menu__clouse ">{t(PartnersMenu.name)}</a></Link>
                                                 </li>
                                             </ul>
                                         </nav>
                                     </div>
                                     <div className="second-floor">
-                                        <a href="reserve.html">
-                                            Всероссийский симфонический резерв
-									    </a>
+                                        <Link href="reserve"><a>{t('MainMenu.reserve')}</a></Link>
                                     </div>
                                 </div>
                                 <div className="menu__wrapper--right">
@@ -106,14 +114,14 @@ const Header = () => (
                                         <button
                                             type="button"
                                             className="language__btn language__btn--dot language__dot"
-                                            onClick={() => { i18n.changeLanguage('ru'); }}
+                                            onClick={() => { changeLanguage('ru'); }}
                                         >
                                             Рус
                                         </button>
                                         <button
                                             type="button"
                                             className="language__btn language__btn--dot"
-                                            onClick={() => { i18n.changeLanguage('en'); }}
+                                            onClick={() => { changeLanguage('en'); }}
                                         >
                                             Eng
                                         </button>
@@ -187,4 +195,4 @@ const Header = () => (
     </div>
 )
 
-export default Header
+export default withI18next(['common'])(Header);

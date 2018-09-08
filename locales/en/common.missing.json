@@ -1,0 +1,12 @@
+{
+  "OrchestraMenu": {
+    "staff": "OrchestraMenu.staff",
+    "team": "OrchestraMenu.team",
+    "academy": "OrchestraMenu.academy",
+    "academy-masters": "OrchestraMenu.academy-masters",
+    "conductors": "OrchestraMenu.conductors",
+    "soloists": "OrchestraMenu.soloists",
+    "application": "OrchestraMenu.application",
+    "contacts": "OrchestraMenu.contacts"
+  }
+}

@@ -1,6 +1,30 @@
 {
-  "integrates_react-i18next": "Dieses Beispiel integriert react-i18next für einfache Übersetzung.",
-  "pureComponent": "Entweder t Funktion an Komponente via props weiterreichen.",
-  "extendedComponent": "Oder die Komponente erneut mit dem translate hoc erweiteren.",
-  "transComponent": "Sonst können Sie auch die Komponente <1>Trans</1> verwenden."
+  "MainMenu": {
+    "orchestra": "оркестр",
+    "afisha": "афиша",
+    "media": "медиа",
+    "partners": "партнеры",
+    "reserve": "всероссийский симфонический резерв"
+  },
+  "OrchestraMenu": {
+    "staff": "Состав оркестра",
+    "team": "КОМАНДА",
+    "academy": "СИМФОНИЧЕСКАЯ АКАДЕМИЯ",
+    "academy-masters": "ПЕДАГОГИ АКАДЕМИИ",
+    "conductors": "ДИРИЖЕРЫ СЕЗОНА 2018-2019",
+    "soloists": "СОЛИСТЫ СЕЗОНА 2018-2019",
+    "application": "ПОДАТЬ ЗАЯВКУ",
+    "contacts": "КОНТАКТЫ"
+  },
+  "MediaMenu": {
+    "news": "новости",
+    "video": "видео",
+    "photo": "фото",
+    "press": "пресса"
+  },
+  "sample_button": "fire in the wind for de",
+  "link": {
+    "gotoPage2": "Zur Seite 2",
+    "gotoPage3": "Zur Seite 3 (no hoc)"
+  }
 }
