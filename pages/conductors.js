@@ -1,17 +1,10 @@
 import React from 'react';
+import Link from 'next/link';
+import { withI18next } from '../lib/withI18next';
 import Layout from '../layouts/Main';
+import callApi from '../utils/api';
 
-const sendReguest = async () => {
-  console.log('Piuuuuuuu');
-  const res = await fetch('http://31.192.109.44/i18n/setlang/', {
-    method: 'post',
-    body: JSON.stringify({ language: 'en' })
-  })
-  const json = await res.json()
-  console.log(json)
-}
-
-const Conductors = () => (
+const Conductors = ({ t, conductors }) => (
   <Layout title="Дирижеры">
     <main className="m-before m-video">
       <div className="container">
@@ -22,6 +15,7 @@ const Conductors = () => (
                 <h1 className="page__title page__title--conductor">
                   Дирижёры сезона 2018-2019
 							</h1>
+                {/* <h1>{t('welcome')}</h1> */}
               </div>
               <div className="page__flex-wrap">
                 <ul className="page__list">
@@ -51,59 +45,38 @@ const Conductors = () => (
                   </li>
                 </ul>
               </div>
-
             </div>
-
           </div>
         </div>
       </div>
       <section className="team-academy">
         <div className="container">
           <div className="row">
-            <div className="col-md-6">
-              <div className="pedagog__cart">
-                <div className="pedagog__photo">
-                  <img src="../static/img/conductors/conductor1.jpg" alt="Диридёр академии" />
-                </div>
-                <div className="pedagog-cart__description">
-                  <a href="persona.html">Кристиан Ярви</a>
-                  <p>
-                    Дирижёр, музыкальный руководитель Филармонического оркестра Балтийского моря
-								</p>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="pedagog__cart">
-                <div className="pedagog__photo">
-                  <img src="../static/img/conductors/conductor2.jpg" alt="Диридёр академии" />
-                </div>
-                <div className="pedagog-cart__description">
-                  <a href="persona.html">Жан Кристоф Спинози </a>
-                  <p>
-                    Скрипач, дирижёр, художественный руководитель Ensemble Matheus
-								</p>
+            {conductors.map(conductor => (
+              <div className="col-md-6" key={conductor.id}>
+                <div className="pedagog__cart">
+                  <div className="pedagog__photo">
+                    <img src={conductor.image} alt={`${conductor.first_name} ${conductor.last_naem}`} />
+                  </div>
+                  <div className="pedagog-cart__description">
+                    <Link href={`/conductors/${conductor.id}`}>
+                      <a>{`${conductor.first_name} ${conductor.last_naem}`}</a>
+                    </Link>
+                    <p>{conductor.post}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-
+            ))}
           </div>
         </div>
       </section>
-      <button onClick={sendReguest}>Click me</button>
     </main>
   </Layout>
 )
 
-Conductors.getInitialProps = async ({ req }) => {
-  const res = await fetch('http://31.192.109.44/api/conductors/')
-  // const res = await fetch('http://31.192.109.44/i18n/setlang/', {
-  //   method: 'post',
-  //   body: JSON.stringify({ language: 'en' })
-  // })
-  const json = await res.json()
-  console.log(json)
-  return { partners: json.stargazers_count }
+Conductors.getInitialProps = async () => {
+  const response = await callApi('/conductors')
+  return { conductors: response.results }
 }
 
-export default Conductors;
+export default withI18next(['home', 'common'])(Conductors);

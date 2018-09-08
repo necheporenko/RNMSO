@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import i18n from '../../i18n';
 
 const OrchestraMenu = [
     { href: 'staff', name: 'Состав оркестра' },
@@ -102,8 +103,20 @@ const Header = () => (
                                 </div>
                                 <div className="menu__wrapper--right">
                                     <div className="language__toggle">
-                                        <button type="button" className="language__btn language__btn--dot language__dot">Рус</button>
-                                        <button type="button" className="language__btn language__btn--dot">Eng</button>
+                                        <button
+                                            type="button"
+                                            className="language__btn language__btn--dot language__dot"
+                                            onClick={() => { i18n.changeLanguage('ru'); }}
+                                        >
+                                            Рус
+                                        </button>
+                                        <button
+                                            type="button"
+                                            className="language__btn language__btn--dot"
+                                            onClick={() => { i18n.changeLanguage('en'); }}
+                                        >
+                                            Eng
+                                        </button>
                                     </div>
                                 </div>
                             </div>
