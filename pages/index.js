@@ -1,10 +1,13 @@
 import React from 'react';
 import Slider from "react-slick";
+import Link from 'next/link';
+import ModalVideo from 'react-modal-video';
+import { withI18next } from '../lib/withI18next';
+import callApi from '../utils/api';
 import Layout from '../layouts/Main';
 
 const PrevArrow = ({ onClick }) => (<i onClick={onClick} className="icon-arrow-left slider__nav slider__nav--prev "></i>);
 const NextArrow = ({ onClick }) => (<i onClick={onClick} className="icon-arrow-right slider__nav slider__nav--next "></i>);
-
 const SliderSettings = {
   dots: false,
   infinite: true,
@@ -15,16 +18,15 @@ const SliderSettings = {
   prevArrow: <PrevArrow />
 };
 
-const Home = () => (
+
+const Home = ({ t, videos, news }) => (
   <Layout>
     <header className="header home">
       <div className="bottom__line">
         <div className="container">
           <div className="row">
             <div className="col-xl-4 col-lg-4">
-              <h1 className="header__title">
-                Российский Национальный Молодежный Симфонический Оркестр
-              </h1>
+              <h1 className="header__title">{t("OrchestraName")}</h1>
             </div>
             <div className="col-xl-7 offset-xl-1 col-lg-8 offset-lg-0">
               <div className="act">
@@ -91,10 +93,11 @@ const Home = () => (
                     </sup>
                   </a>
                 </li>
-
               </ul>
               <div className="full__calendar">
-                <a href="#" className="top-line__link">Календарь концертов</a>
+                <Link href="/calendar">
+                  <a href="#" className="top-line__link">{t("MainMenu.calendarOfConcerts")}</a>
+                </Link>
                 <i className="icon-calendar"></i>
               </div>
             </div>
@@ -316,10 +319,6 @@ const Home = () => (
                   </a>
                 </Slider>
               </div>
-              {/* <div className="slide__nav">
-                <i className="icon-arrow-left slider__nav slider__nav--prev "></i>
-                <i className="icon-arrow-right slider__nav slider__nav--next "></i>
-              </div> */}
             </div>
           </div>
         </div>
@@ -330,13 +329,13 @@ const Home = () => (
         <div className="row">
           <div className="col-xl-11 col-12">
             <div className="block__top-line">
-              <h4>
-                Видео
-              </h4>
-              <a href="video.html" target="_blank" className="top-line__link">
-                Все видео
-                <i className="icon-play-button"></i>
-              </a>
+              <h4>{t("MediaMenu.video")}</h4>
+              <Link href="/video">
+                <a target="_blank" className="top-line__link">
+                  {t("MainPage.allVideo")}
+                  <i className="icon-play-button"></i>
+                </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -344,8 +343,12 @@ const Home = () => (
           <div className="col-xl-5 col-md-6">
             <figure className="video__carts">
               <div className="link__frame">
-                <a data-fancybox href="https://www.youtube.com/watch?v=fQmvMavhmco;autoplay=1" className="popap__video" id="autoplay">
+                {/* <a data-fancybox href="https://www.youtube.com/watch?v=fQmvMavhmco;autoplay=1" className="popap__video" id="autoplay">
                   <img src="../static/img/videoimg1.jpg" alt="Превью видео" className="video__img" />
+                </a> */}
+
+                <a href="https://www.youtube.com/embed/VQ1a4SuXIiw?showinfo=0" className="popap__video">
+                  <iframe width="433" height="238" src="https://www.youtube.com/embed/VQ1a4SuXIiw?showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                 </a>
               </div>
               <figcaption className="video__title">
@@ -415,13 +418,26 @@ const Home = () => (
             </div>
             <div className="video-slider__item">
               <div className="link__frame link__frame--slider">
-                <a data-fancybox href="https://vimeo.com/63186969" className="popap__video">
-                  <img src="../static/img/videoimg1.jpg" alt="Превью видео" className="video__img" />
+                {/* <Popup
+                  className="popup-youtube"
+                  href="http://www.youtube.com/watch?v=0O2aH4XLbto"
+                  savefrom_lm_index="0"
+                  savefrom_lm="1"
+                  config={popupConfig}
+                >
+                  <a data-fancybox href="https://vimeo.com/63186969" className="popap__video">
+                    <img src="../static/img/videoimg1.jpg" alt="Превью видео" className="video__img" />
 
-                </a>
-                <p className="video__title video__title--slider">
-                  Видеоблог РНМСО. Выпуск 8
+                  </a>
+                  <p className="video__title video__title--slider">
+                    Видеоблог РНМСО. Выпуск 8
                 </p>
+                </Popup> */}
+                {/* <BYoutube src="https://www.youtube.com/watch?v=TTAU7lLDZYU">
+                  <img src="http://lorempixel.com/400/200/sports/3" />
+                </BYoutube> */}
+                {/*      */}
+
               </div>
             </div>
             <div className="video-slider__item">
@@ -438,69 +454,55 @@ const Home = () => (
           </div>
         </div>
       </div>
-
     </section>
     <section className="s-news">
       <div className="container">
         <div className="row">
           <div className="col-xl-11 col-12">
             <div className="block__top-line">
-              <h4>
-                Новости
-              </h4>
-              <a href="news.html" target="_blank" className="top-line__link">
-                Все новости
-                <i className="icon-news"></i>
-              </a>
+              <h4>{t("MediaMenu.news")}</h4>
+              <Link href="/news">
+                <a target="_blank" className="top-line__link">
+                  {t("MainPage.allNews")}
+                  <i className="icon-news"></i>
+                </a>
+              </Link>
             </div>
           </div>
         </div>
         <div className="row justify-content-center">
-          <div className="col-xl-5 col-md-6">
-            <div className="news-cart">
-              <div className="news-cart__title">
-                <a href="news-page.html" className="news__title">Начались сентябрьские прослушивания в оркестр</a>
+          {news.map(post => (
+            <div className="col-xl-5 col-md-6" key={post.id}>
+              <div className="news-cart">
+                <div className="news-cart__title">
+                  <Link as={`/news/${post.id}`} href={`/news-page?id=${post.id}`}>
+                    <a className="news__title">{post.title}</a>
+                  </Link>
+                </div>
+                <div className="news-cart__img">
+                  {post.image && <img src={post.image} alt="Превью новости" />}
+                </div>
+                <div className="news-cart__text">
+                  <p dangerouslySetInnerHTML={{ __html: post.announcement }}></p>
+                </div>
+                <Link as={`/news/${post.id}`} href={`/news-page?id=${post.id}`}>
+                  <a className="news-cart__more" target="_blank">{t("MainPage.learnMore")}</a>
+                </Link>
               </div>
-              <div className="news-cart__img">
-
-              </div>
-              <div className="news-cart__text">
-                <p>
-                  Глиссандо регрессийно иллюстрирует целотоновый контрапункт контрастных фактур, потому что современная музыка не запоминается.
-                  Алеаторика дает open-air. Панладовая система, в первом приближении, имитирует соноропериод, благодаря широким мелодическим
-                  скачкам.
-                </p>
-              </div>
-              <a href="news-page.html" className="news-cart__more" target="_blank">
-                Подробнее
-              </a>
             </div>
-          </div>
-          <div className="col-xl-5 col-md-6">
-            <div className="news-cart">
-              <div className="news-cart__title">
-                <a href="news-page.html" className="news__title">Премьерный концерт оркестра состоится в ноябре 2018 года</a>
-              </div>
-              <div className="news-cart__img">
-                <img src="../static/img/newsimg.jpg" alt="Превью новости" />
-              </div>
-              <div className="news-cart__text">
-                <p>
-                  Плотностная компонентная форма, согласно традиционным представлениям, mezzo forte образует серийный форшлаг, таким образом
-                  конструктивное состояние всей музыкальной ткани или какой-либо из составляющих ее субструктур (в том числе: временнoй,
-                  гармонической, динамической, тембровой, темповой) возникает как следствие их выстраивания на основе определенного
-                  ряда (модуса).
-                </p>
-              </div>
-              <a href="news-page.html" className="news-cart__more" target="_blank">
-                Подробнее
-              </a>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
   </Layout>
 )
 
-export default Home
+
+Home.getInitialProps = async ({ req, res }) => {
+  const language = req || res ? req.language || res.locals.language : null;
+  const responseVideo = await callApi('/video/?limit=4&offset=0', language);
+  const responseNews = await callApi('/news/?limit=2&offset=0', language);
+  return { videos: responseVideo.results, news: responseNews.results }
+}
+
+export default withI18next(['common'])(Home);

@@ -1,7 +1,10 @@
 import React from 'react';
+import { withI18next } from '../lib/withI18next';
+import callApi from '../utils/api';
 import Layout from '../layouts/Main';
+import Submenu from '../components/moleculs/Submenu';
 
-const Video = () => (
+const Video = ({ t }) => (
   <Layout title="Видео">
     <main className="m-before m-video">
       <div className="container">
@@ -9,22 +12,9 @@ const Video = () => (
           <div className="col-12">
             <div className="page__title-line">
               <h1 className="page__title">
-                Видео
-						</h1>
-              <ul className="page__list">
-                <li>
-                  <a href="news.html">Новости</a>
-                </li>
-                <li>
-                  <a href="video.html" className="active">Видео</a>
-                </li>
-                <li>
-                  <a href="photo.html">Фото</a>
-                </li>
-                <li>
-                  <a href="press.html">Пресса</a>
-                </li>
-              </ul>
+                {t("MediaMenu.video")}
+              </h1>
+              <Submenu menu="MediaMenu" activePage="video" />
             </div>
           </div>
         </div>
@@ -468,4 +458,11 @@ const Video = () => (
   </Layout>
 )
 
-export default Video;
+
+Video.getInitialProps = async ({ req, res }) => {
+  const language = req || res ? req.language || res.locals.language : null;
+  // const response = await callApi('/press', language);
+  // return { press: response.results }
+}
+
+export default withI18next(['common'])(Video);

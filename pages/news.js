@@ -9,10 +9,6 @@ import Submenu from '../components/moleculs/Submenu';
 
 const limitNews = 4;
 class News extends React.Component {
-  // static async getInitialProps({ req }) {
-  //   const userAgent = req ? req.headers['user-agent'] : navigator.userAgent
-  //   return { userAgent }
-  // }
   static async getInitialProps({ req, res }) {
     const language = req || res ? req.language || res.locals.language : null;
     const response = await callApi(`/news/?limit=${limitNews}&offset=0`, language);
@@ -75,11 +71,11 @@ class News extends React.Component {
                 <div className="col-lg-8 col-md-9">
                   <div className="short__news">
                     <h3 className="full-link__title">
-                      <Link href="news-page">
+                      <Link as={`/news/${post.id}`} href={`/news-page?id=${post.id}`}>
                         <a className="news__full-link">{post.title}</a>
                       </Link>
                     </h3>
-                    <Link href="news-page">
+                    <Link as={`/news/${post.id}`} href={`/news-page?id=${post.id}`}>
                       <a className="news__full-link--img">
                         {post.image && <img src={post.image} alt="Фото новости" />}
                       </a>
@@ -92,88 +88,6 @@ class News extends React.Component {
                 </div>
               </div>
             ))}
-
-            {/* <div className="row">
-              <div className="col-xl-2 col-md-3">
-                <div className="news__date">
-                  <span className="news__year">
-                    2018
-						</span>
-                  <span className="news__day">
-                    7 сентября
-						</span>
-                </div>
-              </div>
-              <div className="col-xl-8 col-md-9">
-                <div className="short__news">
-                  <h3 className="full-link__title">
-                    <a href="news-page.html" className="news__full-link"> Оркестр дал свой первый концерт</a>
-                  </h3>
-
-                  <p className="short-news__text">
-                    Соноропериод диссонирует райдер. Действительно, субтехника синхронно имеет звукорядный фузз. Еще Аристотель в своей «Политике»
-                    говорил, что музыка, воздействуя на человека, доставляет «своего рода очищение, то есть облегчение, связанное с наслаждением»,
-                    однако фьюжн дает звукосниматель. Контрапункт контрастных фактур, следовательно, неизменяем.
-						</p>
-                  <a href="news-page.html" className="article__more">Читать далее</a>
-                </div>
-              </div>
-            </div> */}
-            {/* <div className="row">
-              <div className="col-xl-2 col-md-3">
-                <div className="news__date">
-                  <span className="news__year">
-                    2018
-						</span>
-                  <span className="news__day">
-                    30 августа
-						</span>
-                </div>
-              </div>
-              <div className="col-xl-8 col-md-9">
-                <div className="short__news">
-                  <h3 className="full-link__title">
-                    <a href="news-page.html" className="news__full-link"> Идет подготовка к концерту-презентации оркестра</a>
-                  </h3>
-                  <p className="short-news__text">
-                    Струна просветляет миксолидийский нонаккорд. Звукосниматель изящно образует мнимотакт. Песня "All The Things She Said" (в
-                    русском варианте - "Я сошла с ума"), так или иначе, варьирует midi-контроллер, на этих моментах останавливаются Л.А.Мазель
-                    и В.А.Цуккерман в своем "Анализе музыкальных произведений". В заключении добавлю, арпеджио взаимно. Сет, на первый
-                    взгляд, дает форшлаг, это понятие создано по аналогии с термином Ю.Н.Холопова "многозначная тональность".
-						</p>
-                  <a href="news-page.html" className="article__more">Читать далее</a>
-                </div>
-              </div>
-            </div> */}
-            {/* <div className="row">
-              <div className="col-xl-2 col-md-3">
-                <div className="news__date">
-                  <span className="news__year">
-                    2018
-						</span>
-                  <span className="news__day">
-                    14 августа
-						</span>
-                </div>
-              </div>
-              <div className="col-xl-8 col-md-9">
-                <div className="short__news">
-                  <h3 className="full-link__title">
-                    <a href="news-page.html" className="news__full-link"> Василий Петренко начал репититировать с оркестром концерт-презентацию</a>
-                  </h3>
-                  <a href="news-page.html" className="news__full-link--img">
-                    <img src="../static/img/news-photo2.jpg" alt="Фото новости" />
-                  </a>
-                  <p className="short-news__text">
-                    Глиссандо, согласно традиционным представлениям, начинает сонорный ревер. Пуантилизм, зародившийся в музыкальных микроформах
-                    начала ХХ столетия, нашел далекую историческую параллель в лице средневекового гокета, однако гармонический интервал
-                    просветляет контрапункт контрастных фактур, и здесь мы видим ту самую каноническую секвенцию с разнонаправленным шагом
-                    отдельных звеньев. Мономерная остинатная педаль, в том числе, mezzo forte вызывает сет.
-					      	</p>
-                  <a href="news-page.html" className="article__more">Читать далее</a>
-                </div>
-              </div>
-            </div>  */}
             <div className="row ">
               <div className="col-xl-8 offset-xl-2">
                 <ReactPaginate

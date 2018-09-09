@@ -42,8 +42,25 @@
     "harps": "Harps",
     "drums": "Drums"
   },
+  "MainPage": {
+    "learnMore": "Learn more",
+    "allNews": "All news",
+    "allVideo": "All video"
+  },
+  "AfishaPage": {
+    "soloists": "Soloists",
+    "conductors": "Conductors",
+    "buyTicket": "Buy a ticket",
+    "showAllConcerts": "Show all concerts"
+  },
+  "PhotosPage": {
+    "backToAlbums": "Back to photo albums"
+  },
   "NewsPage": {
     "backToNews": "Back to news"
+  },
+  "PressPage": {
+    "read": "Read"
   },
   "ContactsPage": {
     "address": "Concert Complex «Philharmonia-2» Michurinsky Avenue, Olympic Village, Building 1",

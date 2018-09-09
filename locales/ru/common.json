@@ -42,8 +42,25 @@
     "harps": "Арфы",
     "drums": "Ударные"
   },
+  "MainPage": {
+    "learnMore": "Подробнее",
+    "allNews": "Все новости",
+    "allVideo": "Все видео"
+  },
+  "AfishaPage": {
+    "soloists": "Солисты",
+    "conductors": "Дирижёры",
+    "buyTicket": "Купить билет",
+    "showAllConcerts": "Показать все концерты"
+  },
+  "PhotosPage": {
+    "backToAlbums": "Вернуться к фотоальбомам"
+  },
   "NewsPage": {
     "backToNews": "Назад к новостям"
+  },
+  "PressPage": {
+    "read": "Читать"
   },
   "ContactsPage": {
     "address": "Концертный комплекс «Филармония-2» Мичуринский проспект, Олимпийская деревня, дом 1",

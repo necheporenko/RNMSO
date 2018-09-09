@@ -17,5 +17,13 @@
   "Pagination": {
     "prev": "Pagination.prev",
     "next": "Pagination.next"
+  },
+  "PressPage": {
+    "read": "PressPage.read"
+  },
+  "AfishaPage": {
+    "conductors": "AfishaPage.conductors",
+    "soloists": "AfishaPage.soloists",
+    "buyTicket": "AfishaPage.buyTicket"
   }
 }

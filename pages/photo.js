@@ -1,7 +1,11 @@
 import React from 'react';
+import Link from 'next/link';
+import { withI18next } from '../lib/withI18next';
+import callApi from '../utils/api';
 import Layout from '../layouts/Main';
+import Submenu from '../components/moleculs/Submenu';
 
-const Photo = () => (
+const Photo = ({ t, gallery }) => (
   <Layout title="Фото">
     <main className="m-before">
       <div className="container">
@@ -9,207 +13,42 @@ const Photo = () => (
           <div className="col-12">
             <div className="page__title-line">
               <h1 className="page__title">
-                Фото
-						</h1>
-              <ul className="page__list">
-                <li>
-                  <a href="news.html">Новости</a>
-                </li>
-                <li>
-                  <a href="video.html">Видео</a>
-                </li>
-                <li>
-                  <a href="photo.html" className="active">Фото</a>
-                </li>
-                <li>
-                  <a href="press.html">Пресса</a>
-                </li>
-              </ul>
+                {t("MediaMenu.photo")}
+              </h1>
+              <Submenu menu="MediaMenu" activePage="photo" />
             </div>
-
           </div>
         </div>
         <div className="row justify-content-center">
-          <div className="col-lg-4 col-md-6">
-            <div className="gallery__flex-wrapper">
-              <a href="album.html" className="gallery__link">
-                <img src="../static/img/photo1.jpg" alt="Фотогаллерея" />
-                <div className="gallery__desk">
-                  <h5 className="gallery__title">
-                    Конкурс 2018
-								</h5>
-                  <p className="gallery__quantity">
-                    <span className="quantity__value">28</span>
-                    фото
-								</p>
-                </div>
-              </a>
+          {gallery.map(album => (
+            <div className="col-lg-4 col-md-6" key={album.id}>
+              <div className="gallery__flex-wrapper">
+                <Link as={`/album/${album.main_photo.gallery}`} href={`/album?id=${album.main_photo.gallery}`}>
+                  <a className="gallery__link">
+                    <img src={`http://31.192.109.44${album.main_photo.image}`} alt="Фотогаллерея" />
+                    <div className="gallery__desk">
+                      <h5 className="gallery__title">{album.title}</h5>
+                      <p className="gallery__quantity">
+                        <span className="quantity__value">{album.count_photo}</span>
+                        фото
+                      </p>
+                    </div>
+                  </a>
+                </Link>
+              </div>
             </div>
-          </div>
-          <div className="col-lg-4 col-md-6">
-            <div className="gallery__flex-wrapper">
-              <a href="album.html" className="gallery__link">
-                <img src="../static/img/photo2.jpg" alt="Фотогаллерея" />
-                <div className="gallery__desk">
-                  <h5 className="gallery__title">Репетиции</h5>
-                  <p className="gallery__quantity">
-                    <span className="quantity__value">75</span>
-                    фото
-								</p>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div className="col-lg-4 col-md-6">
-            <div className="gallery__flex-wrapper">
-              <a href="album.html" className="gallery__link">
-                <img src="../static/img/photo3.jpg" alt="Фотогаллерея" />
-                <div className="gallery__desk">
-                  <h5 className="gallery__title">Концерт-презентация оркестра</h5>
-                  <p className="gallery__quantity">
-                    <span className="quantity__value">42</span>
-                    фото
-								</p>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div className="col-lg-4 col-md-6">
-            <div className="gallery__flex-wrapper">
-              <a href="album.html" className="gallery__link">
-                <img src="../static/img/photo1.jpg" alt="Фотогаллерея" />
-                <div className="gallery__desk">
-                  <h5 className="gallery__title">
-                    Конкурс 2018
-								</h5>
-                  <p className="gallery__quantity">
-                    <span className="quantity__value">28</span>
-                    фото
-								</p>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div className="col-lg-4 col-md-6">
-            <div className="gallery__flex-wrapper">
-              <a href="album.html" className="gallery__link">
-                <img src="../static/img/photo2.jpg" alt="Фотогаллерея" />
-                <div className="gallery__desk">
-                  <h5 className="gallery__title">Репетиции</h5>
-                  <p className="gallery__quantity">
-                    <span className="quantity__value">75</span>
-                    фото
-								</p>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div className="col-lg-4 col-md-6">
-            <div className="gallery__flex-wrapper">
-              <a href="album.html" className="gallery__link">
-                <img src="../static/img/photo3.jpg" alt="Фотогаллерея" />
-                <div className="gallery__desk">
-                  <h5 className="gallery__title">Концерт-презентация оркестра</h5>
-                  <p className="gallery__quantity">
-                    <span className="quantity__value">42</span>
-                    фото
-								</p>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div className="col-lg-4 col-md-6">
-            <div className="gallery__flex-wrapper">
-              <a href="album.html" className="gallery__link">
-                <img src="../static/img/photo1.jpg" alt="Фотогаллерея" />
-                <div className="gallery__desk">
-                  <h5 className="gallery__title">
-                    Конкурс 2018
-								</h5>
-                  <p className="gallery__quantity">
-                    <span className="quantity__value">28</span>
-                    фото
-								</p>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div className="col-lg-4 col-md-6">
-            <div className="gallery__flex-wrapper">
-              <a href="album.html" className="gallery__link">
-                <img src="../static/img/photo2.jpg" alt="Фотогаллерея" />
-                <div className="gallery__desk">
-                  <h5 className="gallery__title">Репетиции</h5>
-                  <p className="gallery__quantity">
-                    <span className="quantity__value">75</span>
-                    фото
-								</p>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div className="col-lg-4 col-md-6">
-            <div className="gallery__flex-wrapper">
-              <a href="album.html" className="gallery__link">
-                <img src="../static/img/photo3.jpg" alt="Фотогаллерея" />
-                <div className="gallery__desk">
-                  <h5 className="gallery__title">Концерт-презентация оркестра</h5>
-                  <p className="gallery__quantity">
-                    <span className="quantity__value">42</span>
-                    фото
-								</p>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div className="col-lg-4 col-md-6">
-            <div className="gallery__flex-wrapper">
-              <a href="album.html" className="gallery__link">
-                <img src="../static/img/photo1.jpg" alt="Фотогаллерея" />
-                <div className="gallery__desk">
-                  <h5 className="gallery__title">
-                    Конкурс 2018
-								</h5>
-                  <p className="gallery__quantity">
-                    <span className="quantity__value">28</span>
-                    фото
-								</p>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div className="col-lg-4 col-md-6">
-            <div className="gallery__flex-wrapper">
-              <a href="album.html" className="gallery__link">
-                <img src="../static/img/photo2.jpg" alt="Фотогаллерея" />
-                <div className="gallery__desk">
-                  <h5 className="gallery__title">Репетиции</h5>
-                  <p className="gallery__quantity">
-                    <span className="quantity__value">75</span>
-                    фото
-								</p>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div className="col-lg-4 col-md-6">
-            <div className="gallery__flex-wrapper">
-              <a href="album.html" className="gallery__link">
-                <img src="../static/img/photo3.jpg" alt="Фотогаллерея" />
-                <div className="gallery__desk">
-                  <h5 className="gallery__title">Концерт-презентация оркестра</h5>
-                  <p className="gallery__quantity">
-                    <span className="quantity__value">42</span>
-                    фото
-								</p>
-                </div>
-              </a>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </main>
   </Layout>
 )
 
-export default Photo;
+
+Photo.getInitialProps = async ({ req, res }) => {
+  const language = req || res ? req.language || res.locals.language : null;
+  const response = await callApi('/gallery', language);
+  return { gallery: response.results }
+}
+
+export default withI18next(['common'])(Photo);

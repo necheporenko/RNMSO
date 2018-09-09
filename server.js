@@ -48,9 +48,14 @@ i18n
         // missing keys
         server.post('/locales/add/:lng/:ns', i18nextMiddleware.missingKeyHandler(i18n))
 
-        // dynamic route for news
+        // dynamic routes 
         server.get('/news/:id', (req, res) => {
           const actualPage = '/news-page';
+          const queryParams = { id: req.params.id };
+          app.render(req, res, actualPage, queryParams)
+        })
+        server.get('/album/:id', (req, res) => {
+          const actualPage = '/album';
           const queryParams = { id: req.params.id };
           app.render(req, res, actualPage, queryParams)
         })
