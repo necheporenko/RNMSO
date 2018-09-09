@@ -1,5 +1,19 @@
 import React from 'react';
+import Slider from "react-slick";
 import Layout from '../layouts/Main';
+
+const PrevArrow = ({ onClick }) => (<i onClick={onClick} className="icon-arrow-left slider__nav slider__nav--prev "></i>);
+const NextArrow = ({ onClick }) => (<i onClick={onClick} className="icon-arrow-right slider__nav slider__nav--next "></i>);
+
+const SliderSettings = {
+  dots: false,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  nextArrow: <NextArrow />,
+  prevArrow: <PrevArrow />
+};
 
 const Home = () => (
   <Layout>
@@ -90,220 +104,222 @@ const Home = () => (
           <div className="col-12 col-lg-10">
             <div className="carrousel__wrapper">
               <div className="owl-carousel event__slider">
-                <a href="program-page.html" className="slide__link" target="_blank">
-                  <div className="slider__item">
-                    <div className="slider__left">
-                      <div className="slider__top-line">
-                        <div className="slider__date">
-                          <div className="date__day">
-                            <span>03</span>
-                            <sup>
-                              <small>Августа</small>
-                            </sup>
+                <Slider {...SliderSettings}>
+                  <a href="program-page.html" className="slide__link" target="_blank">
+                    <div className="slider__item">
+                      <div className="slider__left">
+                        <div className="slider__top-line">
+                          <div className="slider__date">
+                            <div className="date__day">
+                              <span>03</span>
+                              <sup>
+                                <small>Августа</small>
+                              </sup>
+                            </div>
+                            <div className="date__time">
+                              <span className="day">сб</span>
+                              <span className="time">19:00</span>
+                            </div>
                           </div>
-                          <div className="date__time">
-                            <span className="day">сб</span>
-                            <span className="time">19:00</span>
+                          <div className="slider__site">
+                            <span className="site__sity">
+                              Москва
+                            </span>
+                            <span className="site__room">
+                              Большой зал Консерватории
+                            </span>
                           </div>
                         </div>
-                        <div className="slider__site">
-                          <span className="site__sity">
-                            Москва
-                          </span>
-                          <span className="site__room">
-                            Большой зал Консерватории
-                          </span>
+                        <div className="slider__content">
+                          <h3 className="slider__title">
+                            Концерт-презентация оркестра
+                          </h3>
+                          <p className="slider__participants">
+                            <span className="participants__post">
+                              Дирижёр -
+                            </span>
+                            <span className="participants__name">
+                              Василий пертенко
+                            </span>
+                          </p>
+                          <p className="slider__participants">
+                            <span className="participants__post">
+                              Солист :
+                            </span>
+                            <span className="participants__name">
+                              Симон Трпчески (фортепиано)
+                            </span>
+                          </p>
+                          <div className="slider__program">
+                            <span className="program__title">
+                              В программе:
+                            </span>
+                            <ul className="program__list">
+                              <li>
+                                Светланов
+                              </li>
+                              <li>
+                                Лист
+                              </li>
+                              <li>
+                                Рахманинов
+                              </li>
+                            </ul>
+                          </div>
                         </div>
-                      </div>
-                      <div className="slider__content">
-                        <h3 className="slider__title">
-                          Концерт-презентация оркестра
-                        </h3>
-                        <p className="slider__participants">
-                          <span className="participants__post">
-                            Дирижёр -
-                          </span>
-                          <span className="participants__name">
-                            Василий пертенко
-                          </span>
-                        </p>
-                        <p className="slider__participants">
-                          <span className="participants__post">
-                            Солист :
-                          </span>
-                          <span className="participants__name">
-                            Симон Трпчески (фортепиано)
-                          </span>
-                        </p>
-                        <div className="slider__program">
-                          <span className="program__title">
-                            В программе:
-                          </span>
-                          <ul className="program__list">
-                            <li>
-                              Светланов
-                            </li>
-                            <li>
-                              Лист
-                            </li>
-                            <li>
-                              Рахманинов
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
 
-                    </div>
-                    <div className="slide__right">
-                      <img src="../static/img/slide1.jpg" alt="Участник концерта" />
-                      <img src="../static/img/slide2.jpg" alt="Участник концерта" />
-                    </div>
-                  </div>
-                </a>
-                <a href="program-page.html" className="slide__link" target="_blank">
-                  <div className="slider__item">
-                    <div className="slider__left">
-                      <div className="slider__top-line">
-                        <div className="slider__date">
-                          <div className="date__day">
-                            <span>03</span>
-                            <sup>
-                              <small>Августа</small>
-                            </sup>
-                          </div>
-                          <div className="date__time">
-                            <span className="day">сб</span>
-                            <span className="time">19:00</span>
-                          </div>
-                        </div>
-                        <div className="slider__site">
-                          <span className="site__sity">
-                            Москва
-                          </span>
-                          <span className="site__room">
-                            Большой зал Консерватории
-                          </span>
-                        </div>
                       </div>
-                      <div className="slider__content">
-                        <h3 className="slider__title">
-                          Концерт-презентация оркестра
-                        </h3>
-                        <p className="slider__participants">
-                          <span className="participants__post">
-                            Дирижёр -
-                          </span>
-                          <span className="participants__name">
-                            Василий пертенко
-                          </span>
-                        </p>
-                        <p className="slider__participants">
-                          <span className="participants__post">
-                            Солист :
-                          </span>
-                          <span className="participants__name">
-                            Симон Трпчески (фортепиано)
-                          </span>
-                        </p>
-                        <div className="slider__program">
-                          <span className="program__title">
-                            В программе:
-                          </span>
-                          <ul className="program__list">
-                            <li>
-                              Светланов
-                            </li>
-                            <li>
-                              Лист
-                            </li>
-                            <li>
-                              Рахманинов
-                            </li>
-                          </ul>
-                        </div>
+                      <div className="slide__right">
+                        <img src="../static/img/slide1.jpg" alt="Участник концерта" />
+                        <img src="../static/img/slide2.jpg" alt="Участник концерта" />
                       </div>
+                    </div>
+                  </a>
+                  <a href="program-page.html" className="slide__link" target="_blank">
+                    <div className="slider__item">
+                      <div className="slider__left">
+                        <div className="slider__top-line">
+                          <div className="slider__date">
+                            <div className="date__day">
+                              <span>03</span>
+                              <sup>
+                                <small>Августа</small>
+                              </sup>
+                            </div>
+                            <div className="date__time">
+                              <span className="day">сб</span>
+                              <span className="time">19:00</span>
+                            </div>
+                          </div>
+                          <div className="slider__site">
+                            <span className="site__sity">
+                              Москва
+                            </span>
+                            <span className="site__room">
+                              Большой зал Консерватории
+                            </span>
+                          </div>
+                        </div>
+                        <div className="slider__content">
+                          <h3 className="slider__title">
+                            Концерт-презентация оркестра
+                          </h3>
+                          <p className="slider__participants">
+                            <span className="participants__post">
+                              Дирижёр -
+                            </span>
+                            <span className="participants__name">
+                              Василий пертенко
+                            </span>
+                          </p>
+                          <p className="slider__participants">
+                            <span className="participants__post">
+                              Солист :
+                            </span>
+                            <span className="participants__name">
+                              Симон Трпчески (фортепиано)
+                            </span>
+                          </p>
+                          <div className="slider__program">
+                            <span className="program__title">
+                              В программе:
+                            </span>
+                            <ul className="program__list">
+                              <li>
+                                Светланов
+                              </li>
+                              <li>
+                                Лист
+                              </li>
+                              <li>
+                                Рахманинов
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
 
-                    </div>
-                    <div className="slide__right">
-                      <img src="../static/img/slide1.jpg" alt="Участник концерта" />
-                      <img src="../static/img/slide2.jpg" alt="Участник концерта" />
-                    </div>
-                  </div>
-                </a>
-                <a href="program-page.html" className="slide__link" target="_blank">
-                  <div className="slider__item">
-                    <div className="slider__left">
-                      <div className="slider__top-line">
-                        <div className="slider__date">
-                          <div className="date__day">
-                            <span>03</span>
-                            <sup>
-                              <small>Августа</small>
-                            </sup>
-                          </div>
-                          <div className="date__time">
-                            <span className="day">сб</span>
-                            <span className="time">19:00</span>
-                          </div>
-                        </div>
-                        <div className="slider__site">
-                          <span className="site__sity">
-                            Москва
-                          </span>
-                          <span className="site__room">
-                            Большой зал Консерватории
-                          </span>
-                        </div>
                       </div>
-                      <div className="slider__content">
-                        <h3 className="slider__title">
-                          Концерт-презентация оркестра
+                      <div className="slide__right">
+                        <img src="../static/img/slide1.jpg" alt="Участник концерта" />
+                        <img src="../static/img/slide2.jpg" alt="Участник концерта" />
+                      </div>
+                    </div>
+                  </a>
+                  <a href="program-page.html" className="slide__link" target="_blank">
+                    <div className="slider__item">
+                      <div className="slider__left">
+                        <div className="slider__top-line">
+                          <div className="slider__date">
+                            <div className="date__day">
+                              <span>03</span>
+                              <sup>
+                                <small>Августа</small>
+                              </sup>
+                            </div>
+                            <div className="date__time">
+                              <span className="day">сб</span>
+                              <span className="time">19:00</span>
+                            </div>
+                          </div>
+                          <div className="slider__site">
+                            <span className="site__sity">
+                              Москва
+                          </span>
+                            <span className="site__room">
+                              Большой зал Консерватории
+                          </span>
+                          </div>
+                        </div>
+                        <div className="slider__content">
+                          <h3 className="slider__title">
+                            Концерт-презентация оркестра
                         </h3>
-                        <p className="slider__participants">
-                          <span className="participants__post">
-                            Дирижёр -
+                          <p className="slider__participants">
+                            <span className="participants__post">
+                              Дирижёр -
                           </span>
-                          <span className="participants__name">
-                            Василий пертенко
+                            <span className="participants__name">
+                              Василий пертенко
                           </span>
-                        </p>
-                        <p className="slider__participants">
-                          <span className="participants__post">
-                            Солист :
+                          </p>
+                          <p className="slider__participants">
+                            <span className="participants__post">
+                              Солист :
                           </span>
-                          <span className="participants__name">
-                            Симон Трпчески (фортепиано)
+                            <span className="participants__name">
+                              Симон Трпчески (фортепиано)
                           </span>
-                        </p>
-                        <div className="slider__program">
-                          <span className="program__title">
-                            В программе:
+                          </p>
+                          <div className="slider__program">
+                            <span className="program__title">
+                              В программе:
                           </span>
-                          <ul className="program__list">
-                            <li>
-                              Светланов
+                            <ul className="program__list">
+                              <li>
+                                Светланов
                             </li>
-                            <li>
-                              Лист
+                              <li>
+                                Лист
                             </li>
-                            <li>
-                              Рахманинов
+                              <li>
+                                Рахманинов
                             </li>
-                          </ul>
+                            </ul>
+                          </div>
                         </div>
                       </div>
+                      <div className="slide__right">
+                        <img src="../static/img/slide1.jpg" alt="Участник концерта" />
+                        <img src="../static/img/slide2.jpg" alt="Участник концерта" />
+                      </div>
                     </div>
-                    <div className="slide__right">
-                      <img src="../static/img/slide1.jpg" alt="Участник концерта" />
-                      <img src="../static/img/slide2.jpg" alt="Участник концерта" />
-                    </div>
-                  </div>
-                </a>
+                  </a>
+                </Slider>
               </div>
-              <div className="slide__nav">
+              {/* <div className="slide__nav">
                 <i className="icon-arrow-left slider__nav slider__nav--prev "></i>
                 <i className="icon-arrow-right slider__nav slider__nav--next "></i>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
