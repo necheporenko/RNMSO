@@ -48,6 +48,13 @@ i18n
         // missing keys
         server.post('/locales/add/:lng/:ns', i18nextMiddleware.missingKeyHandler(i18n))
 
+        // dynamic route for news
+        server.get('/news/:id', (req, res) => {
+          const actualPage = '/news-page';
+          const queryParams = { id: req.params.id };
+          app.render(req, res, actualPage, queryParams)
+        })
+
         // use next.js
         server.get('*', (req, res) => handle(req, res))
 

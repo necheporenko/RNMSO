@@ -2,26 +2,8 @@ import React from 'react';
 import Link from 'next/link';
 import i18n from '../../i18n';
 import { withI18next } from '../../lib/withI18next';
+import { OrchestraMenu, AfishaMenu, MediaMenu, PartnersMenu } from '../../constants';
 
-
-const OrchestraMenu = [
-    { href: 'staff', name: 'OrchestraMenu.staff' },
-    { href: 'team', name: 'OrchestraMenu.team' },
-    { href: 'academy', name: 'OrchestraMenu.academy' },
-    { href: 'academy-masters', name: 'OrchestraMenu.academy-masters' },
-    { href: 'conductors', name: 'OrchestraMenu.conductors' },
-    { href: 'soloists', name: 'OrchestraMenu.soloists' },
-    { href: 'application', name: 'OrchestraMenu.application' },
-    { href: 'contacts', name: 'OrchestraMenu.contacts' },
-];
-const AfishaMenu = { href: 'calendar', name: 'MainMenu.afisha' };
-const MediaMenu = [
-    { href: 'news', name: 'MediaMenu.news' },
-    { href: 'video', name: 'MediaMenu.video' },
-    { href: 'photo', name: 'MediaMenu.photo' },
-    { href: 'press', name: 'MediaMenu.press' },
-];
-const PartnersMenu = { href: 'partners', name: 'MainMenu.partners' };
 
 const changeLanguage = lng => {
     i18n.changeLanguage(lng, (err, t) => {
@@ -180,9 +162,10 @@ const Header = ({ t, language }) => (
                     <Link href={PartnersMenu.href}><a className="hidden__item">{PartnersMenu.name}</a></Link>
                 </div>
                 <div className="main__list main__list--hidden">
-                    <a href="reserve.html" className="hidden__item ">
-                        Всероссийский симфонический резерв
-				    </a>
+                    <Link href="/reserve">
+                        <a className="hidden__item ">{t("MainMenu.partners")}</a>
+                    </Link>
+
                 </div>
                 <div className="main__list main__list--hidden">
                     <div className="hidden__item">

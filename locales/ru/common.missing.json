@@ -13,5 +13,9 @@
     "commonQuestion": "ContactsPage.commonQuestion",
     "requestPress": "ContactsPage.requestPress"
   },
-  "OrchestraName": "OrchestraName"
+  "OrchestraName": "OrchestraName",
+  "Pagination": {
+    "prev": "Pagination.prev",
+    "next": "Pagination.next"
+  }
 }

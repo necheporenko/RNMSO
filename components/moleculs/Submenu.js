@@ -1,28 +1,15 @@
 import React from 'react';
 import Link from 'next/link';
 import { withI18next } from '../../lib/withI18next';
+import { OrchestraMenu, MediaMenu } from '../../constants';
 
 const SubMenus = menu => {
   switch (menu) {
     case 'OrchestraMenu':
-      return [
-        { href: 'staff', name: 'OrchestraMenu.staff' },
-        { href: 'team', name: 'OrchestraMenu.team' },
-        { href: 'academy', name: 'OrchestraMenu.academy' },
-        { href: 'academy-masters', name: 'OrchestraMenu.academy-masters' },
-        { href: 'conductors', name: 'OrchestraMenu.conductors' },
-        { href: 'soloists', name: 'OrchestraMenu.soloists' },
-        { href: 'application', name: 'OrchestraMenu.application' },
-        { href: 'contacts', name: 'OrchestraMenu.contacts' },
-      ];
+      return OrchestraMenu;
 
     case 'MediaMenu':
-      return [
-        { href: 'news', name: 'MediaMenu.news' },
-        { href: 'video', name: 'MediaMenu.video' },
-        { href: 'photo', name: 'MediaMenu.photo' },
-        { href: 'press', name: 'MediaMenu.press' },
-      ];
+      return MediaMenu;
 
     default:
       console.log("Menu doesn't exist");
@@ -35,7 +22,7 @@ const Submenu = ({ t, menu, activePage }) => (
     {SubMenus(menu, activePage).map((menu, index) => (
       <li key={index}>
         <Link href={menu.href}>
-          <a className={menu.href === activePage ? 'active' : ''}>{t(menu.name)}</a>
+          <a className={menu.href === `/${activePage}` ? 'active' : ''}>{t(menu.name)}</a>
         </Link>
       </li>
     ))}

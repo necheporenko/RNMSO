@@ -1,23 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 import { withI18next } from '../../lib/withI18next';
+import { OrchestraMenu, MediaMenu } from '../../constants';
 
-const OrchestraMenu = [
-  { href: 'staff', name: 'OrchestraMenu.staff' },
-  { href: 'team', name: 'OrchestraMenu.team' },
-  { href: 'academy', name: 'OrchestraMenu.academy' },
-  { href: 'academy-masters', name: 'OrchestraMenu.academy-masters' },
-  { href: 'conductors', name: 'OrchestraMenu.conductors' },
-  { href: 'soloists', name: 'OrchestraMenu.soloists' },
-  { href: 'application', name: 'OrchestraMenu.application' },
-  { href: 'contacts', name: 'OrchestraMenu.contacts' },
-];
-const MediaMenu = [
-  { href: 'news', name: 'MediaMenu.news' },
-  { href: 'video', name: 'MediaMenu.video' },
-  { href: 'photo', name: 'MediaMenu.photo' },
-  { href: 'press', name: 'MediaMenu.press' },
-];
 
 const Footer = ({ t }) => (
   <footer className="footer">
@@ -103,8 +88,8 @@ const Footer = ({ t }) => (
         </div>
         <div className="col-lg-2 d-none d-lg-block d-xl-block">
           <div className="footer__partners">
-            <Link href="reserve"><a className="partners-link">{t("MainMenu.reserve")}</a></Link>
-            <Link href="partners"><a className="partners-link footer-menu__title">{t("MainMenu.partners")}</a></Link>
+            <Link href="/reserve"><a className="partners-link">{t("MainMenu.reserve")}</a></Link>
+            <Link href="/partners"><a className="partners-link footer-menu__title">{t("MainMenu.partners")}</a></Link>
           </div>
         </div>
       </div>

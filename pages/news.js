@@ -85,7 +85,7 @@ class News extends React.Component {
                       </a>
                     </Link>
                     <p className="short-news__text" dangerouslySetInnerHTML={{ __html: post.announcement }}></p>
-                    <Link href="news-page">
+                    <Link as={`/news/${post.id}`} href={`/news-page?id=${post.id}`}>
                       <a className="article__more">Читать далее</a>
                     </Link>
                   </div>
@@ -176,27 +176,9 @@ class News extends React.Component {
             </div>  */}
             <div className="row ">
               <div className="col-xl-8 offset-xl-2">
-                <div className="paginator">
-                  <div className="paginator__flex-item paginator__flex-item--1">
-                    <button className="paginator-btn paginator-btn--pref" type="button">Предыдущая</button>
-                  </div>
-                  <div className="paginator__flex-item paginator__flex-item--2">
-                    <button className="paginator-btn paginator-btn--next" type="button">Следующая</button>
-                  </div>
-                  <div className="paginator__flex-item paginator__flex-item--3">
-                    <ul className="paginator__list">
-                      <li>1</li>
-                      <li className="active">2</li>
-                      <li>3</li>
-                      <li>...</li>
-                      <li>6</li>
-                      <li>7</li>
-                    </ul>
-                  </div>
-                </div>
                 <ReactPaginate
-                  previousLabel={"Предыдущая"}
-                  nextLabel={"Следующая"}
+                  previousLabel={t("Pagination.prew")}
+                  nextLabel={t("Pagination.next")}
                   breakLabel={<a href="">...</a>}
                   breakClassName={"break-me"}
                   pageCount={Math.ceil(news.count / 4)}
@@ -219,11 +201,5 @@ class News extends React.Component {
     )
   }
 }
-
-// News.getInitialProps = async ({ req, res }) => {
-//   const language = req || res ? req.language || res.locals.language : null;
-//   const response = await callApi('/news/?limit=4&offset=0', language)
-//   return { news: response }
-// }
 
 export default withI18next(['common'])(News);

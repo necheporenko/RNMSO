@@ -42,9 +42,16 @@
     "harps": "Harps",
     "drums": "Drums"
   },
+  "NewsPage": {
+    "backToNews": "Back to news"
+  },
   "ContactsPage": {
     "address": "Concert Complex «Philharmonia-2» Michurinsky Avenue, Olympic Village, Building 1",
     "commonQuestion": "General issues:",
     "requestPress": "Press inquiries:"
+  },
+  "Pagination": {
+    "prew": "Previous",
+    "next": "Next"
   }
 }
