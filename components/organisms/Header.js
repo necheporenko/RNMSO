@@ -31,7 +31,7 @@ const changeLanguage = lng => {
     location.reload();
 }
 
-const Header = ({ t }) => (
+const Header = ({ t, language }) => (
     <div>
         <div className="top__line ">
             <div className="container">
@@ -113,14 +113,14 @@ const Header = ({ t }) => (
                                     <div className="language__toggle">
                                         <button
                                             type="button"
-                                            className="language__btn language__btn--dot language__dot"
+                                            className={(language || i18n.language) === 'ru' ? 'language__btn language__btn--dot language__dot' : 'language__btn language__btn--dot'}
                                             onClick={() => { changeLanguage('ru'); }}
                                         >
                                             Рус
                                         </button>
                                         <button
                                             type="button"
-                                            className="language__btn language__btn--dot"
+                                            className={(language || i18n.language) === 'en' ? 'language__btn language__btn--dot language__dot' : 'language__btn language__btn--dot'}
                                             onClick={() => { changeLanguage('en'); }}
                                         >
                                             Eng
@@ -194,5 +194,10 @@ const Header = ({ t }) => (
         </div>
     </div>
 )
+
+Header.getInitialProps = async ({ req, res }) => {
+    const language = req || res ? req.language || res.locals.language : null;
+    return { language }
+}
 
 export default withI18next(['common'])(Header);

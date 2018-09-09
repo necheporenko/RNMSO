@@ -16,6 +16,14 @@ const SubMenus = menu => {
         { href: 'contacts', name: 'OrchestraMenu.contacts' },
       ];
 
+    case 'MediaMenu':
+      return [
+        { href: 'news', name: 'MediaMenu.news' },
+        { href: 'video', name: 'MediaMenu.video' },
+        { href: 'photo', name: 'MediaMenu.photo' },
+        { href: 'press', name: 'MediaMenu.press' },
+      ];
+
     default:
       console.log("Menu doesn't exist");
       null;

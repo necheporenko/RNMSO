@@ -25,6 +25,23 @@
     "photo": "фото",
     "press": "пресса"
   },
+  "OrchestraMembers": {
+    "firstViolins": "Первые скрипки",
+    "secondViolins": "Вторые скрипки",
+    "alti": "Альты",
+    "cello": "Виолончели",
+    "contrabasses": "Контрабасы",
+    "flutes": "Флейты",
+    "oboes": "Гобои",
+    "clarinets": "Кларнеты",
+    "bassoons": "Фаготы",
+    "horn": "Валторны",
+    "pipes": "Трубы",
+    "trombones": "Тромбоны",
+    "tuba": "Туба",
+    "harps": "Арфы",
+    "drums": "Ударные"
+  },
   "ContactsPage": {
     "address": "Концертный комплекс «Филармония-2» Мичуринский проспект, Олимпийская деревня, дом 1",
     "commonQuestion": "Общие вопросы:",

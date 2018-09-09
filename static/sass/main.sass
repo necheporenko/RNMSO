@@ -1576,11 +1576,11 @@ main
 	align-items: center
 	flex-wrap: wrap
 .paginator__flex-item--1
-	flex: 0 0 23%
+	flex: 1 0 23%
 	display: flex
 	justify-content: flex-start
 .paginator__flex-item--2
-	flex: 0 0 23%
+	flex: 1 0 23%
 	order: 3
 	display: flex
 	justify-content: flex-end
@@ -1590,6 +1590,7 @@ main
 	display: flex
 	justify-content: center
 .paginator-btn
+	color: #000;
 	background: none
 	border: none
 	font-size: 12px
@@ -1622,9 +1623,13 @@ main
 			margin-top: -7px
 			right: 0
 			font-size: 11px
+.break-me
+	a
+		color: #000
 .paginator__list
 	order: 2
-	li
+	li,
+	&__li
 		display: inline-block
 		cursor: pointer
 		font-size: 16px
@@ -1633,7 +1638,16 @@ main
 		text-align: center
 		line-height: 36px
 		border-radius: 50%
-	.active
+	&__li
+		a
+			color: #000
+			display: block
+			width: 36px
+			height: 36px
+			&:focus
+				outline: 0
+	.active,
+	&--active
 		border: 1px solid #000
 // =================news-page=================
 .news-page__top-line

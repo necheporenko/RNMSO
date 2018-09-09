@@ -24,6 +24,7 @@
     "node-sass": "^4.9.3",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
-    "react-i18next": "^7.11.1"
+    "react-i18next": "^7.11.1",
+    "react-paginate": "^5.2.4"
   }
 }

@@ -1,7 +1,11 @@
 import React from 'react';
+import Link from 'next/link';
+import { withI18next } from '../lib/withI18next';
+import callApi from '../utils/api';
 import Layout from '../layouts/Main';
+import Submenu from '../components/moleculs/Submenu';
 
-const Home = () => (
+const Staff = ({ t, members }) => (
   <Layout>
     <main className="m-before m-video">
       <div className="container">
@@ -10,40 +14,13 @@ const Home = () => (
             <div className="page__title-line page__title-line--orchestra">
               <div className="page__flex-wrap">
                 <h1 className="page__title page__title--long">
-                  Состав оркестра
-							</h1>
+                  {t("OrchestraMenu.staff")}
+                </h1>
               </div>
               <div className="page__flex-wrap">
-                <ul className="page__list">
-                  <li>
-                    <a href="staf.html" className="active">Состав Оркестра</a>
-                  </li>
-                  <li>
-                    <a href="team.html">Команда</a>
-                  </li>
-                  <li>
-                    <a href="academy.html">Симфоническая академия</a>
-                  </li>
-                  <li>
-                    <a href="academy-masters.html">Педагоги академии</a>
-                  </li>
-                  <li>
-                    <a href="conductors.html">Дирижёры сезона 2018-2019</a>
-                  </li>
-                  <li>
-                    <a href="soloists.html">Солисты сезона 2018-2019</a>
-                  </li>
-                  <li>
-                    <a href="application.html">Подать заявку</a>
-                  </li>
-                  <li>
-                    <a href="contacts.html">Контакты</a>
-                  </li>
-                </ul>
+                <Submenu menu="OrchestraMenu" activePage="staff" />
               </div>
-
             </div>
-
           </div>
         </div>
       </div>
@@ -161,13 +138,16 @@ const Home = () => (
               Ударные
 					</h2>
           </div>
-
-
         </div>
-
       </section>
     </main>
   </Layout>
 )
 
-export default Home
+Staff.getInitialProps = async ({ req, res }) => {
+  const language = req || res ? req.language || res.locals.language : null;
+  const response = await callApi('/orchestra-members', language)
+  return { members: response.results }
+}
+
+export default withI18next(['common'])(Staff);

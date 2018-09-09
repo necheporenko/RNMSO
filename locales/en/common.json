@@ -25,6 +25,23 @@
     "photo": "photo",
     "press": "press"
   },
+  "OrchestraMembers": {
+    "firstViolins": "First violins",
+    "secondViolins": "Second violins",
+    "alti": "Alti",
+    "cello": "Cello",
+    "contrabasses": "Contrabasses",
+    "flutes": "Flutes",
+    "oboes": "Oboes",
+    "clarinets": "Clarinets",
+    "bassoons": "Bassoons",
+    "horn": "Horn",
+    "pipes": "Pipes",
+    "trombones": "Trombones",
+    "tuba": "Tuba",
+    "harps": "Harps",
+    "drums": "Drums"
+  },
   "ContactsPage": {
     "address": "Concert Complex «Philharmonia-2» Michurinsky Avenue, Olympic Village, Building 1",
     "commonQuestion": "General issues:",
