@@ -53,6 +53,33 @@
     "buyTicket": "Buy a ticket",
     "showAllConcerts": "Show all concerts"
   },
+  "ApplicationPage": {
+    "application": "APPLICATION FOR PARTICIPATION IN SELECTION",
+    "rules": "SELECTION RULES",
+    "applicationForm": "APPLICATION FORM",
+    "form": {
+      "name": "Full name",
+      "bDay": "Birth Day",
+      "placeOfBirth": "Place of birth",
+      "citizenship": "Citizenship",
+      "education": "Education",
+      "awards": "Awards, wins in contests",
+      "passport": "Passport",
+      "homeAddress": "Home address (residence permit)",
+      "actualAddress": "Actual address",
+      "phone": "Telephone for communication (home, mobile)",
+      "accompanist": "Do I need an accompanist for auditions?",
+      "needHouse": "Is there a need for housing?",
+      "agree": "I agree to the processing of my personal data in accordance with FZ-152",
+      "sendApplication": "Send Application",
+      "required": "This field is required.",
+      "yes": "Yes",
+      "no": "No",
+      "educationInfo": "name of educational institution / faculty or department / instrument / teacher / year of admission / year of graduation / specialty / diploma No.",
+      "passportInfo": "series, number, by whom, when issued",
+      "dayFormat": "DD.MM.YYYY"
+    }
+  },
   "PhotosPage": {
     "backToAlbums": "Back to photo albums"
   },
