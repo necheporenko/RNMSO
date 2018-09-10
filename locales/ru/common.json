@@ -81,7 +81,8 @@
     }
   },
   "PhotosPage": {
-    "backToAlbums": "Вернуться к фотоальбомам"
+    "backToAlbums": "Вернуться к фотоальбомам",
+    "photos": "фото"
   },
   "NewsPage": {
     "backToNews": "Назад к новостям"

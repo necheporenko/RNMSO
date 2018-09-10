@@ -1,7 +1,7 @@
 export const OrchestraMenu = [
   { href: '/staff', name: 'OrchestraMenu.staff' },
   // { href: '/team', name: 'OrchestraMenu.team' },
-  { href: '/academy', name: 'OrchestraMenu.academy' },
+  // { href: '/academy', name: 'OrchestraMenu.academy' },
   // { href: '/academy-masters', name: 'OrchestraMenu.academy-masters' },
   { href: '/conductors', name: 'OrchestraMenu.conductors' },
   { href: '/soloists', name: 'OrchestraMenu.soloists' },

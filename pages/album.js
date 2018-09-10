@@ -10,8 +10,10 @@ class Album extends React.Component {
   static async getInitialProps({ req, res, query }) {
     const language = req || res ? req.language || res.locals.language : null;
     const albumID = query.id;
-    const response = await callApi(`/gallery-photo/?gallery=${albumID}`, language);
-    return { photos: response };
+    const responsePhotos = await callApi(`/gallery-photo/?gallery=${albumID}`, language);
+    const responseGallery = await callApi(`/gallery/${albumID}`, language);
+    console.log(responsePhotos, responseGallery);
+    return { photos: responsePhotos, gallery: responseGallery };
   }
 
   state = {
@@ -50,7 +52,8 @@ class Album extends React.Component {
 
   renderGallery = () => {
     const { photos } = this.props;
-    photos.results && photos.results.map((photo, index) => (
+
+    return photos.results && photos.results.map((photo, index) => (
       <a
         href={photo.image}
         onClick={(e) => this.openLightbox(index, e)}
@@ -63,7 +66,7 @@ class Album extends React.Component {
 
 
   render() {
-    const { t, photos } = this.props;
+    const { t, photos, gallery } = this.props;
     return (
       <Layout title="">
         <main>
@@ -78,7 +81,7 @@ class Album extends React.Component {
             <div className="row">
               <div className="col-12">
                 <h1 className="album__title">
-                  Конкурс 2018
+                  {gallery.title}
                 </h1>
               </div>
             </div>
@@ -86,8 +89,8 @@ class Album extends React.Component {
             <div className="row">
               <div className="col-12">
                 <div className="album__quantity">
-                  <span className="album__value">28</span>
-                  фото
+                  <span className="album__value">{gallery.count_photo}</span>
+                  {t("PhotosPage.photos")}
                 </div>
               </div>
             </div>

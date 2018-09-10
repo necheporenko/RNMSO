@@ -81,7 +81,8 @@
     }
   },
   "PhotosPage": {
-    "backToAlbums": "Back to photo albums"
+    "backToAlbums": "Back to photo albums",
+    "photos": "photos"
   },
   "NewsPage": {
     "backToNews": "Back to news"

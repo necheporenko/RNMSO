@@ -25,5 +25,8 @@
     "conductors": "AfishaPage.conductors",
     "soloists": "AfishaPage.soloists",
     "buyTicket": "AfishaPage.buyTicket"
+  },
+  "PhotosPage": {
+    "photos": "PhotosPage.photos"
   }
 }
