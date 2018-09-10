@@ -678,6 +678,7 @@ h4
 .popap__video
 	display: block
 	outline: none
+	background: #000
 	&::before
 		content: '\e80e'
 		font-family: 'fontello'
@@ -1678,6 +1679,7 @@ main
 			max-width: 100%
 			display: block
 			height: auto
+			opacity: 0.5
 	.popap__video
 		&::before
 			top: 40%
@@ -2153,10 +2155,12 @@ main
 		background: #000
 		transform: rotate(-45deg)
 .modal__content
+	display: flex
 .modal__left
-	float: left
-	margin-right: 33px
-	width: 23%
+	float: left;
+	margin-right: 20px;
+	width: 23%;
+	text-align: center;
 .modal__photo
 	width: 114px
 	height: 114px
@@ -2181,5 +2185,6 @@ main
 .modal__participated
 	margin: 0
 	margin-top: 15px
-
+.ReactModal__Overlay--after-open
+	z-index: 21
 @import "media" // Always at the end

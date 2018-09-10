@@ -105,7 +105,7 @@ class Album extends React.Component {
 
             <div className="row justify-content-center">
               <div className="col-lg-8">
-                <p className="album__description">{photos.results.text}</p>
+                <p className="album__description" dangerouslySetInnerHTML={{ __html: gallery.text }}></p>
               </div>
             </div>
             <div className="row">

@@ -340,58 +340,20 @@ const Home = ({ t, videos, news }) => (
           </div>
         </div>
         <div className="row justify-content-center">
-          <div className="col-xl-5 col-md-6">
-            <figure className="video__carts">
-              <div className="link__frame">
-                {/* <a data-fancybox href="https://www.youtube.com/watch?v=fQmvMavhmco;autoplay=1" className="popap__video" id="autoplay">
-                  <img src="../static/img/videoimg1.jpg" alt="Превью видео" className="video__img" />
-                </a> */}
-
-                <a href="https://www.youtube.com/embed/VQ1a4SuXIiw?showinfo=0" className="popap__video">
-                  <iframe width="433" height="238" src="https://www.youtube.com/embed/VQ1a4SuXIiw?showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                </a>
-              </div>
-              <figcaption className="video__title">
-                Видеоблог РНМСО. Выпуск 7
-              </figcaption>
-            </figure>
-          </div>
-          <div className="col-xl-5 col-md-6">
-            <figure className="video__carts">
-              <div className="link__frame">
-                <a data-fancybox href="https://www.youtube.com/watch?v=fQmvMavhmco;autoplay=1" className="popap__video">
-                  <img src="../static/img/videoimg2.jpg" alt="Превью видео" className="video__img" />
-                </a>
-              </div>
-              <figcaption className="video__title">
-                Видеоблог РНМСО. Выпуск 8
-              </figcaption>
-            </figure>
-          </div>
-          <div className="col-xl-5 col-md-6">
-            <figure className="video__carts">
-              <div className="link__frame">
-                <a data-fancybox href="https://vimeo.com/63186969" className="popap__video">
-                  <img src="../static/img/videoimg1.jpg" alt="Превью видео" className="video__img" />
-                </a>
-              </div>
-              <figcaption className="video__title">
-                Видеоблог РНМСО. Выпуск 7
-              </figcaption>
-            </figure>
-          </div>
-          <div className="col-xl-5 col-md-6">
-            <figure className="video__carts">
-              <div className="link__frame">
-                <a data-fancybox href="https://vimeo.com/63186969" className="popap__video">
-                  <img src="../static/img/videoimg2.jpg" alt="Превью видео" className="video__img" />
-                </a>
-              </div>
-              <figcaption className="video__title">
-                Видеоблог РНМСО. Выпуск 8
-              </figcaption>
-            </figure>
-          </div>
+          {videos.map(video => (
+            <div className="col-xl-5 col-md-6" key={video.id}>
+              <figure className="video__carts">
+                <div className="link__frame">
+                  <a data-fancybox href={video.video} className="popap__video">
+                    <img src="../static/img/videoimg2.jpg" alt="Превью видео" className="video__img" />
+                  </a>
+                </div>
+                <figcaption className="video__title">
+                  {video.title}
+                </figcaption>
+              </figure>
+            </div>
+          ))}
         </div>
         <div className="row">
           <div className="owl-carousel video-slider">

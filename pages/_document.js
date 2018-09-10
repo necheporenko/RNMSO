@@ -11,6 +11,10 @@ export default class MyDocument extends Document {
                     <Main />
                     <NextScript />
                 </body>
+                {/* FIXME    */}
+                <script src="../static/libs/jquery/dist/jquery.min.js"></script>
+                <script src="../static/libs/remodal/dist/remodal.min.js"></script>
+                <script src="../static/scripts.min.js"></script>
             </html>
         )
     }
