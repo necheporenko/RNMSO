@@ -4,6 +4,7 @@ import { withI18next } from '../lib/withI18next';
 import callApi from '../utils/api';
 import Layout from '../layouts/Main';
 import Submenu from '../components/moleculs/Submenu';
+import { Form, Text, TextArea, RadioGroup, Radio } from 'informed';
 
 class Application extends React.Component {
   state = {
@@ -63,6 +64,40 @@ class Application extends React.Component {
                     <h2 className="application__title waves__title">
                       Форма подачи заявки
 							</h2>
+                    <Form id="application-form" className="application__form">
+                      <label htmlFor="complex-name"><span>Фамилия, имя, отчество</span>
+                        <Text field="name" id="complex-name" className="form__input" />
+                      </label>
+                      <RadioGroup field="gender" className="radio__button">
+                        <p>Есть ли необходимость в жилье?</p>
+                        <label htmlFor="radio-male">
+                          <Radio value="yes" id="radio-male" className="radio" />
+                          <span className="radio-custom"></span>
+                          <span className="label">Да</span>
+                        </label>
+                        <label htmlFor="radio-female">
+                          <Radio value="no" id="radio-female" className="radio" />
+                          <span className="radio-custom"></span>
+                          <span className="label">No</span>
+                        </label>
+                      </RadioGroup>
+
+                      <div className="radio__button">
+                        <p> Есть ли необходимость в жилье?</p>
+                        <label>
+                          <input className="radio" type="radio" name="houm" value="Yes" />
+                          <span className="radio-custom"></span>
+                          <span className="label">Да</span>
+                        </label>
+                        <label>
+                          <input className="radio" type="radio" name="houm" value="No" checked />
+                          <span className="radio-custom"></span>
+                          <span className="label">Нет</span>
+                        </label>
+                      </div>
+                      <button type="submit">Submit</button>
+                    </Form>
+
                     <form className="application__form">
                       <label>
                         <span>Фамилия, имя, отчество</span>
