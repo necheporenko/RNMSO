@@ -35,9 +35,9 @@ const Conductors = ({ t, conductors }) => (
                     <img src={conductor.image} alt={`${conductor.first_name} ${conductor.last_name}`} />
                   </div>
                   <div className="pedagog-cart__description">
-                    <Link href={`/conductors/${conductor.id}`}>
-                      <a>{`${conductor.first_name} ${conductor.last_name}`}</a>
-                    </Link>
+                    {/* <Link href={`/conductors/${conductor.id}`}> */}
+                    <a>{`${conductor.first_name} ${conductor.last_name}`}</a>
+                    {/* </Link> */}
                     <p>{conductor.post}</p>
                   </div>
                 </div>

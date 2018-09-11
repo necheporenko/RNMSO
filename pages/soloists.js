@@ -35,9 +35,9 @@ const Soloist = ({ t, soloists }) => (
                   </div>
                   <div className="pedagog-cart__description">
                     {/* persona */}
-                    <Link href={`/soloists/${soloist.id}`}>
-                      <a>{`${soloist.first_name} ${soloist.last_name}`}</a>
-                    </Link>
+                    {/* <Link href={`/soloists/${soloist.id}`}> */}
+                    <a>{`${soloist.first_name} ${soloist.last_name}`}</a>
+                    {/* </Link> */}
                     <p>
                       {soloist.specialty}
                     </p>
