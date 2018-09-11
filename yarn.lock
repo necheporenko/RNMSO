@@ -4869,6 +4869,12 @@ react-transition-group@2, react-transition-group@^2.2.1:
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
+react-yandex-maps@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/react-yandex-maps/-/react-yandex-maps-2.2.1.tgz#7a129085da193ca3a94089f228a75fc721b10a8b"
+  dependencies:
+    prop-types "^15.6.1"
+
 react@16.4.1:
   version "16.4.1"
   resolved "https://registry.yarnpkg.com/react/-/react-16.4.1.tgz#de51ba5764b5dbcd1f9079037b862bd26b82fe32"

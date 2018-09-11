@@ -31,7 +31,7 @@ class Calendar extends React.Component {
                   </h1>
                 </div>
               </div>
-              <div className="col-lg-10 col-9">
+              {/* <div className="col-lg-10 col-9">
                 <div className="calendar__wrapper">
                   <a href="#" className="calendar-slider__date">Октябрь 2018</a>
                   <div className="calendar-slider__mounth">
@@ -251,7 +251,7 @@ class Calendar extends React.Component {
                     <i className="icon-arrow-right calendar-slider__arrow calendar-slider__arrow--next "></i>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className="row justify-content-center">
               {concerts.map(concert => (

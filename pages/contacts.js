@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { withI18next } from '../lib/withI18next';
+import { YMaps, Map, GeoObject } from 'react-yandex-maps';
 import Layout from '../layouts/Main';
 import Submenu from '../components/moleculs/Submenu';
 
@@ -62,13 +63,20 @@ const Contacts = ({ t }) => (
         <div className="container">
           <div className="row">
             <div className="col-12 mycol">
-              <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A558aa8ed7fb72dcc60fa82209381424f13c9cbed6526279c300e0bb998503930&amp;width=100%25&amp;height=720&amp;lang=ru_RU&amp;scroll=true"></script>
+              <YMaps>
+                <Map state={{ center: [55.677496, 37.468876], zoom: 17 }} width={'100%'} height={720} >
+                  <GeoObject geometry={{
+                    type: 'Point',
+                    coordinates: [55.677496, 37.468876],
+                  }} />
+                </Map>
+              </YMaps>
             </div>
           </div>
         </div>
       </section>
     </main>
-  </Layout>
+  </Layout >
 )
 
 export default withI18next(['common'])(Contacts);

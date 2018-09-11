@@ -221,4 +221,3 @@ Persona.getInitialProps = async ({ req, res, query }) => {
   return { conductor: response };
 }
 export default withI18next(['common'])(Persona);
-export default Persona;

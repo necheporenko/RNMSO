@@ -11,7 +11,7 @@ const ProgramPage = ({ t, concert }) => (
     <main className="calendar--program">
       <div className="container">
         <div className="row">
-          <div className="col-12 d-none d-xl-block">
+          {/* <div className="col-12 d-none d-xl-block">
             <div className="calendar__wrapper">
               <a href="#" className="calendar-slider__date">Октябрь 2018</a>
               <div className="calendar-slider__mounth">
@@ -231,7 +231,7 @@ const ProgramPage = ({ t, concert }) => (
                 <i className="icon-arrow-right calendar-slider__arrow calendar-slider__arrow--next "></i>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="row">
           <div className="col-12">

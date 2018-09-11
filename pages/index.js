@@ -52,7 +52,7 @@ const Home = ({ t, videos, news, concerts }) => (
           <div className="col-12 col-lg-10">
             <div className="events__calendar">
               <ul className="events__date">
-                <li>
+                {/* <li>
                   <a href="#" className="no-link">
                     <span>19</span>
                     <sup>
@@ -92,7 +92,7 @@ const Home = ({ t, videos, news, concerts }) => (
                       <small>авг</small>
                     </sup>
                   </a>
-                </li>
+                </li> */}
               </ul>
               <div className="full__calendar">
                 <Link href="/calendar">
