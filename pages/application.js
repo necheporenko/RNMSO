@@ -7,13 +7,10 @@ import Submenu from '../components/moleculs/Submenu';
 import { Form, Text, TextArea, RadioGroup, Radio } from 'informed';
 
 class Application extends React.Component {
-  state = {
-
-  }
+  state = {}
 
   render() {
     const { t } = this.props;
-    const { concerts } = this.state;
     return (
       <Layout title="Заявка на участие в отборе">
         <main className="m-before ">
@@ -37,9 +34,7 @@ class Application extends React.Component {
             <div className="container">
               <div className="row">
                 <div className="col-12">
-                  <h2 className="application__title">
-                    Правила отбора
-						</h2>
+                  <h2 className="application__title">{t("ApplicationPage.rules")}</h2>
                 </div>
               </div>
               <div className="row">
@@ -61,10 +56,9 @@ class Application extends React.Component {
               <div className="row">
                 <div className="col-lg-6 offset-lg-3 col-sm-10 offset-sm-0">
                   <div className="form__block">
-                    <h2 className="application__title waves__title">
-                      Форма подачи заявки
-							</h2>
-                    <Form id="application-form" className="application__form">
+                    <h2 className="application__title waves__title">{t("ApplicationPage.applicationForm")}</h2>
+
+                    {/* <Form id="application-form" className="application__form">
                       <label htmlFor="complex-name"><span>Фамилия, имя, отчество</span>
                         <Text field="name" id="complex-name" className="form__input" />
                       </label>
@@ -96,98 +90,95 @@ class Application extends React.Component {
                         </label>
                       </div>
                       <button type="submit">Submit</button>
-                    </Form>
+                    </Form> */}
 
-                    <form className="application__form">
+                    <form className="application__form" method="post" action="http://31.192.109.44/api/request/">
                       <label>
-                        <span>Фамилия, имя, отчество</span>
-                        <input type="text" className="form__input" required />
+                        <span>{t("ApplicationPage.form.name")}</span>
+                        <input type="text" className="form__input" name="name" required />
                         <b className="danger">* Это поле обязательно</b>
                       </label>
                       <label>
-                        <span>Дата рождения</span>
-                        <input type="text" id="date" placeholder="ДД.ММ.ГГГГ" className="form__input error" required />
+                        <span>{t("ApplicationPage.form.bDay")}</span>
+                        <input type="text" id="date" placeholder={t("ApplicationPage.form.dayFormat")} name="birth" className="form__input" required />
                         <b className="danger">* Это поле обязательно</b>
                       </label>
                       <label>
-                        <span>Место рождения</span>
-                        <input type="text" className="form__input" required />
+                        <span>{t("ApplicationPage.form.placeOfBirth")}</span>
+                        <input type="text" className="form__input" name="birth_place" required />
                         <b className="danger">* Это поле обязательно</b>
                       </label>
                       <label>
-                        <span>Гражданство</span>
-                        <input type="text" className="form__input" required />
+                        <span>{t("ApplicationPage.form.citizenship")}</span>
+                        <input type="text" className="form__input" name="citizenship" required />
                         <b className="danger">* Это поле обязательно</b>
                       </label>
                       <label>
-                        <span>Образование</span>
-                        <input type="text" className="form__input" required />
+                        <span>{t("ApplicationPage.form.education")}</span>
+                        <input type="text" className="form__input" name="education" required />
                         <b className="danger">* Это поле обязательно</b>
-                        <span className="additional-description">
-                          название учебного заведения / факультет или отделение / инструмент / педагог / год поступления / год окончания / специальность
-                          / № диплома
-									</span>
+                        <span className="additional-description">{t("ApplicationPage.form.educationInfo")}	</span>
                       </label>
                       <label>
-                        <span>Награды, победы в конкурсах</span>
-                        <textarea className="form__input" rows="4" required></textarea>
+                        <span>{t("ApplicationPage.form.awards")}</span>
+                        <textarea className="form__input" rows="4" name="rewards" required></textarea>
                         <b className="danger">* Это поле обязательно</b>
                       </label>
                       <label>
-                        <span>Паспорт</span>
-                        <input type="text" className="form__input" required />
-                        <span className="additional-description">серия, номер, кем, когда выдан </span>
+                        <span>{t("ApplicationPage.form.passport")}</span>
+                        <input type="text" className="form__input" name="passport" required />
+                        <span className="additional-description">{t("ApplicationPage.form.passportInfo")}</span>
                         <b className="danger">* Это поле обязательно</b>
                       </label>
                       <label>
-                        <span>Домашний адрес (прописка)</span>
-                        <textarea className="form__input" rows="4" required></textarea>
+                        <span>{t("ApplicationPage.form.homeAddress")}</span>
+                        <textarea className="form__input" rows="4" name="propiska" required></textarea>
                         <b className="danger">* Это поле обязательно</b>
                       </label>
                       <label>
-                        <span>Фактический адрес</span>
-                        <textarea className="form__input" rows="4" required></textarea>
+                        <span>{t("ApplicationPage.form.actualAddress")}с</span>
+                        <textarea className="form__input" rows="4" name="address" required></textarea>
                         <b className="danger">* Это поле обязательно</b>
                       </label>
                       <label>
-                        <span>Телефон для связи (домашний, мобильный)</span>
-                        <input type="tel" className="form__input" required />
+                        <span>{t("ApplicationPage.form.phone")}</span>
+                        <input type="tel" className="form__input" name="phone" required />
                         <b className="danger">* Это поле обязательно</b>
                       </label>
                       <div className="radio__button">
-                        <p> Нужен ли концертмейстер для прослушиваний? </p>
+                        <p> {t("ApplicationPage.form.accompanist")} </p>
                         <label>
-                          <input className="radio" type="radio" name="concertmaster" value="Yes" />
+                          <input className="radio" type="radio" name="is_need_endmaster" value="Yes" />
                           <span className="radio-custom"></span>
-                          <span className="label">Да</span>
+                          <span className="label">{t("ApplicationPage.form.yes")} </span>
                         </label>
                         <label>
-                          <input className="radio" type="radio" name="concertmaster" value="No" checked />
+                          <input className="radio" type="radio" name="is_need_endmaster" value="No" checked />
                           <span className="radio-custom"></span>
-                          <span className="label">Нет</span>
+                          <span className="label">{t("ApplicationPage.form.no")}</span>
                         </label>
                       </div>
                       <div className="radio__button">
-                        <p> Есть ли необходимость в жилье?</p>
+                        <p> {t("ApplicationPage.form.needHouse")}</p>
                         <label>
-                          <input className="radio" type="radio" name="houm" value="Yes" />
+                          <input className="radio" type="radio" name="is_need_housing" value="Yes" />
                           <span className="radio-custom"></span>
-                          <span className="label">Да</span>
+                          <span className="label">{t("ApplicationPage.form.yes")} </span>
                         </label>
                         <label>
-                          <input className="radio" type="radio" name="houm" value="No" checked />
+                          <input className="radio" type="radio" name="is_need_housing" value="No" checked />
                           <span className="radio-custom"></span>
-                          <span className="label">Нет</span>
+                          <span className="label">{t("ApplicationPage.form.no")} </span>
                         </label>
                       </div>
                       <div className="radio__button">
                         <label className="checkbox__label">
-                          <input className="checkbox" type="checkbox" name="checkbox-test" checked />
+                          <input className="checkbox" type="checkbox" checked />
                           <span className="checkbox-custom"></span>
-                          <span className="label">Я даю согласие на обработку моих персональных данных в соответствии с ФЗ-152</span>
+                          <span className="label">{t("ApplicationPage.form.agree")}</span>
                         </label>
                       </div>
-                      <button className="act__btn application-form__btn" type="submit"> Отправить заявку</button>
+                      <button className="act__btn application-form__btn" type="submit">{t("ApplicationPage.form.sendApplication")}</button>
                     </form>
                   </div>
                 </div>
