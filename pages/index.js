@@ -31,14 +31,12 @@ const Home = ({ t, videos, news, concerts }) => (
             <div className="col-xl-7 offset-xl-1 col-lg-8 offset-lg-0">
               <div className="act">
                 <p className="event">
-                  {t("ApplicationPage.listening")}:
+                  {t("MainPage.listening")}:
                   <time dateTime="2018-09">Сентябрь 2018</time>
                 </p>
-                <p className="invite">
-                  {t("ApplicationPage.musiciansInvited")}
-                </p>
+                <p className="invite"> {t("MainPage.musiciansInvited")}</p>
                 <div className="button__wrapper">
-                  <Link href="/application"><a className="act__btn">{t("ApplicationPage.apply")}</a></Link>
+                  <Link href="/application"><a className="act__btn">{t("ApplicationPage.form.apply")}</a></Link>
                 </div>
               </div>
             </div>
