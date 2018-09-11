@@ -46,7 +46,9 @@
   "MainPage": {
     "learnMore": "Learn more",
     "allNews": "All news",
-    "allVideo": "All video"
+    "allVideo": "All video",
+    "listening": "Listening to the Orchestra",
+    "musiciansInvited": "Musicians from 20 to 28 years are invited"
   },
   "AfishaPage": {
     "soloists": "Soloists",
@@ -78,7 +80,8 @@
       "no": "No",
       "educationInfo": "name of educational institution / faculty or department / instrument / teacher / year of admission / year of graduation / specialty / diploma No.",
       "passportInfo": "series, number, by whom, when issued",
-      "dayFormat": "DD.MM.YYYY"
+      "dayFormat": "DD.MM.YYYY",
+      "apply": "apply"
     }
   },
   "ReservePage": {

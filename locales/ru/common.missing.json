@@ -28,5 +28,10 @@
   },
   "PhotosPage": {
     "photos": "PhotosPage.photos"
+  },
+  "ApplicationPage": {
+    "listening": "ApplicationPage.listening",
+    "musiciansInvited": "ApplicationPage.musiciansInvited",
+    "apply": "ApplicationPage.apply"
   }
 }

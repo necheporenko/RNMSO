@@ -1,9 +1,9 @@
 import React from 'react';
 import Slider from "react-slick";
 import Link from 'next/link';
-import ModalVideo from 'react-modal-video';
 import { withI18next } from '../lib/withI18next';
 import callApi from '../utils/api';
+import { getYouTubeVideoId } from '../utils/common';
 import Layout from '../layouts/Main';
 
 const PrevArrow = ({ onClick }) => (<i onClick={onClick} className="icon-arrow-left slider__nav slider__nav--prev "></i>);
@@ -19,7 +19,7 @@ const SliderSettings = {
 };
 
 
-const Home = ({ t, videos, news }) => (
+const Home = ({ t, videos, news, concerts }) => (
   <Layout>
     <header className="header home">
       <div className="bottom__line">
@@ -31,14 +31,14 @@ const Home = ({ t, videos, news }) => (
             <div className="col-xl-7 offset-xl-1 col-lg-8 offset-lg-0">
               <div className="act">
                 <p className="event">
-                  Прослушивания в оркестр:
+                  {t("ApplicationPage.listening")}:
                   <time dateTime="2018-09">Сентябрь 2018</time>
                 </p>
                 <p className="invite">
-                  Приглашаются музыканты от 20 до 28 лет
+                  {t("ApplicationPage.musiciansInvited")}
                 </p>
                 <div className="button__wrapper">
-                  <a href="application.html" className="act__btn">Подать заявку</a>
+                  <Link href="/application"><a className="act__btn">{t("ApplicationPage.apply")}</a></Link>
                 </div>
               </div>
             </div>
@@ -108,215 +108,57 @@ const Home = ({ t, videos, news }) => (
             <div className="carrousel__wrapper">
               <div className="owl-carousel event__slider">
                 <Slider {...SliderSettings}>
-                  <a href="program-page.html" className="slide__link" target="_blank">
-                    <div className="slider__item">
-                      <div className="slider__left">
-                        <div className="slider__top-line">
-                          <div className="slider__date">
-                            <div className="date__day">
-                              <span>03</span>
-                              <sup>
-                                <small>Августа</small>
-                              </sup>
+                  {concerts.map(concert => (
+                    <Link as={`/program-page/${concert.id}`} href={`/program-page?id=${concert.id}`} key={concert.id}>
+                      <a className="slide__link" target="_blank">
+                        <div className="slider__item">
+                          <div className="slider__left">
+                            <div className="slider__top-line">
+                              <div className="slider__date">
+                                <div className="date__day">
+                                  <span>03</span>
+                                  <sup>
+                                    <small>Августа</small>
+                                  </sup>
+                                </div>
+                                <div className="date__time">
+                                  <span className="day">сб</span>
+                                  <span className="time">19:00</span>
+                                </div>
+                              </div>
+                              <div className="slider__site">
+                                <span className="site__sity">{concert.place}</span>
+                                {/* <span className="site__room"> Большой зал Консерватории</span> */}
+                              </div>
                             </div>
-                            <div className="date__time">
-                              <span className="day">сб</span>
-                              <span className="time">19:00</span>
-                            </div>
-                          </div>
-                          <div className="slider__site">
-                            <span className="site__sity">
-                              Москва
-                            </span>
-                            <span className="site__room">
-                              Большой зал Консерватории
-                            </span>
-                          </div>
-                        </div>
-                        <div className="slider__content">
-                          <h3 className="slider__title">
-                            Концерт-презентация оркестра
-                          </h3>
-                          <p className="slider__participants">
-                            <span className="participants__post">
-                              Дирижёр -
-                            </span>
-                            <span className="participants__name">
-                              Василий пертенко
-                            </span>
-                          </p>
-                          <p className="slider__participants">
-                            <span className="participants__post">
-                              Солист :
-                            </span>
-                            <span className="participants__name">
-                              Симон Трпчески (фортепиано)
-                            </span>
-                          </p>
-                          <div className="slider__program">
-                            <span className="program__title">
-                              В программе:
-                            </span>
-                            <ul className="program__list">
-                              <li>
-                                Светланов
-                              </li>
-                              <li>
-                                Лист
-                              </li>
-                              <li>
-                                Рахманинов
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-
-                      </div>
-                      <div className="slide__right">
-                        <img src="../static/img/slide1.jpg" alt="Участник концерта" />
-                        <img src="../static/img/slide2.jpg" alt="Участник концерта" />
-                      </div>
-                    </div>
-                  </a>
-                  <a href="program-page.html" className="slide__link" target="_blank">
-                    <div className="slider__item">
-                      <div className="slider__left">
-                        <div className="slider__top-line">
-                          <div className="slider__date">
-                            <div className="date__day">
-                              <span>03</span>
-                              <sup>
-                                <small>Августа</small>
-                              </sup>
-                            </div>
-                            <div className="date__time">
-                              <span className="day">сб</span>
-                              <span className="time">19:00</span>
+                            <div className="slider__content">
+                              <h3 className="slider__title">{concert.title}</h3>
+                              <p className="slider__participants">
+                                <span className="participants__post">{t("AfishaPage.conductors")}: </span>
+                                {concert.conductors.map(conductor => (
+                                  <span className="participants__name" key={conductor.id}>{`${conductor.first_name} ${conductor.last_name}`}</span>
+                                ))}
+                              </p>
+                              <p className="slider__participants">
+                                <span className="participants__post">{t("AfishaPage.soloists")}: </span>
+                                {concert.soloists.map(soloist => (
+                                  <span className="participants__name" key={soloist.id}>{`${soloist.first_name} ${soloist.last_name} (${soloist.specialty})`}</span>
+                                ))}
+                              </p>
+                              <div className="slider__program">
+                                <span className="program__title">В программе:</span>
+                                <div dangerouslySetInnerHTML={{ __html: concert.event_program }}></div>
+                              </div>
                             </div>
                           </div>
-                          <div className="slider__site">
-                            <span className="site__sity">
-                              Москва
-                            </span>
-                            <span className="site__room">
-                              Большой зал Консерватории
-                            </span>
+                          <div className="slide__right">
+                            <img src="../static/img/slide1.jpg" alt="Участник концерта" />
+                            <img src="../static/img/slide2.jpg" alt="Участник концерта" />
                           </div>
                         </div>
-                        <div className="slider__content">
-                          <h3 className="slider__title">
-                            Концерт-презентация оркестра
-                          </h3>
-                          <p className="slider__participants">
-                            <span className="participants__post">
-                              Дирижёр -
-                            </span>
-                            <span className="participants__name">
-                              Василий пертенко
-                            </span>
-                          </p>
-                          <p className="slider__participants">
-                            <span className="participants__post">
-                              Солист :
-                            </span>
-                            <span className="participants__name">
-                              Симон Трпчески (фортепиано)
-                            </span>
-                          </p>
-                          <div className="slider__program">
-                            <span className="program__title">
-                              В программе:
-                            </span>
-                            <ul className="program__list">
-                              <li>
-                                Светланов
-                              </li>
-                              <li>
-                                Лист
-                              </li>
-                              <li>
-                                Рахманинов
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-
-                      </div>
-                      <div className="slide__right">
-                        <img src="../static/img/slide1.jpg" alt="Участник концерта" />
-                        <img src="../static/img/slide2.jpg" alt="Участник концерта" />
-                      </div>
-                    </div>
-                  </a>
-                  <a href="program-page.html" className="slide__link" target="_blank">
-                    <div className="slider__item">
-                      <div className="slider__left">
-                        <div className="slider__top-line">
-                          <div className="slider__date">
-                            <div className="date__day">
-                              <span>03</span>
-                              <sup>
-                                <small>Августа</small>
-                              </sup>
-                            </div>
-                            <div className="date__time">
-                              <span className="day">сб</span>
-                              <span className="time">19:00</span>
-                            </div>
-                          </div>
-                          <div className="slider__site">
-                            <span className="site__sity">
-                              Москва
-                          </span>
-                            <span className="site__room">
-                              Большой зал Консерватории
-                          </span>
-                          </div>
-                        </div>
-                        <div className="slider__content">
-                          <h3 className="slider__title">
-                            Концерт-презентация оркестра
-                        </h3>
-                          <p className="slider__participants">
-                            <span className="participants__post">
-                              Дирижёр -
-                          </span>
-                            <span className="participants__name">
-                              Василий пертенко
-                          </span>
-                          </p>
-                          <p className="slider__participants">
-                            <span className="participants__post">
-                              Солист :
-                          </span>
-                            <span className="participants__name">
-                              Симон Трпчески (фортепиано)
-                          </span>
-                          </p>
-                          <div className="slider__program">
-                            <span className="program__title">
-                              В программе:
-                          </span>
-                            <ul className="program__list">
-                              <li>
-                                Светланов
-                            </li>
-                              <li>
-                                Лист
-                            </li>
-                              <li>
-                                Рахманинов
-                            </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="slide__right">
-                        <img src="../static/img/slide1.jpg" alt="Участник концерта" />
-                        <img src="../static/img/slide2.jpg" alt="Участник концерта" />
-                      </div>
-                    </div>
-                  </a>
+                      </a>
+                    </Link>
+                  ))}
                 </Slider>
               </div>
             </div>
@@ -345,7 +187,7 @@ const Home = ({ t, videos, news }) => (
               <figure className="video__carts">
                 <div className="link__frame">
                   <a data-fancybox href={video.video} className="popap__video">
-                    <img src="../static/img/videoimg2.jpg" alt="Превью видео" className="video__img" />
+                    <img src={`https://img.youtube.com/vi/${getYouTubeVideoId(video.video)}/mqdefault.jpg`} alt="Превью видео" className="video__img" />
                   </a>
                 </div>
                 <figcaption className="video__title">
@@ -464,7 +306,8 @@ Home.getInitialProps = async ({ req, res }) => {
   const language = req || res ? req.language || res.locals.language : null;
   const responseVideo = await callApi('/video/?limit=4&offset=0', language);
   const responseNews = await callApi('/news/?limit=2&offset=0', language);
-  return { videos: responseVideo.results, news: responseNews.results }
+  const responseConcerts = await callApi('/concerts/?limit=4&offset=0', language);
+  return { videos: responseVideo.results, news: responseNews.results, concerts: responseConcerts.results }
 }
 
 export default withI18next(['common'])(Home);

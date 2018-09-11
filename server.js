@@ -59,6 +59,11 @@ i18n
           const queryParams = { id: req.params.id };
           app.render(req, res, actualPage, queryParams)
         })
+        server.get('/program-page/:id', (req, res) => {
+          const actualPage = '/program-page';
+          const queryParams = { id: req.params.id };
+          app.render(req, res, actualPage, queryParams)
+        })
 
         // use next.js
         server.get('*', (req, res) => handle(req, res))
