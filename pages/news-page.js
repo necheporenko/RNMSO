@@ -48,12 +48,12 @@ const NewsPage = ({ t, news }) => (
           <div className="row justify-content-center">
             <div className="col-lg-4 col-md-6">
               <div className="news__navigation news__navigation--left">
-                <button className="paginator-btn paginator-btn--pref" type="buttoh">Оркестр дал свой первый концерт</button>
+                {news.previous_id && <Link href={`/news/${news.previous_id}`}><button className="paginator-btn paginator-btn--pref" type="buttoh"></button></Link>}
               </div>
             </div>
             <div className="col-lg-4 col-md-6">
               <div className="news__navigation news__navigation--right">
-                <button className="paginator-btn paginator-btn--next" type="buttoh">Василий Петренко начал репитировать с оркестром концерт-презентацию</button>
+                {news.next_id && <Link href={`/news/${news.next_id}`}><button className="paginator-btn paginator-btn--next" type="buttoh"></button></Link>}
               </div>
             </div>
           </div>

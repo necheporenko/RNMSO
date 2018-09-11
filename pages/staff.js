@@ -1,10 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
+import Modal from 'react-modal';
 import { withI18next } from '../lib/withI18next';
 import callApi from '../utils/api';
 import Layout from '../layouts/Main';
 import Submenu from '../components/moleculs/Submenu';
-import Modal from 'react-modal';
+
 
 Modal.setAppElement('#__next');
 const customStyles = {
@@ -31,21 +32,42 @@ class Staff extends React.Component {
   }
 
   state = {
-    // videos: this.props.videos,
     currentMember: {},
     modalIsOpen: false
   };
 
-  openModal = async () => {
+  openModal = async (memberId) => {
     const { language } = this.props;
-    const currentMember = await callApi('/orchestra-members/2', language)
+    const currentMember = await callApi(`/orchestra-members/${memberId}`, language)
 
     this.setState({ modalIsOpen: true, currentMember });
-    console.log(currentMember)
   }
 
   closeModal = () => {
     this.setState({ modalIsOpen: false });
+  }
+
+  renderMember = (group) => {
+    const { members } = this.props;
+    return members.filter(member => member.group === group).map(member => (
+      <div className="reserve-composition" key={member.id}>
+        <figure className="reserve__participant laureate" onClick={() => this.openModal(member.id)}>
+          <a href="#modal">
+            <div className="dots_wr">
+              <img src={member.image} alt="Состав оркестра" />
+              <span className="img-dots"></span>
+            </div>
+          </a>
+          <figcaption className="participant__description ">
+            <p className="participant__name">
+              <span className="participant__first-name">{member.first_name}</span>
+              <span className="participant__family-name">{member.last_name}</span>
+            </p>
+            <p className="participant__progress">{member.status} </p>
+          </figcaption>
+        </figure>
+      </div>
+    ))
   }
 
   render() {
@@ -96,116 +118,80 @@ class Staff extends React.Component {
             <div className="container">
               <div className="instrument__block">
                 <h2 className="reserve__section-title">
-                  Первые скрипки
+                  {t("OrchestraMembers.firstViolins")}
                 </h2>
-                {members.filter(member => member.group === 3).map(member => (
-                  <div className="reserve-composition" onClick={this.openModal} key={member.id}>
-                    <figure className=" mix reserve__participant laureate">
-                      <a href="#modal">
-                        <div className="dots_wr">
-                          <img src={member.image} alt="Состав оркестра" />
-                          <span className="img-dots"></span>
-                        </div>
-                      </a>
-                      <figcaption className="participant__description ">
-                        <p className="participant__name">
-                          <span className="participant__first-name">{member.first_name}</span>
-                          <span className="participant__family-name">{member.last_name}</span>
-                        </p>
-                        <p className="participant__progress">{member.status} </p>
-                      </figcaption>
-                    </figure>
-                  </div>
-                ))}
-
+                {this.renderMember(3)}
               </div>
               <div className="instrument__block">
                 <h2 className="reserve__section-title">
-                  Вторые скрипки
+                  {t("OrchestraMembers.secondViolins")}
                 </h2>
-                <div className="reserve-composition">
-                  <figure className=" mix reserve__participant ">
-                    <a href="#modal">
-                      <div className="dots_wr">
-                        <img src="../static/img/staff/staff1.jpg" alt="Состав оркестра" />
-                        <span className="img-dots"></span>
-                      </div>
-                    </a>
-                    <figcaption className="participant__description ">
-                      <p className="participant__name">
-                        <span className="participant__first-name">Анна</span>
-                        <span className="participant__family-name">Апетьян</span>
-                      </p>
-                      <p className="participant__progress">
-                      </p>
-                    </figcaption>
-                  </figure>
-                </div>
+                {this.renderMember(4)}
               </div>
               <div className="instrument__block">
                 <h2 className="reserve__section-title">
-                  Альты
-            </h2>
+                  {t("OrchestraMembers.alti")}
+                </h2>
               </div>
               <div className="instrument__block">
                 <h2 className="reserve__section-title">
-                  Виолончели
-            </h2>
+                  {t("OrchestraMembers.cello")}
+                </h2>
               </div>
               <div className="instrument__block">
                 <h2 className="reserve__section-title">
-                  Контрабасы
-            </h2>
+                  {t("OrchestraMembers.contrabasses")}
+                </h2>
               </div>
               <div className="instrument__block">
                 <h2 className="reserve__section-title">
-                  Флейты
-            </h2>
+                  {t("OrchestraMembers.flutes")}
+                </h2>
               </div>
               <div className="instrument__block">
                 <h2 className="reserve__section-title">
-                  Гобои
-            </h2>
+                  {t("OrchestraMembers.oboes")}
+                </h2>
               </div>
               <div className="instrument__block">
                 <h2 className="reserve__section-title">
-                  Кларнеты
-            </h2>
+                  {t("OrchestraMembers.clarinets")}
+                </h2>
               </div>
               <div className="instrument__block">
                 <h2 className="reserve__section-title">
-                  Фаготы
-            </h2>
+                  {t("OrchestraMembers.bassoons")}
+                </h2>
               </div>
               <div className="instrument__block">
                 <h2 className="reserve__section-title">
-                  Валторны
-            </h2>
+                  {t("OrchestraMembers.horn")}
+                </h2>
               </div>
               <div className="instrument__block">
                 <h2 className="reserve__section-title">
-                  Трубы
-            </h2>
+                  {t("OrchestraMembers.pipes")}
+                </h2>
               </div>
               <div className="instrument__block">
                 <h2 className="reserve__section-title">
-                  Тромбоны
-            </h2>
+                  {t("OrchestraMembers.trombones")}
+                </h2>
               </div>
               <div className="instrument__block">
                 <h2 className="reserve__section-title">
-                  Туба
-            </h2>
+                  {t("OrchestraMembers.tuba")}
+                </h2>
               </div>
               <div className="instrument__block">
                 <h2 className="reserve__section-title">
-                  Арфы
-            </h2>
+                  {t("OrchestraMembers.harps")}
+                </h2>
               </div>
               <div className="instrument__block">
                 <h2 className="reserve__section-title">
-                  Ударные
-            </h2>
+                  {t("OrchestraMembers.drums")}
+                </h2>
               </div>
             </div>
           </section>

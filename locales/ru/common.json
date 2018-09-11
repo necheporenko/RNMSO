@@ -26,6 +26,7 @@
     "press": "пресса"
   },
   "OrchestraMembers": {
+    "violins": "скрипки",
     "firstViolins": "Первые скрипки",
     "secondViolins": "Вторые скрипки",
     "alti": "Альты",
@@ -79,6 +80,10 @@
       "passportInfo": "серия, номер, кем, когда выдан",
       "dayFormat": "ДД.ММ.ГГГГ"
     }
+  },
+  "ReservePage": {
+    "allList": "Весь список",
+    "laureates": "Лауреаты Всероссийского симфонического конкурса"
   },
   "PhotosPage": {
     "backToAlbums": "Вернуться к фотоальбомам",

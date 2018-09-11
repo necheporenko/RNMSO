@@ -26,6 +26,7 @@
     "press": "press"
   },
   "OrchestraMembers": {
+    "violins": "violins",
     "firstViolins": "First violins",
     "secondViolins": "Second violins",
     "alti": "Alti",
@@ -79,6 +80,10 @@
       "passportInfo": "series, number, by whom, when issued",
       "dayFormat": "DD.MM.YYYY"
     }
+  },
+  "ReservePage": {
+    "allList": "The whole list",
+    "laureates": "Laureates of the All-Russian Symphony Competition"
   },
   "PhotosPage": {
     "backToAlbums": "Back to photo albums",
