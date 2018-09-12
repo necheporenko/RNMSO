@@ -4,16 +4,37 @@ import Header from '../components/organisms/Header'
 import Footer from '../components/organisms/Footer'
 import '../static/sass/main.sass'
 
-const Home = ({ children, title = 'This is the default title' }) => (
-  <div>
-    <Head title={title} />
+const bodyStyles = {
+  position: 'fixed',
+  left: '-270px',
+  overflow: 'hidden',
+  transition: '1s'
+}
 
-    <Header />
-    <main>
-      {children}
-    </main>
-    <Footer />
-  </div>
-)
+class Home extends React.Component {
+  state = {
+    isOpenMobileMenu: false
+  }
+
+  toggleMobileMenu = () => {
+    this.setState({ isOpenMobileMenu: !this.state.isOpenMobileMenu })
+  }
+
+  render() {
+    const { children, title = 'This is the default title' } = this.props;
+    const { isOpenMobileMenu } = this.state;
+    return (
+      <div className="wrapper" style={isOpenMobileMenu ? bodyStyles : {}}>
+        <Head title={title} />
+
+        <Header toggleMobileMenu={this.toggleMobileMenu} />
+        <main>
+          {children}
+        </main>
+        <Footer />
+      </div>
+    )
+  }
+}
 
 export default Home

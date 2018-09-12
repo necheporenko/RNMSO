@@ -13,7 +13,7 @@ const changeLanguage = lng => {
     location.reload();
 }
 
-const Header = ({ t, language }) => (
+const Header = ({ t, language, toggleMobileMenu }) => (
     <div>
         <div className="top__line ">
             <div className="container">
@@ -33,7 +33,7 @@ const Header = ({ t, language }) => (
                         </div>
                     </div>
                     <div className="col-2 d-block d-lg-none d-xl-none">
-                        <div className="menu__toggle">
+                        <div className="menu__toggle" onClick={() => toggleMobileMenu()}>
                             <span></span>
                         </div>
                     </div>
@@ -118,11 +118,11 @@ const Header = ({ t, language }) => (
         <div className="menu__hidden">
             <div className="main__menu main__menu--hidden">
                 <div className="menu__close">
-                    <button className="menu__close-btn"></button>
+                    <button className="menu__close-btn" onClick={() => toggleMobileMenu()}></button>
                 </div>
                 <div className="main__list main__list--hidden">
-                    <span className="hidden-menu__open hidden__item">Оркестр
-					<i className="icon-bands"></i>
+                    <span className="hidden-menu__open hidden__item">{t("MainMenu.orchestra")}
+                        <i className="icon-bands"></i>
                     </span>
                     <div className="hidden__list">
                         <div className="hidden__container">
@@ -137,11 +137,11 @@ const Header = ({ t, language }) => (
                     </div>
                 </div>
                 <div className="main__list main__list--hidden">
-                    <Link href={AfishaMenu.href}><a className="hidden__item">{AfishaMenu.name}</a></Link>
+                    <Link href={AfishaMenu.href}><a className="hidden__item">{t(AfishaMenu.name)}</a></Link>
                 </div>
                 <div className="main__list main__list--hidden">
-                    <span className="hidden-menu__open hidden__item">Медиа
-					<i className="icon-bands"></i>
+                    <span className="hidden-menu__open hidden__item">{t("MainMenu.media")}
+                        <i className="icon-bands"></i>
                     </span>
                     <div className="hidden__list">
                         <div className="hidden__container">
@@ -159,18 +159,29 @@ const Header = ({ t, language }) => (
                     </div>
                 </div>
                 <div className="main__list main__list--hidden">
-                    <Link href={PartnersMenu.href}><a className="hidden__item">{PartnersMenu.name}</a></Link>
+                    <Link href={PartnersMenu.href}><a className="hidden__item">{t(PartnersMenu.name)}</a></Link>
                 </div>
                 <div className="main__list main__list--hidden">
                     <Link href="/reserve">
-                        <a className="hidden__item ">{t("MainMenu.partners")}</a>
+                        <a className="hidden__item ">{t("MainMenu.reserve")}</a>
                     </Link>
-
                 </div>
                 <div className="main__list main__list--hidden">
                     <div className="hidden__item">
-                        <button type="button" className="language__btn language__btn--hidden language__hide">Переключить на Русский</button>
-                        <button type="button" className="language__btn language__btn--hidden">Switch to English</button>
+                        <button
+                            type="button"
+                            className={(language || i18n.language) === 'ru' ? 'language__btn language__btn--hidden language__hide' : 'language__btn language__btn--hidden'}
+                            onClick={() => { changeLanguage('ru'); }}
+                        >
+                            Переключить на Русский
+                        </button>
+                        <button
+                            type="button"
+                            className={(language || i18n.language) === 'en' ? 'language__btn language__btn--hidden language__hide' : 'language__btn language__btn--hidden'}
+                            onClick={() => { changeLanguage('en'); }}
+                        >
+                            Switch to English
+                        </button>
                     </div>
                 </div>
             </div>
