@@ -33,5 +33,14 @@
     "listening": "ApplicationPage.listening",
     "musiciansInvited": "ApplicationPage.musiciansInvited",
     "apply": "ApplicationPage.apply"
+  },
+  "MainPage": {
+    "inProgramme": "MainPage.inProgramme"
+  },
+  "VideosPage": {
+    "allVideos": "VideosPage.allVideos",
+    "videoblog": "VideosPage.videoblog",
+    "concerts": "VideosPage.concerts",
+    "rehearsals": "VideosPage.rehearsals"
   }
 }

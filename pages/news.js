@@ -82,7 +82,7 @@ class News extends React.Component {
                     </Link>
                     <p className="short-news__text" dangerouslySetInnerHTML={{ __html: post.announcement }}></p>
                     <Link as={`/news/${post.id}`} href={`/news-page?id=${post.id}`}>
-                      <a className="article__more">Читать далее</a>
+                      <a className="article__more">{t("PressPage.readMore")}</a>
                     </Link>
                   </div>
                 </div>

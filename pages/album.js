@@ -74,7 +74,7 @@ class Album extends React.Component {
             <div className="row">
               <div className="col-12">
                 <div className="come-back">
-                  <Link href="/photo"><a>Вернуться к фотоальбомам</a></Link>
+                  <Link href="/photo"><a>{t("PhotosPage.backToAlbums")}</a></Link>
                 </div>
               </div>
             </div>

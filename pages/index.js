@@ -144,7 +144,7 @@ const Home = ({ t, videos, news, concerts }) => (
                                 ))}
                               </p>
                               <div className="slider__program">
-                                <span className="program__title">В программе:</span>
+                                <span className="program__title">{t("MainPage.inProgramme")}:</span>
                                 <div dangerouslySetInnerHTML={{ __html: concert.event_program }}></div>
                               </div>
                             </div>

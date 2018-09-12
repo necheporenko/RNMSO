@@ -29,8 +29,8 @@ const Photo = ({ t, gallery }) => (
                     <div className="gallery__desk">
                       <h5 className="gallery__title">{album.title}</h5>
                       <p className="gallery__quantity">
-                        <span className="quantity__value">{album.count_photo}</span>
-                        фото
+                        <span className="quantity__value">{album.count_photo} </span>
+                        {t("PhotosPage.photos")}
                       </p>
                     </div>
                   </a>

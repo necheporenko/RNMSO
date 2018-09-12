@@ -49,10 +49,10 @@ class Video extends React.Component {
             <div className="row">
               <div className="col-12">
                 <div className="controls top__controls">
-                  <button className="filter__btn filter reset" data-filter="all" onClick={() => this.setState({ currentFilter: '' })}>Все видео</button>
-                  <button className="filter__btn filter" data-filter=".videoblog" onClick={() => this.setState({ currentFilter: 'видеоблог' })}>#видеоблог</button>
-                  <button className="filter__btn filter" data-filter="concert" onClick={() => this.setState({ currentFilter: 'концерты' })}>#концерты</button>
-                  <button className="filter__btn filter" data-filter=".repetition" onClick={() => this.setState({ currentFilter: 'репетиции' })}>#репетиции</button>
+                  <button className="filter__btn filter reset" data-filter="all" onClick={() => this.setState({ currentFilter: '' })}>{t("VideosPage.allVideos")}</button>
+                  <button className="filter__btn filter" data-filter=".videoblog" onClick={() => this.setState({ currentFilter: t("VideosPage.videoblog")})}>#{t("VideosPage.videoblog")}</button>
+                  <button className="filter__btn filter" data-filter="concert" onClick={() => this.setState({ currentFilter: t("VideosPage.concerts")})}>#{t("VideosPage.concerts")}</button>
+                  <button className="filter__btn filter" data-filter=".repetition" onClick={() => this.setState({ currentFilter: t("VideosPage.rehearsals")} )}>#{t("VideosPage.rehearsals")}</button>
                 </div>
               </div>
             </div>

@@ -273,7 +273,7 @@ const ProgramPage = ({ t, concert }) => (
               <div className="col-lg-2  d-none  d-xl-block">
                 <div className="program-button__wrapper">
                   <button className="act__btn act__btn--program-page" type="button">
-                    Купить билет
+                    {t("AfishaPage.buyTicket")}
                   </button>
                 </div>
               </div>
@@ -282,7 +282,7 @@ const ProgramPage = ({ t, concert }) => (
               <div className="col-md-3 d-block  d-xl-none ordercol">
                 <div className="program-button__wrapper program-button__wrapper--second">
                   <button className="act__btn act__btn--program-page" type="button">
-                    Купить билет
+                    {t("AfishaPage.buyTicket")}
                   </button>
                 </div>
               </div>
@@ -382,7 +382,7 @@ const ProgramPage = ({ t, concert }) => (
               </div>
               <div className="col-md-6">
                 <div className="in-program">
-                  <p className="in-program__title">В программе</p>
+                  <p className="in-program__title">{t("MainPage.inProgramme")}</p>
                   <div dangerouslySetInnerHTML={{ __html: concert.event_program }}></div>
                 </div>
               </div>
@@ -397,7 +397,7 @@ const ProgramPage = ({ t, concert }) => (
               <div className="col-12">
                 <div className="program-button__wrapper program-button__wrapper--bottom">
                   <button className="act__btn act__btn--program-page bottom__btn--program-page" type="button">
-                    Купить билет
+                    {t("AfishaPage.buyTicket")}
                   </button>
                 </div>
               </div>

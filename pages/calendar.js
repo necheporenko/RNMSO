@@ -302,8 +302,8 @@ class Calendar extends React.Component {
               <div className="col-12">
                 <div className="event-button__wrapper">
                   <button className="act__btn visible__btn" type="button">
-                    Показать все концерты
-              </button>
+                    {t("AfishaPage.showAllConcerts")}
+                  </button>
                 </div>
               </div>
             </div>
