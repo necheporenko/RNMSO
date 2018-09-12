@@ -5,7 +5,21 @@ import { withI18next } from '../lib/withI18next';
 import callApi from '../utils/api';
 import Layout from '../layouts/Main';
 
-
+Modal.setAppElement('#__next');
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    zIndex: '100',
+    borderRadius: '12px',
+    border: "2px solid #ebe2cc",
+    width: '65%'
+  }
+}
 class Reserve extends React.Component {
   static async getInitialProps({ req, res, query }) {
     const language = req || res ? req.language || res.locals.language : null;
@@ -101,6 +115,27 @@ class Reserve extends React.Component {
                 </div>
               </div>
             </section>
+
+
+            <Modal
+              isOpen={this.state.modalIsOpen}
+              onRequestClose={this.closeModal}
+              style={customStyles}
+            >
+              <div className="modal-name__wrapper">
+                <div className="modal__left">
+                  <img src={currentMember.image} className="modal__photo" alt="Состав оркестра" />
+                  <div className="modal-name__wrapper">
+                    <p className="modal__name">
+                      <span className="modal__first-name">{currentMember.first_name}</span>
+                      <span className="modal__family-name">{currentMember.last_name}</span>
+                    </p>
+                  </div>
+                </div>
+                <div className="modal__right" dangerouslySetInnerHTML={{ __html: currentMember.biography }}></div>
+              </div>
+            </Modal>
+
             <section className="reserve__instrument">
               <div className="container">
                 <div className="instrument__block">

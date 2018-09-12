@@ -23,7 +23,6 @@ const customStyles = {
   }
 }
 
-
 class Staff extends React.Component {
   static async getInitialProps({ req, res, query }) {
     const language = req || res ? req.language || res.locals.language : null;

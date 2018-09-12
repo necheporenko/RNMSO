@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import moment from 'moment';
 import { withI18next } from '../lib/withI18next';
 import callApi from '../utils/api';
 import Layout from '../layouts/Main';
@@ -8,7 +9,7 @@ class Calendar extends React.Component {
   static async getInitialProps({ req, res }) {
     const language = req || res ? req.language || res.locals.language : null;
     const response = await callApi('/concerts/?limit=4&offset=0', language);
-    return { concerts: response.results }
+    return { concerts: response, language }
   }
 
   state = {
@@ -17,8 +18,10 @@ class Calendar extends React.Component {
   }
 
   render() {
-    const { t } = this.props;
+    const { t, language } = this.props;
     const { concerts } = this.state;
+
+    moment.locale(language);
     return (
       <Layout title="Афиша">
         <main>
@@ -254,20 +257,20 @@ class Calendar extends React.Component {
               </div> */}
             </div>
             <div className="row justify-content-center">
-              {concerts.map(concert => (
+              {concerts.results.map(concert => (
                 <div className="col-lg-4 col-sm-6 mycol" key={concert.id}>
                   <div className="event__cart">
                     <p className="event-cart__date">
-                      6 сентября
+                      {moment(concert.dt.slice(0, 16)).format("D MMMM")}
                       <sup>
-                        <small>2018</small>
-                      </sup> / чт / 19:00
-                  </p>
+                        <small>{moment(concert.dt.slice(0, 16)).format("YYYY")}</small>
+                      </sup> / {moment(concert.dt.slice(0, 16)).format("D")} / {moment(concert.dt.slice(0, 16)).format("HH:mm")}
+                    </p>
                     <p className="event-cart__room">{concert.place}</p>
                     <Link href={concert.link_buy}><a><img src={concert.image} alt="Первью события" /></a></Link>
 
                     <h2 className="event-cart__title">
-                      <Link><a>{concert.title}</a></Link>
+                      <Link href={`/program-page/${concert.id}`}><a>{concert.title}</a></Link>
                     </h2>
                     <div className="event__participant-wrapper">
                       {concert.conductors.length > 0 &&
@@ -283,7 +286,7 @@ class Calendar extends React.Component {
                       {concert.soloists.length > 0 &&
                         <div className="event-cart__participant">
                           {t("AfishaPage.soloists")}:
-                        <p className="event-cart__soloist-name">
+                            <p className="event-cart__soloist-name">
                             {concert.soloists.map(soloist => (
                               <span key={soloist.id}>{`${soloist.first_name} ${soloist.last_name} (${soloist.specialty})`}</span>
                             ))}
@@ -298,15 +301,17 @@ class Calendar extends React.Component {
                 </div>
               ))}
             </div>
-            <div className="row">
-              <div className="col-12">
-                <div className="event-button__wrapper">
-                  <button className="act__btn visible__btn" type="button">
-                    {t("AfishaPage.showAllConcerts")}
-                  </button>
+            {concerts.count < concerts.resultsc.legth && (
+              <div className="row">
+                <div className="col-12">
+                  <div className="event-button__wrapper">
+                    <button className="act__btn visible__btn" type="button">
+                      {t("AfishaPage.showAllConcerts")}
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </main>
       </Layout>

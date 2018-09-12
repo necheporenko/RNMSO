@@ -119,17 +119,17 @@ class Header extends React.Component {
                                                 <button
                                                     type="button"
                                                     className={(language || i18n.language) === 'ru' ? 'language__btn language__btn--dot language__dot' : 'language__btn language__btn--dot'}
-                                                    onClick={() => { changeLanguage('ru'); }}
+                                                    onClick={() => { this.changeLanguage('ru'); }}
                                                 >
                                                     Рус
-                                            </button>
+                                                </button>
                                                 <button
                                                     type="button"
                                                     className={(language || i18n.language) === 'en' ? 'language__btn language__btn--dot language__dot' : 'language__btn language__btn--dot'}
-                                                    onClick={() => { changeLanguage('en'); }}
+                                                    onClick={() => { this.changeLanguage('en'); }}
                                                 >
                                                     Eng
-                                            </button>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>

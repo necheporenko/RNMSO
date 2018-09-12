@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import ReactPaginate from 'react-paginate';
+import moment from 'moment';
 import { withI18next } from '../lib/withI18next';
 import callApi from '../utils/api';
 import Layout from '../layouts/Main';
@@ -27,7 +28,6 @@ class News extends React.Component {
     this.setState({ offset: offset }, () => {
       this.loadCommentsFromServer();
     });
-    console.log(data, offset, this.state.news);
   };
 
   async loadCommentsFromServer() {
@@ -40,8 +40,10 @@ class News extends React.Component {
 
 
   render() {
-    const { t } = this.props;
+    const { t, language } = this.props;
     const { news } = this.state;
+
+    moment.locale(language);
     return (
       <Layout title="Новости">
         <main className="m-before">
@@ -60,12 +62,8 @@ class News extends React.Component {
               <div className="row" key={post.id}>
                 <div className="col-xl-2 col-md-3">
                   <div className="news__date">
-                    <span className="news__year">
-                      2018
-                    </span>
-                    <span className="news__day">
-                      23 сентября
-                    </span>
+                    <span className="news__year">{moment(post.date.slice(0, 16)).format("YYYY")}</span>
+                    <span className="news__day">{moment(post.date.slice(0, 16)).format("D MMMM")} </span>
                   </div>
                 </div>
                 <div className="col-lg-8 col-md-9">
