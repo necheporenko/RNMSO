@@ -12,7 +12,6 @@ class Album extends React.Component {
     const albumID = query.id;
     const responsePhotos = await callApi(`/gallery-photo/?gallery=${albumID}`, language);
     const responseGallery = await callApi(`/gallery/${albumID}`, language);
-    console.log(responsePhotos, responseGallery);
     return { photos: responsePhotos, gallery: responseGallery };
   }
 
