@@ -276,7 +276,7 @@ class Calendar extends React.Component {
                       {concert.conductors.length > 0 &&
                         <div className="event-cart__participant">
                           {t("AfishaPage.conductors")}:
-                        <p className="event-cart__soloist-name">
+                          <p className="event-cart__soloist-name">
                             {concert.conductors.map(conductor => (
                               <span key={conductor.id}>{`${conductor.first_name} ${conductor.last_name}`}</span>
                             ))}
@@ -301,7 +301,7 @@ class Calendar extends React.Component {
                 </div>
               ))}
             </div>
-            {concerts.count < concerts.resultsc.legth && (
+            {concerts.count < concerts.results.length && (
               <div className="row">
                 <div className="col-12">
                   <div className="event-button__wrapper">
