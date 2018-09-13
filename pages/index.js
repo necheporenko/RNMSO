@@ -153,8 +153,9 @@ const Home = ({ t, videos, news, concerts, language }) => {
                               </div>
                             </div>
                             <div className="slide__right">
-                              <img src="../static/img/slide1.jpg" alt="Участник концерта" />
-                              <img src="../static/img/slide2.jpg" alt="Участник концерта" />
+                              {concert.images.length > 0 && concert.images.slice(0, 2).map(image => (
+                                <img src={`http://31.192.109.44/media/small/${image.image.substring(6)}`} alt="Участник концерта" />
+                              ))}
                             </div>
                           </div>
                         </a>

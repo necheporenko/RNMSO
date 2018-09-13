@@ -8,13 +8,30 @@ import Layout from '../layouts/Main';
 class Calendar extends React.Component {
   static async getInitialProps({ req, res }) {
     const language = req || res ? req.language || res.locals.language : null;
-    const response = await callApi('/concerts/?limit=4&offset=0', language);
+    const response = await callApi('/concerts/?limit=9&offset=0', language);
     return { concerts: response, language }
   }
 
   state = {
     concerts: this.props.concerts,
     offset: 0
+  }
+
+  handlePageClick = () => {
+    // let selected = data.selected;
+    // let offset = Math.ceil(selected * limitNews);
+
+    // this.setState({ offset: offset }, () => {
+    this.loadCommentsFromServer();
+    // });
+  };
+
+  async loadCommentsFromServer() {
+    // const { offset } = this.state;
+    const { language } = this.props;
+
+    const response = await callApi(`/concerts/?offset=9`, language);
+    this.setState({ concerts: response });
   }
 
   render() {
@@ -267,7 +284,7 @@ class Calendar extends React.Component {
                       </sup> / {moment(concert.dt.slice(0, 16)).format("D")} / {moment(concert.dt.slice(0, 16)).format("HH:mm")}
                     </p>
                     <p className="event-cart__room">{concert.place}</p>
-                    <Link href={concert.link_buy}><a><img src={concert.image.replace('media/', 'media/small/')} alt="Первью события" /></a></Link>
+                    <Link href={`/program-page/${concert.id}`}><a><img src={concert.image.replace('media/', 'media/small/')} alt="Первью события" /></a></Link>
 
                     <h2 className="event-cart__title">
                       <Link href={`/program-page/${concert.id}`}><a>{concert.title}</a></Link>
@@ -305,7 +322,7 @@ class Calendar extends React.Component {
               <div className="row">
                 <div className="col-12">
                   <div className="event-button__wrapper">
-                    <button className="act__btn visible__btn" type="button">
+                    <button className="act__btn visible__btn" type="button" onClick={() => this.handlePageClick()}>
                       {t("AfishaPage.showAllConcerts")}
                     </button>
                   </div>
