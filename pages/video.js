@@ -16,6 +16,7 @@ class Video extends React.Component {
   state = {
     videos: this.props.videos,
     currentFilter: '',
+    isSelected: false,
   };
 
   render() {

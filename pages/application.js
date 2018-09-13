@@ -150,19 +150,19 @@ class Application extends React.Component {
                       <div className="radio__button">
                         <p> {t("ApplicationPage.form.needHouse")}</p>
                         <label>
-                          <input className="radio" type="radio" name="is_need_housing" value="Yes" />
+                          <input className="radio" type="radio" name="is_need_housing" value="Yes"/>
                           <span className="radio-custom"></span>
                           <span className="label">{t("ApplicationPage.form.yes")} </span>
                         </label>
                         <label>
-                          <input className="radio" type="radio" name="is_need_housing" value="No" checked />
+                          <input className="radio" type="radio" name="is_need_housing" value="No"  checked/>
                           <span className="radio-custom"></span>
                           <span className="label">{t("ApplicationPage.form.no")} </span>
                         </label>
                       </div>
                       <div className="radio__button">
                         <label className="checkbox__label">
-                          <input className="checkbox" type="checkbox" checked />
+                          <input className="checkbox" type="checkbox" required />
                           <span className="checkbox-custom"></span>
                           <span className="label">{t("ApplicationPage.form.agree")}</span>
                         </label>

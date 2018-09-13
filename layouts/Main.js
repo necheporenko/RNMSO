@@ -21,7 +21,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { children, title = 'This is the default title' } = this.props;
+    const { children, title = 'RNYSO Главная' } = this.props;
     const { isOpenMobileMenu } = this.state;
     return (
       <div className="wrapper" style={isOpenMobileMenu ? bodyStyles : {}}>

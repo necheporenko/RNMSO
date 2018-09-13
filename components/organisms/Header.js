@@ -21,7 +21,7 @@ class Header extends React.Component {
             if (err) return console.log('something went wrong loading', err)
         })
         document.cookie = `i18next=${lng}`;
-        location.reload();
+        //location.reload(); // only needed when library is not downloaded locally
     }
 
     toggleMobileMenuList = (menu) => {

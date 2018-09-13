@@ -86,7 +86,7 @@ class News extends React.Component {
                 </div>
               </div>
             ))}
-            <div className="row ">
+            <div className="row">
               <div className="col-xl-8 offset-xl-2">
                 <ReactPaginate
                   previousLabel={t("Pagination.prew")}
