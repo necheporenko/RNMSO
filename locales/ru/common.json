@@ -92,7 +92,8 @@
   },
   "PhotosPage": {
     "backToAlbums": "Вернуться к фотоальбомам",
-    "photos": "фото"
+    "photos": "фото",
+    "of": " из "
   },
   "VideosPage": {
     "allVideos": "Все видео",

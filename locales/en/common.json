@@ -92,7 +92,8 @@
   },
   "PhotosPage": {
     "backToAlbums": "Back to photo albums",
-    "photos": "photos"
+    "photos": "photos",
+    "of": " of "
   },
   "VideosPage": {
     "allVideos": "All videos",

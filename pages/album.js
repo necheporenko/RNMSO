@@ -58,7 +58,7 @@ class Album extends React.Component {
         onClick={(e) => this.openLightbox(index, e)}
         key={photo.id}
       >
-        <img src={photo.image} />
+        <img src={photo.image.replace('media/', 'media/small/')} />
       </a>
     ))
   }
@@ -111,7 +111,15 @@ class Album extends React.Component {
               <div className="photo__album">
                 {this.renderGallery()}
                 <Lightbox
-                  images={(photos.results && photos.results.map(photo => { return { src: photo.image } })) || []}
+                  images={(photos.results && photos.results.map(photo => {
+                    return {
+                      src: photo.image,
+                      srcSet: [
+                        `${photo.image.replace('media/', 'media/small/')} 320w`,
+                        `${photo.image.replace('media/', 'media/big/')} 500w`,
+                        `${photo.image} 1024w`]
+                    }
+                  })) || []}
                   currentImage={this.state.currentImage}
                   isOpen={this.state.lightboxIsOpen}
                   onClickNext={this.gotoNext}
@@ -119,6 +127,7 @@ class Album extends React.Component {
                   onClose={this.closeLightbox}
                   onClickThumbnail={this.gotoImage}
                   showThumbnails={true}
+                  imageCountSeparator={t("PhotosPage.of")}
                 />
               </div>
             </div>

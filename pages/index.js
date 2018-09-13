@@ -183,7 +183,7 @@ const Home = ({ t, videos, news, concerts, language }) => {
             </div>
           </div>
           <div className="row justify-content-center">
-            {videos.map(video => (
+            {videos.filter(video => video.is_index).slice(0, 4).map(video => (
               <div className="col-xl-5 col-md-6" key={video.id}>
                 <figure className="video__carts">
                   <div className="link__frame">
@@ -285,7 +285,7 @@ const Home = ({ t, videos, news, concerts, language }) => {
                     </Link>
                   </div>
                   <div className="news-cart__img">
-                    {post.image && <img src={post.image} alt="Превью новости" />}
+                    {post.image && <img src={post.image.replace('media/', 'media/small/')} alt="Превью новости" />}
                   </div>
                   <div className="news-cart__text">
                     <p dangerouslySetInnerHTML={{ __html: post.announcement }}></p>
@@ -307,7 +307,7 @@ const Home = ({ t, videos, news, concerts, language }) => {
 
 Home.getInitialProps = async ({ req, res }) => {
   const language = req || res ? req.language || res.locals.language : null;
-  const responseVideo = await callApi('/video/?limit=4&offset=0', language);
+  const responseVideo = await callApi('/video/?is_index=true', language);
   const responseNews = await callApi('/news/?limit=2&offset=0', language);
   const responseConcerts = await callApi('/concerts/?limit=4&offset=0', language);
   return { videos: responseVideo.results, news: responseNews.results, concerts: responseConcerts.results, language }

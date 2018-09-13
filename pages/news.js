@@ -75,7 +75,7 @@ class News extends React.Component {
                     </h3>
                     <Link as={`/news/${post.id}`} href={`/news-page?id=${post.id}`}>
                       <a className="news__full-link--img">
-                        {post.image && <img src={post.image} alt="Фото новости" />}
+                        {post.image && <img src={post.image.replace('media/', 'media/big/')} alt="Фото новости" />}
                       </a>
                     </Link>
                     <p className="short-news__text" dangerouslySetInnerHTML={{ __html: post.announcement }}></p>

@@ -267,7 +267,7 @@ class Calendar extends React.Component {
                       </sup> / {moment(concert.dt.slice(0, 16)).format("D")} / {moment(concert.dt.slice(0, 16)).format("HH:mm")}
                     </p>
                     <p className="event-cart__room">{concert.place}</p>
-                    <Link href={concert.link_buy}><a><img src={concert.image} alt="Первью события" /></a></Link>
+                    <Link href={concert.link_buy}><a><img src={concert.image.replace('media/', 'media/small/')} alt="Первью события" /></a></Link>
 
                     <h2 className="event-cart__title">
                       <Link href={`/program-page/${concert.id}`}><a>{concert.title}</a></Link>

@@ -23,8 +23,9 @@ const customStyles = {
 class Reserve extends React.Component {
   static async getInitialProps({ req, res, query }) {
     const language = req || res ? req.language || res.locals.language : null;
-    const response = await callApi('/reserve-members', language)
-    return { members: response.results, language }
+    const responseMembers = await callApi('/reserve-members', language);
+    const responseGroups = await callApi('/member-groups', language);
+    return { members: responseMembers.results, groups: responseGroups.results, language }
   }
 
   state = {
@@ -50,7 +51,7 @@ class Reserve extends React.Component {
 
     const filteredMembers = members.filter(member =>
       isLaureate
-        ? member.group === group && member.laureate == true
+        ? member.group === group && member.laureate
         : member.group === group);
 
     return (
@@ -59,7 +60,7 @@ class Reserve extends React.Component {
           <figure className="reserve__participant" key={member.id} onClick={() => this.openModal(member.id)}>
             <a href="#modal">
               <div className="dots_wr">
-                <img src={member.image} alt="Участник резерва" />
+                <img src={member.image.replace('media/', 'media/small/')} alt="Участник резерва" />
                 <span className="img-dots"></span>
               </div>
             </a>
@@ -68,7 +69,8 @@ class Reserve extends React.Component {
                 <span className="participant__first-name">{member.first_name}</span>
                 <span className="participant__family-name">{member.last_name}</span>
               </p>
-              <p className="participant__progress">{member.status} </p>
+              {/* <p className="participant__progress">{member.status} </p> */}
+              {member.laureate && <p className="participant__progress">{member.laureate} </p>}
             </figcaption>
           </figure>
         ))}
@@ -76,10 +78,8 @@ class Reserve extends React.Component {
     )
   }
 
-
-
   render() {
-    const { t, members } = this.props;
+    const { t, groups } = this.props;
     const { currentMember, isLaureate } = this.state;
     return (
       <Layout title="Резерв">
@@ -126,8 +126,9 @@ class Reserve extends React.Component {
               style={customStyles}
             >
               <div className="modal-name__wrapper">
+                <button class="remodal-close" onClick={() => this.closeModal()}></button>
                 <div className="modal__left">
-                  <img src={currentMember.image} className="modal__photo" alt="Состав оркестра" />
+                  {currentMember.image && <img src={currentMember.image.replace('media/', 'media/small/')} className="modal__photo" alt="Состав оркестра" />}
                   <div className="modal-name__wrapper">
                     <p className="modal__name">
                       <span className="modal__first-name">{currentMember.first_name}</span>
@@ -141,103 +142,14 @@ class Reserve extends React.Component {
 
             <section className="reserve__instrument">
               <div className="container">
-                <div className="instrument__block">
-                  <h2 className="reserve__section-title">
-                    {t("OrchestraMembers.violins")}
-                  </h2>
-                  {/* <div className="reserve-composition"> */}
-                  {this.renderMember(17)}
-                  {/* </div> */}
-                </div>
-                <div className="instrument__block">
-                  <h2 className="reserve__section-title">
-                    {t("OrchestraMembers.alti")}
-                  </h2>
-
-                  {this.renderMember(5)}
-                </div>
-                <div className="instrument__block">
-                  <h2 className="reserve__section-title">
-                    {t("OrchestraMembers.cello")}
-                  </h2>
-
-                  {this.renderMember(6)}
-                </div>
-                <div className="instrument__block">
-                  <h2 className="reserve__section-title">
-                    {t("OrchestraMembers.contrabasses")}
-                  </h2>
-
-                  {this.renderMember(7)}
-                </div>
-                <div className="instrument__block">
-                  <h2 className="reserve__section-title">
-                    {t("OrchestraMembers.flutes")}
-                  </h2>
-
-                  {this.renderMember(8)}
-                </div>
-                <div className="instrument__block">
-                  <h2 className="reserve__section-title">
-                    {t("OrchestraMembers.oboes")}
-                  </h2>
-                </div>
-                {this.renderMember(18)}
-                <div className="instrument__block">
-                  <h2 className="reserve__section-title">
-                    {t("OrchestraMembers.clarinets")}
-                  </h2>
-
-                  {this.renderMember(9)}
-                </div>
-                <div className="instrument__block">
-                  <h2 className="reserve__section-title">
-                    {t("OrchestraMembers.bassoons")}
-                  </h2>
-                </div>
-                {this.renderMember(10)}
-                <div className="instrument__block">
-                  <h2 className="reserve__section-title">
-                    {t("OrchestraMembers.horn")}
-                  </h2>
-
-                  {this.renderMember(16)}
-                </div>
-                <div className="instrument__block">
-                  <h2 className="reserve__section-title">
-                    {t("OrchestraMembers.pipes")}
-                  </h2>
-
-                  {this.renderMember(15)}
-                </div>
-                <div className="instrument__block">
-                  <h2 className="reserve__section-title">
-                    {t("OrchestraMembers.trombones")}
-                  </h2>
-
-                  {this.renderMember(14)}
-                </div>
-                <div className="instrument__block">
-                  <h2 className="reserve__section-title">
-                    {t("OrchestraMembers.tuba")}
-                  </h2>
-
-                  {this.renderMember(13)}
-                </div>
-                <div className="instrument__block">
-                  <h2 className="reserve__section-title">
-                    {t("OrchestraMembers.harps")}
-                  </h2>
-
-                  {this.renderMember(12)}
-                </div>
-                <div className="instrument__block">
-                  <h2 className="reserve__section-title">
-                    {t("OrchestraMembers.drums")}
-                  </h2>
-
-                  {this.renderMember(11)}
-                </div>
+                {groups.map(group => (
+                  <div className="instrument__block" key={group.id}>
+                    <h2 className="reserve__section-title">
+                      {group.title}
+                    </h2>
+                    {this.renderMember(group.id)}
+                  </div>
+                ))}
               </div>
             </section>
           </main>

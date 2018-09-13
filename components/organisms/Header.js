@@ -111,7 +111,7 @@ class Header extends React.Component {
                                                 </nav>
                                             </div>
                                             <div className="second-floor">
-                                                <Link href="reserve"><a>{t('MainMenu.reserve')}</a></Link>
+                                                <Link href="/reserve"><a>{t('MainMenu.reserve')}</a></Link>
                                             </div>
                                         </div>
                                         <div className="menu__wrapper--right">
