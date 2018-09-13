@@ -48,25 +48,29 @@ class Staff extends React.Component {
 
   renderMember = (group) => {
     const { members } = this.props;
-    return members.filter(member => member.group === group).map(member => (
-      <div className="reserve-composition" key={member.id}>
-        <figure className="reserve__participant laureate" onClick={() => this.openModal(member.id)}>
-          <a href="#modal">
-            <div className="dots_wr">
-              <img src={member.image} alt="Состав оркестра" />
-              <span className="img-dots"></span>
-            </div>
-          </a>
-          <figcaption className="participant__description ">
-            <p className="participant__name">
-              <span className="participant__first-name">{member.first_name}</span>
-              <span className="participant__family-name">{member.last_name}</span>
-            </p>
-            <p className="participant__progress">{member.status} </p>
-          </figcaption>
-        </figure>
+    const filteredMembers = members.filter(member => member.group === group);
+
+    return (
+      <div className="reserve-composition" style={{ marginBottom: filteredMembers.length > 0 ? '60px' : '0' }}>
+        {filteredMembers.map(member => (
+          <figure className="reserve__participant laureate" key={member.id} onClick={() => this.openModal(member.id)}>
+            <a href="#modal">
+              <div className="dots_wr">
+                <img src={member.image} alt="Состав оркестра" />
+                <span className="img-dots"></span>
+              </div>
+            </a>
+            <figcaption className="participant__description ">
+              <p className="participant__name">
+                <span className="participant__first-name">{member.first_name}</span>
+                <span className="participant__family-name">{member.last_name}</span>
+              </p>
+              <p className="participant__progress">{member.status} </p>
+            </figcaption>
+          </figure>))
+        }
       </div>
-    ))
+    )
   }
 
   render() {
