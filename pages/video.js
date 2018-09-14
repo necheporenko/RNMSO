@@ -85,7 +85,7 @@ class Video extends React.Component {
 
               <div className="col-lg-8" style={{ paddingBottom: '20px' }}>
                 {notMainVideos[0] && notMainVideos.filter(video => currentFilter === t("VideosPage.allVideos") ? video : video.tags.includes(currentFilter)).slice(0, 1).map(video => (
-                  <figure className="video__carts top__cart">
+                  <figure className="video__carts top__cart" key={video.id}>
                     <div className="link__frame">
                       <a data-fancybox href={video.video} className="popap__video" id="autoplay">
                         <img src={`https://img.youtube.com/vi/${getYouTubeVideoId(video.video)}/mqdefault.jpg`} alt="Превью видео" className="video__img" />

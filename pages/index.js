@@ -53,47 +53,16 @@ const Home = ({ t, videos, news, concerts, language }) => {
             <div className="col-12 col-lg-10">
               <div className="events__calendar">
                 <ul className="events__date">
-                  {/* <li>
-                  <a href="#" className="no-link">
-                    <span>19</span>
-                    <sup>
-                      <small>июл</small>
-                    </sup>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="no-link">
-                    <span>29</span>
-                    <sup>
-                      <small>июл</small>
-                    </sup>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="no-link">
-                    <span>03</span>
-                    <sup>
-                      <small>авг</small>
-                    </sup>
-                  </a>
-                </li>
-
-                <li>
-                  <a href="#" className="no-link">
-                    <span>14</span>
-                    <sup>
-                      <small>авг</small>
-                    </sup>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="no-link">
-                    <span>26</span>
-                    <sup>
-                      <small>авг</small>
-                    </sup>
-                  </a>
-                </li> */}
+                  {concerts.slice(-5).map((concert, index) => (
+                    <li key={concert.id} onClick={() => this.concertSlider.slickGoTo(index)}>
+                      <a className="no-link" style={{ cursor: 'pointer' }}>
+                        <span>{moment(concert.dt.slice(0, 16)).format("D")}</span>
+                        <sup>
+                          <small>{moment(concert.dt.slice(0, 16)).format("MMM").slice(0, -1)}</small>
+                        </sup>
+                      </a>
+                    </li>
+                  ))}
                 </ul>
                 <div className="full__calendar">
                   <Link href="/calendar">
@@ -108,8 +77,8 @@ const Home = ({ t, videos, news, concerts, language }) => {
             <div className="col-12 col-lg-10">
               <div className="carrousel__wrapper">
                 <div className="owl-carousel event__slider">
-                  <Slider {...SliderSettings}>
-                    {concerts.map(concert => (
+                  <Slider {...SliderSettings} ref={slider => (this.concertSlider = slider)}>
+                    {concerts.slice(-5).map(concert => (
                       <Link as={`/program-page/${concert.id}`} href={`/program-page?id=${concert.id}`} key={concert.id}>
                         <a className="slide__link" target="_blank">
                           <div className="slider__item">
@@ -153,8 +122,8 @@ const Home = ({ t, videos, news, concerts, language }) => {
                               </div>
                             </div>
                             <div className="slide__right">
-                              {concert.images.length > 0 && concert.images.slice(0, 2).map(image => (
-                                <img src={`http://31.192.109.44/media/small/${image.image.substring(6)}`} alt="Участник концерта" />
+                              {concert.images.length > 0 && concert.images.slice(0, 2).map((image, index) => (
+                                <img key={index} src={`http://31.192.109.44/media/small/${image.image.substring(6)}`} alt="Участник концерта" />
                               ))}
                             </div>
                           </div>
@@ -310,7 +279,7 @@ Home.getInitialProps = async ({ req, res }) => {
   const language = req || res ? req.language || res.locals.language : null;
   const responseVideo = await callApi('/video/?is_index=true', language);
   const responseNews = await callApi('/news/?limit=2&offset=0', language);
-  const responseConcerts = await callApi('/concerts/?limit=4&offset=0', language);
+  const responseConcerts = await callApi(`/concerts/?offset=0&dt_after=${moment().format("YYYY-MM-DD")}`, language);
   return { videos: responseVideo.results, news: responseNews.results, concerts: responseConcerts.results, language }
 }
 
