@@ -67,7 +67,7 @@ class Album extends React.Component {
   render() {
     const { t, photos, gallery } = this.props;
     return (
-      <Layout title="">
+      <Layout title={gallery.title}>
         <main>
           <div className="container">
             <div className="row">

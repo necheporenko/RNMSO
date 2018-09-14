@@ -8,7 +8,7 @@ import Layout from '../layouts/Main';
 const NewsPage = ({ t, news, language, nextNews, prevNews }) => {
   moment.locale(language);
   return (
-    <Layout title="Новость">
+    <Layout title={news.title}>
       <main>
         <div className="container">
           <div className="news-page__top-line">
@@ -18,10 +18,10 @@ const NewsPage = ({ t, news, language, nextNews, prevNews }) => {
                   <Link href="/news"><a>{t("NewsPage.backToNews")}</a></Link>
                 </div>
               </div>
-              <div className="col-xl-2">
+              <div className="col-xl-3">
                 <div className="news__date news__date--page">
-                  <span className="news__year">{moment(news.date.slice(0, 16)).format("YYYY")}</span>
-                  <span className="news__day">{moment(news.date.slice(0, 16)).format("D MMMM")}</span>
+                  <span className="news__year">{moment(news.date.slice(0, 16)).locale(language).format("YYYY")}</span>
+                  <span className="news__day">{moment(news.date.slice(0, 16)).locale(language).format("D MMMM")}</span>
                 </div>
               </div>
             </div>
@@ -78,6 +78,8 @@ NewsPage.getInitialProps = async ({ req, res, query }) => {
   if (response.next_id) {
     responsePrevNews = await callApi(`/news/${response.next_id}`, language);
   }
+
+  moment.locale(language);
   return { news: response, language, nextNews: responsePrevNews, prevNews: responsePrevNews };
 }
 export default withI18next(['common'])(NewsPage);

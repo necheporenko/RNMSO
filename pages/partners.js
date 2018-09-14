@@ -5,7 +5,7 @@ import callApi from '../utils/api';
 import Layout from '../layouts/Main'
 
 const Partners = ({ t, partners }) => (
-  <Layout>
+  <Layout title={t('MainMenu.partners')}>
     <main>
       <div className="container">
         <div className="row">

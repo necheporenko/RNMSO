@@ -6,7 +6,7 @@ import Layout from '../layouts/Main';
 import Submenu from '../components/moleculs/Submenu';
 
 const Press = ({ t, press }) => (
-  <Layout title="Пресса">
+  <Layout title={t("MediaMenu.press")}>
     <main className="m-before">
       <div className="container">
         <div className="row">
