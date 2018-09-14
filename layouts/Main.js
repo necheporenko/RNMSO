@@ -24,21 +24,26 @@ class Home extends React.Component {
     const { children, title = 'RNYSO Главная' } = this.props;
     const { isOpenMobileMenu } = this.state;
     return (
+      <ReactCSSTransitionGroup
+        transitionName="react-nav-anim"
+        transitionAppear={true}
+        transitionAppearTimeout={2000}
+        transitionEnterTimeout={false}
+        transitionLeaveTimeout={false}
+      >
       <div className={isOpenMobileMenu ? 'wrapper body-menu' : 'wrapper'} style={isOpenMobileMenu ? bodyStyles : { width: '100%' }}>
         <Head title={title} />
 
-        <ReactCSSTransitionGroup
-          transitionName="react-nav-anim"
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={300}
-        >
+
           <Header toggleMobileMenu={this.toggleMobileMenu} />
-        </ReactCSSTransitionGroup>
+
+
         <main>
           {children}
         </main>
         <Footer />
       </div>
+      </ReactCSSTransitionGroup>
     )
   }
 }
