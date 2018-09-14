@@ -13,6 +13,7 @@ class News extends React.Component {
   static async getInitialProps({ req, res }) {
     const language = req || res ? req.language || res.locals.language : null;
     const response = await callApi(`/news/?limit=${limitNews}&offset=0`, language);
+    moment.locale(language);
     return { data: response, language };
   }
 
@@ -60,10 +61,10 @@ class News extends React.Component {
             </div>
             {news && news.results.map(post => (
               <div className="row" key={post.id}>
-                <div className="col-xl-2 col-md-3">
+                <div className="col-xl-3 col-md-3">
                   <div className="news__date">
-                    <span className="news__year">{moment(post.date.slice(0, 16)).format("YYYY")}</span>
-                    <span className="news__day">{moment(post.date.slice(0, 16)).format("D MMMM")} </span>
+                    <span className="news__year">{moment(post.date.slice(0, 16)).locale(language).format("YYYY")}</span>
+                    <span className="news__day">{moment(post.date.slice(0, 16)).locale(language).format("D MMMM")} </span>
                   </div>
                 </div>
                 <div className="col-lg-8 col-md-9">

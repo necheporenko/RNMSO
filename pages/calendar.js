@@ -89,7 +89,7 @@ class Calendar extends React.Component {
 
     moment.locale(language);
     return (
-      <Layout title="Афиша">
+      <Layout title={t("MainMenu.afisha")}>
         <main>
           <div className="container">
             <div className="row">

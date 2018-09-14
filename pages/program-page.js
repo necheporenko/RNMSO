@@ -79,7 +79,7 @@ class ProgramPage extends React.Component {
     moment.locale(language);
 
     return (
-      <Layout title="">
+      <Layout title={concert.title}>
         <main className="calendar--program">
           <div className="container">
             <div className="row">

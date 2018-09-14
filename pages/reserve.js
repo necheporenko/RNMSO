@@ -82,7 +82,7 @@ class Reserve extends React.Component {
     const { t, groups } = this.props;
     const { currentMember, isLaureate } = this.state;
     return (
-      <Layout title="Резерв">
+      <Layout title={t("MainMenu.reserve")}>
         <div className="remodal-bg">
           <main>
             <section className="reserve__top-line">

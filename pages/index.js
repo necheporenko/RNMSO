@@ -49,7 +49,7 @@ const SliderSettings = {
 const Home = ({ t, videos, news, concerts, language }) => {
   moment.locale(language);
   return (
-    <Layout>
+    <Layout title={t("OrchestraName")}>
       <header className="header home">
         <div className="bottom__line">
           <div className="container">

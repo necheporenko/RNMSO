@@ -61,7 +61,7 @@ class Application extends React.Component {
   render() {
     const { t } = this.props;
     return (
-      <Layout title="Заявка на участие в отборе">
+      <Layout title={t("ApplicationPage.application")}>
         <main className="m-before ">
           <div className="container">
             <div className="row">
