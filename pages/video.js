@@ -37,7 +37,7 @@ class Video extends React.Component {
     const { t, tags } = this.props;
     const { videos, currentFilter, notMainVideos } = this.state;
     return (
-      <Layout title="Видео">
+      <Layout title={t("MediaMenu.video")}>
         <main className="m-before m-video">
           <div className="container">
             <div className="row">

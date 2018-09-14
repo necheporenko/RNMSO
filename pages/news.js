@@ -45,7 +45,7 @@ class News extends React.Component {
 
     moment.locale(language);
     return (
-      <Layout title="Новости">
+      <Layout title={t("MediaMenu.news")}>
         <main className="m-before">
           <div className="container">
             <div className="row">

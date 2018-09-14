@@ -77,7 +77,7 @@ class Staff extends React.Component {
     const { t, groups } = this.props;
     const { currentMember } = this.state;
     return (
-      <Layout >
+      <Layout title={t("OrchestraMenu.staff")}>
         <main className="m-before m-video">
           <div className="container">
             <div className="row">
