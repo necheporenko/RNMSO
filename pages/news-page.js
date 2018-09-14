@@ -5,7 +5,7 @@ import { withI18next } from '../lib/withI18next';
 import callApi from '../utils/api';
 import Layout from '../layouts/Main';
 
-const NewsPage = ({ t, news, language }) => {
+const NewsPage = ({ t, news, language, nextNews, prevNews }) => {
   moment.locale(language);
   return (
     <Layout title="Новость">
@@ -36,7 +36,7 @@ const NewsPage = ({ t, news, language }) => {
             </div>
             <div className="row justify-content-center">
               <div className="col-lg-8 offset-lg-0 col-md-10 offset-md-2 mycol">
-                {news.image && <img src={news.image} className="img-responsive full-news__img" alt="Фото новости" />}
+                {news.image && <img src={news.image.replace('media/', 'media/big/')} className="img-responsive full-news__img" alt="Фото новости" />}
               </div>
             </div>
             <div className="row justify-content-center">
@@ -47,12 +47,12 @@ const NewsPage = ({ t, news, language }) => {
             <div className="row justify-content-center">
               <div className="col-lg-4 col-md-6">
                 <div className="news__navigation news__navigation--left">
-                  {news.previous_id && <Link href={`/news/${news.previous_id}`}><button className="paginator-btn paginator-btn--pref" type="buttoh"></button></Link>}
+                  {news.previous_id && <Link href={`/news/${news.previous_id}`}><button className="paginator-btn paginator-btn--pref" type="buttoh">{prevNews.title}</button></Link>}
                 </div>
               </div>
               <div className="col-lg-4 col-md-6">
                 <div className="news__navigation news__navigation--right">
-                  {news.next_id && <Link href={`/news/${news.next_id}`}><button className="paginator-btn paginator-btn--next" type="buttoh"></button></Link>}
+                  {news.next_id && <Link href={`/news/${news.next_id}`}><button className="paginator-btn paginator-btn--next" type="buttoh">{nextNews.title}</button></Link>}
                 </div>
               </div>
             </div>
@@ -68,6 +68,16 @@ NewsPage.getInitialProps = async ({ req, res, query }) => {
   const language = req || res ? req.language || res.locals.language : null;
   const newsID = query.id;
   const response = await callApi(`/news/${newsID}`, language);
-  return { news: response, language };
+  let responseNextNews;
+  let responsePrevNews;
+
+  if (response.next_id) {
+    responseNextNews = await callApi(`/news/${response.next_id}`, language);
+  }
+
+  if (response.next_id) {
+    responsePrevNews = await callApi(`/news/${response.next_id}`, language);
+  }
+  return { news: response, language, nextNews: responsePrevNews, prevNews: responsePrevNews };
 }
 export default withI18next(['common'])(NewsPage);

@@ -5,21 +5,87 @@ import { withI18next } from '../lib/withI18next';
 import callApi from '../utils/api';
 import Layout from '../layouts/Main';
 
+function getDaysArrayByMonth(currentMounth, language) {
+  currentMounth.locale(language);
+  var daysInMonth = moment(currentMounth).daysInMonth();
+  var arrDays = [];
+
+  while (daysInMonth) {
+    var current = moment(currentMounth).date(daysInMonth);
+    arrDays.push(current);
+    daysInMonth--;
+  }
+
+  return arrDays.reverse();
+}
+
 class Calendar extends React.Component {
   static async getInitialProps({ req, res }) {
+    const FirstDayOfMounth = moment().startOf('month').format("YYYY-MM-DD");
+    const LastDayOfMounth = moment().endOf('month').format("YYYY-MM-DD");
+
     const language = req || res ? req.language || res.locals.language : null;
-    const response = await callApi('/concerts/?limit=4&offset=0', language);
-    return { concerts: response, language }
+    const response = await callApi(`/concerts/?limit=9&offset=0&dt_after=${FirstDayOfMounth}&dt_before=${LastDayOfMounth}`, language);
+
+
+    var mounthCalendar = getDaysArrayByMonth(moment(), language);
+
+    return { concerts: response, language, mounthCalendar }
   }
 
   state = {
     concerts: this.props.concerts,
-    offset: 0
+    offset: 0,
+    currentMounth: moment(),
+    mounthCalendar: this.props.mounthCalendar
+  }
+
+  handlePageClick = () => {
+    const { offset } = this.state;
+
+    // this.setState({ offset: 0 }, () => {
+    this.loadCommentsFromServer();
+    // });
+  };
+
+  async loadCommentsFromServer() {
+    const { offset } = this.state;
+    const { language } = this.props;
+
+    const response = await callApi(`/concerts/?offset=${offset}`, language);
+    this.setState({ concerts: response });
+  }
+
+  changeMounth = (direction) => {
+    const { currentMounth } = this.state;
+
+    if (direction === "next") {
+      this.setState({ currentMounth: moment(currentMounth).add(1, 'months') }, () => this.loadAnotherMounth())
+    } else if (direction === "prev") {
+      this.setState({ currentMounth: moment(currentMounth).subtract(1, 'months') }, () => this.loadAnotherMounth())
+    }
+
+  }
+
+  async loadAnotherMounth() {
+    const { currentMounth } = this.state;
+    const { language, mounthCalendar } = this.props;
+
+    moment.locale(language);
+    const FirstDayOfMounth = moment(currentMounth).startOf('month').format("YYYY-MM-DD");
+    const LastDayOfMounth = moment(currentMounth).endOf('month').format("YYYY-MM-DD");
+
+    const response = await callApi(`/concerts/?limit=9&offset=0&dt_after=${FirstDayOfMounth}&dt_before=${LastDayOfMounth}`, language);
+
+    this.setState({
+      mounthCalendar: getDaysArrayByMonth(currentMounth, language),
+      concerts: response
+    })
   }
 
   render() {
     const { t, language } = this.props;
-    const { concerts } = this.state;
+    const { concerts, mounthCalendar } = this.state;
 
     moment.locale(language);
     return (
@@ -34,227 +100,46 @@ class Calendar extends React.Component {
                   </h1>
                 </div>
               </div>
-              {/* <div className="col-lg-10 col-9">
+
+
+              <div className="col-lg-10 col-9">
                 <div className="calendar__wrapper">
-                  <a href="#" className="calendar-slider__date">Октябрь 2018</a>
+                  <a href="#" className="calendar-slider__date">{moment(mounthCalendar[0]).format("MMMM YYYY")}</a>
                   <div className="calendar-slider__mounth">
-                    <div className="slider-mounth__day">
-                      <span>1</span>
-                      <span>пн</span>
-                    </div>
-                    <div className="slider-mounth__day">
-                      <span>2</span>
-                      <span>вт</span>
-                    </div>
-                    <div className="slider-mounth__day">
-                      <span>3</span>
-                      <span>ср</span>
-                    </div>
-                    <div className="slider-mounth__day">
-                      <span>4</span>
-                      <span>чт</span>
-                    </div>
-                    <div className="slider-mounth__day event">
-                      <span>5</span>
-                      <span>пт</span>
-                      <div className="tooltip">
-                        <div className="tooltip__event">
-                          <a href="program-page.html" className="tooltip__title">
-                            Сказки с оркестром
-                      </a>
-                          <p className="tooltip__desc">
-                            15:00, Филармония-2. Концертный зал Рахманинова / Москва
-                      </p>
-                        </div>
-                        <div className="tooltip__event">
-                          <a href="calendar-program.html" className="tooltip__title">
-                            Мама, я Меломан
-                      </a>
-                          <p className="tooltip__desc">
-                            23:00, Концертный зал Чайковского / Москва
-                      </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="slider-mounth__day">
-                      <span>6</span>
-                      <span>сб</span>
-                    </div>
-                    <div className="slider-mounth__day">
-                      <span>7</span>
-                      <span>вс</span>
-                    </div>
-                    <div className="slider-mounth__day">
-                      <span>8</span>
-                      <span>пн</span>
-                    </div>
-                    <div className="slider-mounth__day">
-                      <span>9</span>
-                      <span>вт</span>
-                    </div>
-                    <div className="slider-mounth__day">
-                      <span>10</span>
-                      <span>ср</span>
-                    </div>
-                    <div className="slider-mounth__day event">
-                      <span>11</span>
-                      <span>чт</span>
-                      <div className="tooltip">
+                    {mounthCalendar.map((day, index) => (
+                      <div
+                        key={index}
+                        className={concerts.results.some(concert => moment(concert.dt).format("YYYY-MM-DD") === moment(day).format("YYYY-MM-DD"))
+                          ? "slider-mounth__day event"
+                          : "slider-mounth__day"}
+                      >
+                        <span>{moment(day).format("D")}</span>
+                        <span style={{ textTransform: 'lowercase' }}>{moment(day).format("dd")}</span>
 
-                        <div className="tooltip__event">
-                          <a href="calendar-program.html" className="tooltip__title">
-                            Мама, я Меломан
-                      </a>
-                          <p className="tooltip__desc">
-                            23:00, Концертный зал Чайковского / Москва
-                      </p>
+                        <div className="tooltip">
+                          {concerts.results.filter(concert =>
+                            moment(concert.dt).format("YYYY-MM-DD") === moment(day).format("YYYY-MM-DD"))
+                            .map(concert => (
+                              <div className="tooltip__event" key={concert.id}>
+                                <Link href={`/program-page/${concert.id}`}>
+                                  <a className="tooltip__title">{concert.title}</a>
+                                </Link>
+                                <p className="tooltip__desc">{`${moment(day).format("HH:mm")}, ${concert.place}`}</p>
+                              </div>
+                            ))
+                          }
                         </div>
                       </div>
-                    </div>
-                    <div className="slider-mounth__day">
-                      <span>12</span>
-                      <span>пт</span>
-                    </div>
-                    <div className="slider-mounth__day event">
-                      <span>13</span>
-                      <span>сб</span>
-                      <div className="tooltip">
-                        <div className="tooltip__event">
-                          <a href="program-page.html" className="tooltip__title">
-                            Сказки с оркестром
-                      </a>
-                          <p className="tooltip__desc">
-                            15:00, Филармония-2. Концертный зал Рахманинова / Москва
-                      </p>
-                        </div>
-                        <div className="tooltip__event">
-                          <a href="calendar-program.html" className="tooltip__title">
-                            Мама, я Меломан
-                      </a>
-                          <p className="tooltip__desc">
-                            23:00, Концертный зал Чайковского / Москва
-                      </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="slider-mounth__day">
-                      <span>14</span>
-                      <span>вс</span>
-                    </div>
-                    <div className="slider-mounth__day">
-                      <span>15</span>
-                      <span>пн</span>
-                    </div>
-                    <div className="slider-mounth__day">
-                      <span>16</span>
-                      <span>вт</span>
-                    </div>
-                    <div className="slider-mounth__day">
-                      <span>17</span>
-                      <span>ср</span>
-                    </div>
-                    <div className="slider-mounth__day">
-                      <span>18</span>
-                      <span>чт</span>
-                    </div>
-                    <div className="slider-mounth__day event">
-                      <span>19</span>
-                      <span>пт</span>
-                      <div className="tooltip">
-                        <div className="tooltip__event">
-                          <a href="program-page.html" className="tooltip__title">
-                            Сказки с оркестром
-                      </a>
-                          <p className="tooltip__desc">
-                            15:00, Филармония-2. Концертный зал Рахманинова / Москва
-                      </p>
-                        </div>
-                        <div className="tooltip__event">
-                          <a href="calendar-program.html" className="tooltip__title">
-                            Мама, я Меломан
-                      </a>
-                          <p className="tooltip__desc">
-                            23:00, Концертный зал Чайковского / Москва
-                      </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="slider-mounth__day event">
-                      <span>20</span>
-                      <span>сб</span>
-                      <div className="tooltip">
-                        <div className="tooltip__event">
-                          <a href="calendar-program.html" className="tooltip__title">
-                            Мама, я Меломан
-                      </a>
-                          <p className="tooltip__desc">
-                            23:00, Концертный зал Чайковского / Москва
-                      </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="slider-mounth__day">
-                      <span>21</span>
-                      <span>вс</span>
-                    </div>
-                    <div className="slider-mounth__day">
-                      <span>22</span>
-                      <span>пн</span>
-                    </div>
-                    <div className="slider-mounth__day">
-                      <span>23</span>
-                      <span>вт</span>
-                    </div>
-                    <div className="slider-mounth__day">
-                      <span>24</span>
-                      <span>ср</span>
-                    </div>
-                    <div className="slider-mounth__day">
-                      <span>25</span>
-                      <span>чт</span>
-                    </div>
-                    <div className="slider-mounth__day">
-                      <span>26</span>
-                      <span>пт</span>
-                    </div>
-                    <div className="slider-mounth__day event">
-                      <span>27</span>
-                      <span>сб</span>
-                      <div className="tooltip">
-                        <div className="tooltip__event">
-                          <a href="program-page.html" className="tooltip__title">
-                            Сказки с оркестром
-                      </a>
-                          <p className="tooltip__desc">
-                            15:00, Филармония-2. Концертный зал Рахманинова / Москва
-                      </p>
-                        </div>
+                    ))}
 
-                      </div>
+
+                    <div className="calendar-slider__nav">
+                      <i onClick={() => this.changeMounth("prev")} className="icon-arrow-left calendar-slider__arrow calendar-slider__arrow--prev "></i>
+                      <i onClick={() => this.changeMounth("next")} className="icon-arrow-right calendar-slider__arrow calendar-slider__arrow--next "></i>
                     </div>
-                    <div className="slider-mounth__day">
-                      <span>28</span>
-                      <span>вс</span>
-                    </div>
-                    <div className="slider-mounth__day">
-                      <span>29</span>
-                      <span>пн</span>
-                    </div>
-                    <div className="slider-mounth__day">
-                      <span>30</span>
-                      <span>вт</span>
-                    </div>
-                    <div className="slider-mounth__day">
-                      <span>31</span>
-                      <span>ср</span>
-                    </div>
-                  </div>
-                  <div className="calendar-slider__nav">
-                    <i className="icon-arrow-left calendar-slider__arrow calendar-slider__arrow--prev "></i>
-                    <i className="icon-arrow-right calendar-slider__arrow calendar-slider__arrow--next "></i>
                   </div>
                 </div>
-              </div> */}
+              </div>
             </div>
             <div className="row justify-content-center">
               {concerts.results.map(concert => (
@@ -267,7 +152,7 @@ class Calendar extends React.Component {
                       </sup> / {moment(concert.dt.slice(0, 16)).format("D")} / {moment(concert.dt.slice(0, 16)).format("HH:mm")}
                     </p>
                     <p className="event-cart__room">{concert.place}</p>
-                    <Link href={concert.link_buy}><a><img src={concert.image} alt="Первью события" /></a></Link>
+                    <Link href={`/program-page/${concert.id}`}><a><img src={concert.image.replace('media/', 'media/small/')} alt="Первью события" /></a></Link>
 
                     <h2 className="event-cart__title">
                       <Link href={`/program-page/${concert.id}`}><a>{concert.title}</a></Link>
@@ -301,11 +186,11 @@ class Calendar extends React.Component {
                 </div>
               ))}
             </div>
-            {concerts.count < concerts.results.length && (
+            {concerts.count > concerts.results.length && (
               <div className="row">
                 <div className="col-12">
                   <div className="event-button__wrapper">
-                    <button className="act__btn visible__btn" type="button">
+                    <button className="act__btn visible__btn" type="button" onClick={() => this.handlePageClick()}>
                       {t("AfishaPage.showAllConcerts")}
                     </button>
                   </div>

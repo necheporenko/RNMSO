@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import moment from 'moment';
 import { withI18next } from '../lib/withI18next';
 import callApi from '../utils/api';
 import Layout from '../layouts/Main';
@@ -52,7 +53,7 @@ const Conductors = ({ t, conductors }) => (
 
 Conductors.getInitialProps = async ({ req, res }) => {
   const language = req || res ? req.language || res.locals.language : null;
-  const response = await callApi('/conductors', language)
+  const response = await callApi(`/conductors/?season=${moment().year()}`, language)
   return { conductors: response.results }
 }
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import moment from 'moment';
 import { withI18next } from '../lib/withI18next';
 import callApi from '../utils/api';
 import Layout from '../layouts/Main';
@@ -54,7 +55,7 @@ const Soloist = ({ t, soloists }) => (
 
 Soloist.getInitialProps = async ({ req, res }) => {
   const language = req || res ? req.language || res.locals.language : null;
-  const response = await callApi('/soloists', language)
+  const response = await callApi(`/soloists/?season=${moment().year()}`, language)
   return { soloists: response.results }
 }
 

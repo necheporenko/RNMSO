@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Head from '../components/head'
 import Header from '../components/organisms/Header'
 import Footer from '../components/organisms/Footer'
@@ -6,9 +7,8 @@ import '../static/sass/main.sass'
 
 const bodyStyles = {
   position: 'fixed',
-  left: '-270px',
-  overflow: 'hidden',
-  transition: '1s'
+  transition: '3s all ease',
+  width: '100%'
 }
 
 class Home extends React.Component {
@@ -24,10 +24,16 @@ class Home extends React.Component {
     const { children, title = 'RNYSO Главная' } = this.props;
     const { isOpenMobileMenu } = this.state;
     return (
-      <div className="wrapper" style={isOpenMobileMenu ? bodyStyles : {}}>
+      <div className={isOpenMobileMenu ? 'wrapper body-menu' : 'wrapper'} style={isOpenMobileMenu ? bodyStyles : { width: '100%' }}>
         <Head title={title} />
 
-        <Header toggleMobileMenu={this.toggleMobileMenu} />
+        <ReactCSSTransitionGroup
+          transitionName="react-nav-anim"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={300}
+        >
+          <Header toggleMobileMenu={this.toggleMobileMenu} />
+        </ReactCSSTransitionGroup>
         <main>
           {children}
         </main>

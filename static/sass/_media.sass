@@ -131,6 +131,10 @@
 			flex-basis: 70%
 // ≥992px
 +media-breakpoint-down(md)
+	.slick-dots
+		display: block
+	.slider__nav
+		display: none
 	.top__line
 		margin: 0
 	.logo__group
@@ -282,6 +286,10 @@
 		margin-top: 35px
 // ≥768px
 +media-breakpoint-down(sm)
+	.ReactModal__Overlay--after-open
+		width: 95%
+	.ReactModal__Content--after-open
+		padding-bottom: 100px !important
 	p
 		font-size: 14px
 		line-height: 20px
@@ -365,6 +373,8 @@
 		width: 48%
 // ≥576px
 +media-breakpoint-down(xs)
+	.modal__content
+		flex-direction: column
 	main
 		margin-bottom: 40px
 	.menu__toggle
@@ -557,6 +567,7 @@
 	.modal__name
 		font-size: 16px
 		line-height: 20px
+		margin: 0 auto
 		margin-bottom: 10px
 	.modal__right
 		font-size: 14px

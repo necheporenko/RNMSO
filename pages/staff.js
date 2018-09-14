@@ -19,15 +19,15 @@ const customStyles = {
     zIndex: '100',
     borderRadius: '12px',
     border: "2px solid #ebe2cc",
-    width: '65%'
   }
 }
 
 class Staff extends React.Component {
   static async getInitialProps({ req, res, query }) {
     const language = req || res ? req.language || res.locals.language : null;
-    const response = await callApi('/orchestra-members', language)
-    return { members: response.results, language }
+    const responseMembers = await callApi('/orchestra-members', language);
+    const responseGroups = await callApi('/member-groups', language);
+    return { members: responseMembers.results, groups: responseGroups.results, language }
   }
 
   state = {
@@ -56,7 +56,7 @@ class Staff extends React.Component {
           <figure className="reserve__participant laureate" key={member.id} onClick={() => this.openModal(member.id)}>
             <a href="#modal">
               <div className="dots_wr">
-                <img src={member.image} alt="Состав оркестра" />
+                <img src={member.image.replace('media/', 'media/small/')} alt="Состав оркестра" />
                 <span className="img-dots"></span>
               </div>
             </a>
@@ -74,10 +74,10 @@ class Staff extends React.Component {
   }
 
   render() {
-    const { t, members } = this.props;
+    const { t, groups } = this.props;
     const { currentMember } = this.state;
     return (
-      <Layout >
+      <Layout title={t("OrchestraMenu.staff")}>
         <main className="m-before m-video">
           <div className="container">
             <div className="row">
@@ -96,6 +96,18 @@ class Staff extends React.Component {
             </div>
           </div>
 
+          <section className="reserve__instrument">
+            <div className="container">
+              {groups.map(group => (
+                <div className="instrument__block" key={group.id}>
+                  <h2 className="reserve__section-title">
+                    {group.title}
+                  </h2>
+                  {this.renderMember(group.id)}
+                </div>
+              ))}
+            </div>
+          </section>
 
           <Modal
             isOpen={this.state.modalIsOpen}
@@ -103,114 +115,22 @@ class Staff extends React.Component {
             style={customStyles}
           >
             <div className="modal-name__wrapper">
-              <div className="modal__left">
-                <img src={currentMember.image} className="modal__photo" alt="Состав оркестра" />
-                <div className="modal-name__wrapper">
-                  <p className="modal__name">
-                    <span className="modal__first-name">{currentMember.first_name}</span>
-                    <span className="modal__family-name">{currentMember.last_name}</span>
-                  </p>
+              <button class="remodal-close" onClick={() => this.closeModal()}></button>
+              <div className="modal__content">
+                <div className="modal__left">
+                  {currentMember.image && <img src={currentMember.image.replace('media/', 'media/small/')} className="modal__photo" alt="Состав оркестра" />}
+                  <div className="modal-name__wrapper">
+                    <p className="modal__name">
+                      <span className="modal__first-name">{currentMember.first_name}</span>
+                      <span className="modal__family-name">{currentMember.last_name}</span>
+                      {currentMember.status && <span className="participant__progress--modal">{currentMember.status}</span>}
+                    </p>
+                  </div>
                 </div>
+                <div className="modal__right" dangerouslySetInnerHTML={{ __html: currentMember.biography }}></div>
               </div>
-              <div className="modal__right" dangerouslySetInnerHTML={{ __html: currentMember.biography }}></div>
             </div>
           </Modal>
-
-
-          <section className="reserve__instrument">
-            <div className="container">
-              <div className="instrument__block">
-                <h2 className="reserve__section-title">
-                  {t("OrchestraMembers.firstViolins")}
-                </h2>
-                {this.renderMember(3)}
-              </div>
-              <div className="instrument__block">
-                <h2 className="reserve__section-title">
-                  {t("OrchestraMembers.secondViolins")}
-                </h2>
-                {this.renderMember(4)}
-              </div>
-              <div className="instrument__block">
-                <h2 className="reserve__section-title">
-                  {t("OrchestraMembers.alti")}
-                </h2>
-                {this.renderMember(5)}
-              </div>
-              <div className="instrument__block">
-                <h2 className="reserve__section-title">
-                  {t("OrchestraMembers.cello")}
-                </h2>
-                {this.renderMember(6)}
-              </div>
-              <div className="instrument__block">
-                <h2 className="reserve__section-title">
-                  {t("OrchestraMembers.contrabasses")}
-                </h2>
-                {this.renderMember(7)}
-              </div>
-              <div className="instrument__block">
-                <h2 className="reserve__section-title">
-                  {t("OrchestraMembers.flutes")}
-                </h2>
-                {this.renderMember(8)}
-              </div>
-              <div className="instrument__block">
-                <h2 className="reserve__section-title">
-                  {t("OrchestraMembers.oboes")}
-                </h2>
-                {this.renderMember(18)}
-              </div>
-              <div className="instrument__block">
-                <h2 className="reserve__section-title">
-                  {t("OrchestraMembers.clarinets")}
-                </h2>
-                {this.renderMember(9)}
-              </div>
-              <div className="instrument__block">
-                <h2 className="reserve__section-title">
-                  {t("OrchestraMembers.bassoons")}
-                </h2>
-                {this.renderMember(10)}
-              </div>
-              <div className="instrument__block">
-                <h2 className="reserve__section-title">
-                  {t("OrchestraMembers.horn")}
-                </h2>
-                {this.renderMember(16)}
-              </div>
-              <div className="instrument__block">
-                <h2 className="reserve__section-title">
-                  {t("OrchestraMembers.pipes")}
-                </h2>
-                {this.renderMember(15)}
-              </div>
-              <div className="instrument__block">
-                <h2 className="reserve__section-title">
-                  {t("OrchestraMembers.trombones")}
-                </h2>
-                {this.renderMember(14)}
-              </div>
-              <div className="instrument__block">
-                <h2 className="reserve__section-title">
-                  {t("OrchestraMembers.tuba")}
-                </h2>
-                {this.renderMember(13)}
-              </div>
-              <div className="instrument__block">
-                <h2 className="reserve__section-title">
-                  {t("OrchestraMembers.harps")}
-                </h2>
-                {this.renderMember(12)}
-              </div>
-              <div className="instrument__block">
-                <h2 className="reserve__section-title">
-                  {t("OrchestraMembers.drums")}
-                </h2>
-                {this.renderMember(11)}
-              </div>
-            </div>
-          </section>
         </main>
       </Layout>
     )

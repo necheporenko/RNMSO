@@ -6,7 +6,7 @@ import Layout from '../layouts/Main';
 import Submenu from '../components/moleculs/Submenu';
 
 const Photo = ({ t, gallery }) => (
-  <Layout title="Фото">
+  <Layout title={t("MediaMenu.photo")}>
     <main className="m-before">
       <div className="container">
         <div className="row">
@@ -20,12 +20,12 @@ const Photo = ({ t, gallery }) => (
           </div>
         </div>
         <div className="row justify-content-center">
-          {gallery.map(album => (
+          {gallery.length > 0 && gallery.map(album => (
             <div className="col-lg-4 col-md-6" key={album.id}>
               <div className="gallery__flex-wrapper">
-                <Link as={`/album/${album.main_photo.gallery}`} href={`/album?id=${album.main_photo.gallery}`}>
+                <Link as={`/album/${album.id}`} href={`/album?id=${album.id}`}>
                   <a className="gallery__link">
-                    <img src={`http://31.192.109.44${album.main_photo.image}`} alt="Фотогаллерея" />
+                    {album.main_photo && <img src={`http://31.192.109.44/media/small/${album.main_photo.image.substring(6)}`} alt="Фотогаллерея" />}
                     <div className="gallery__desk">
                       <h5 className="gallery__title">{album.title}</h5>
                       <p className="gallery__quantity">

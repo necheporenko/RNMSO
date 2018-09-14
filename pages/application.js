@@ -9,6 +9,55 @@ import { Form, Text, TextArea, RadioGroup, Radio } from 'informed';
 class Application extends React.Component {
   state = {}
 
+  // submitForm = async () => {
+  //   await callApi('/request', "ru", {
+  //     method: 'POST', body: {
+  //       address
+  //         :
+  //         "string",
+  //       birth
+  //         :
+  //         "2000-08-08",
+  //       birth_place
+  //         :
+  //         "22",
+  //       citizenship
+  //         :
+  //         "string",
+  //       created
+  //         :
+  //         "2018-09-13T11:04:17.211871Z",
+  //       education
+  //         :
+  //         "string",
+  //       id
+  //         :
+  //         1,
+  //       is_need_endmaster
+  //         :
+  //         true,
+  //       is_need_housing
+  //         :
+  //         true,
+  //       name
+  //         :
+  //         "string",
+  //       passport
+  //         :
+  //         "string",
+  //       phone
+  //         :
+  //         "string",
+  //       propiska
+  //         :
+  //         "string",
+  //       rewards
+  //         :
+  //         "string"
+  //     }
+  //   });
+  // }
+
   render() {
     const { t } = this.props;
     return (
@@ -142,7 +191,7 @@ class Application extends React.Component {
                           <span className="label">{t("ApplicationPage.form.yes")} </span>
                         </label>
                         <label>
-                          <input className="radio" type="radio" name="is_need_endmaster" value="No" checked />
+                          <input className="radio" type="radio" name="is_need_endmaster" value="No" defaultChecked />
                           <span className="radio-custom"></span>
                           <span className="label">{t("ApplicationPage.form.no")}</span>
                         </label>
@@ -150,24 +199,30 @@ class Application extends React.Component {
                       <div className="radio__button">
                         <p> {t("ApplicationPage.form.needHouse")}</p>
                         <label>
-                          <input className="radio" type="radio" name="is_need_housing" value="Yes"/>
+                          <input className="radio" type="radio" name="is_need_housing" value="Yes" />
                           <span className="radio-custom"></span>
                           <span className="label">{t("ApplicationPage.form.yes")} </span>
                         </label>
                         <label>
-                          <input className="radio" type="radio" name="is_need_housing" value="No"  checked/>
+                          <input className="radio" type="radio" name="is_need_housing" value="No" defaultChecked />
                           <span className="radio-custom"></span>
                           <span className="label">{t("ApplicationPage.form.no")} </span>
                         </label>
                       </div>
                       <div className="radio__button">
                         <label className="checkbox__label">
-                          <input className="checkbox" type="checkbox" required />
+                          <input className="checkbox" type="checkbox" name="isAgree" defaultChecked required style={{ display: 'block', opacity: 0 }} />
                           <span className="checkbox-custom"></span>
                           <span className="label">{t("ApplicationPage.form.agree")}</span>
                         </label>
                       </div>
-                      <button className="act__btn application-form__btn" type="submit">{t("ApplicationPage.form.sendApplication")}</button>
+                      <button
+                        className="act__btn application-form__btn"
+                        // onClick={() => this.submitForm()}
+                        type="submit"
+                      >
+                        {t("ApplicationPage.form.sendApplication")}
+                      </button>
                     </form>
                   </div>
                 </div>
