@@ -10,13 +10,39 @@ import Layout from '../layouts/Main';
 const PrevArrow = ({ onClick }) => (<i onClick={onClick} className="icon-arrow-left slider__nav slider__nav--prev "></i>);
 const NextArrow = ({ onClick }) => (<i onClick={onClick} className="icon-arrow-right slider__nav slider__nav--next "></i>);
 const SliderSettings = {
-  dots: false,
+  dots: true,
   infinite: true,
   speed: 500,
   slidesToShow: 1,
   slidesToScroll: 1,
   nextArrow: <NextArrow />,
-  prevArrow: <PrevArrow />
+  prevArrow: <PrevArrow />,
+  appendDots: dots => (
+    <div
+      style={{
+        // marginTop: "-10px"
+        padding: "10px"
+      }}
+    >
+      <ul style={{ margin: "0px", display: 'flex', justifyContent: 'center' }}> {dots} </ul>
+    </div>
+  ),
+  customPaging: i => (
+    <div
+      style={{
+        width: '12px',
+        height: '12px',
+        background: '#f2f2f2',
+        borderRadius: '8px',
+        display: 'block',
+        // fontSize: '0',
+        color: 'transparent',
+        marginLeft: '12px'
+      }}
+    >
+      {i + 1}
+    </div>
+  )
 };
 
 
@@ -169,63 +195,21 @@ const Home = ({ t, videos, news, concerts, language }) => {
             ))}
           </div>
           <div className="row">
-            <div className="owl-carousel video-slider">
-              <div className="video-slider__item">
-                <div className="link__frame link__frame--slider">
-                  <a data-fancybox href="https://vimeo.com/63186969" className="popap__video">
-                    <img src="../static/img/videoimg1.jpg" alt="Превью видео" className="video__img" />
-                  </a>
-                  <p className="video__title video__title--slider">
-                    Видеоблог РНМСО. Выпуск 8
-                </p>
-                </div>
-              </div>
-              <div className="video-slider__item">
-                <div className="link__frame link__frame--slider">
-                  <a data-fancybox href="https://vimeo.com/63186969" className="popap__video">
-                    <img src="../static/img/videoimg1.jpg" alt="Превью видео" className="video__img" />
-
-                  </a>
-                  <p className="video__title video__title--slider">
-                    Видеоблог РНМСО. Выпуск 8
-                </p>
-                </div>
-              </div>
-              <div className="video-slider__item">
-                <div className="link__frame link__frame--slider">
-                  {/* <Popup
-                  className="popup-youtube"
-                  href="http://www.youtube.com/watch?v=0O2aH4XLbto"
-                  savefrom_lm_index="0"
-                  savefrom_lm="1"
-                  config={popupConfig}
-                >
-                  <a data-fancybox href="https://vimeo.com/63186969" className="popap__video">
-                    <img src="../static/img/videoimg1.jpg" alt="Превью видео" className="video__img" />
-
-                  </a>
-                  <p className="video__title video__title--slider">
-                    Видеоблог РНМСО. Выпуск 8
-                </p>
-                </Popup> */}
-                  {/* <BYoutube src="https://www.youtube.com/watch?v=TTAU7lLDZYU">
-                  <img src="http://lorempixel.com/400/200/sports/3" />
-                </BYoutube> */}
-                  {/*      */}
-
-                </div>
-              </div>
-              <div className="video-slider__item">
-                <div className="link__frame link__frame--slider">
-                  <a data-fancybox href="https://vimeo.com/63186969" className="popap__video">
-                    <img src="../static/img/videoimg1.jpg" alt="Превью видео" className="video__img" />
-
-                  </a>
-                  <p className="video__title video__title--slider">
-                    Видеоблог РНМСО. Выпуск 8
-                </p>
-                </div>
-              </div>
+            <div className="owl-carousel video-slider mobile-video-slider">
+              <Slider {...SliderSettings} ref={slider => (this.videoSlider = slider)}>
+                {videos.filter(video => video.is_index).slice(0, 4).map(video => (
+                  <div className="video-slider__item" key={video.id}>
+                    <div className="link__frame link__frame--slider">
+                      <a data-fancybox href={video.video} className="popap__video">
+                        <img src={`https://img.youtube.com/vi/${getYouTubeVideoId(video.video)}/mqdefault.jpg`} alt="Превью видео" className="video__img" />
+                      </a>
+                      <p className="video__title video__title--slider">
+                        {video.title}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </Slider>
             </div>
           </div>
         </div>
@@ -279,7 +263,9 @@ Home.getInitialProps = async ({ req, res }) => {
   const language = req || res ? req.language || res.locals.language : null;
   const responseVideo = await callApi('/video/?is_index=true', language);
   const responseNews = await callApi('/news/?limit=2&offset=0', language);
-  const responseConcerts = await callApi(`/concerts/?offset=0&dt_after=${moment().format("YYYY-MM-DD")}`, language);
+  // const responseConcerts = await callApi(`/concerts/?offset=0&dt_after=${moment().format("YYYY-MM-DD")}`, language);
+  const responseConcerts = await callApi(`/concerts/?offset=0`, language);
+
   return { videos: responseVideo.results, news: responseNews.results, concerts: responseConcerts.results, language }
 }
 

@@ -1043,7 +1043,7 @@ main
 	position: absolute
 	width: 110px
 	top: 0
-	right: 0
+	right: 5px
 	z-index: 10
 	.calendar-slider__arrow
 		position: absolute
@@ -1057,6 +1057,7 @@ main
 			right: 0
 .calendar-slider__mounth
 	display: flex
+	justify-content: space-between
 .slider-mounth__day
 	text-align: center
 	padding: 4px 6px
@@ -1066,6 +1067,8 @@ main
 	transition: all .2s ease
 	cursor: pointer
 	margin-left: 2px
+	display: flex
+	flex-direction: column
 	&:hover
 		border: 1px solid #E5E5E5
 	&.event
@@ -1079,6 +1082,16 @@ main
 			.tooltip
 				visibility: visible
 				opacity: 1
+.slick-dots
+	display: none
+	.slick-active
+		div
+			background: linear-gradient(239.59deg,#ebe2cc 24.66%,#c4c4c4 97.54%) !important
+.mobile-video-slider
+	.slick-list
+		width: 100vw
+		img
+			width: 100vw
 .tooltip
 	position: absolute
 	width: 253px
