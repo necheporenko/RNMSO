@@ -31,18 +31,14 @@ class Home extends React.Component {
         transitionEnterTimeout={false}
         transitionLeaveTimeout={false}
       >
-      <div className={isOpenMobileMenu ? 'wrapper body-menu' : 'wrapper'} style={isOpenMobileMenu ? bodyStyles : { width: '100%' }}>
-        <Head title={title} />
-
-
+        <div className={isOpenMobileMenu ? 'wrapper body-menu' : 'wrapper'} style={isOpenMobileMenu ? bodyStyles : { width: '100%' }}>
+          <Head title={title} />
           <Header toggleMobileMenu={this.toggleMobileMenu} />
-
-
-        <main>
-          {children}
-        </main>
-        <Footer />
-      </div>
+          <main>
+            {children}
+          </main>
+          <Footer />
+        </div>
       </ReactCSSTransitionGroup>
     )
   }
