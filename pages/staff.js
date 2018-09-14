@@ -19,7 +19,6 @@ const customStyles = {
     zIndex: '100',
     borderRadius: '12px',
     border: "2px solid #ebe2cc",
-    width: '65%'
   }
 }
 
@@ -117,16 +116,19 @@ class Staff extends React.Component {
           >
             <div className="modal-name__wrapper">
               <button class="remodal-close" onClick={() => this.closeModal()}></button>
-              <div className="modal__left">
-                {currentMember.image && <img src={currentMember.image.replace('media/', 'media/small/')} className="modal__photo" alt="Состав оркестра" />}
-                <div className="modal-name__wrapper">
-                  <p className="modal__name">
-                    <span className="modal__first-name">{currentMember.first_name}</span>
-                    <span className="modal__family-name">{currentMember.last_name}</span>
-                  </p>
+              <div className="modal__content">
+                <div className="modal__left">
+                  {currentMember.image && <img src={currentMember.image.replace('media/', 'media/small/')} className="modal__photo" alt="Состав оркестра" />}
+                  <div className="modal-name__wrapper">
+                    <p className="modal__name">
+                      <span className="modal__first-name">{currentMember.first_name}</span>
+                      <span className="modal__family-name">{currentMember.last_name}</span>
+                      {currentMember.status && <span className="participant__progress--modal">{currentMember.status}</span>}
+                    </p>
+                  </div>
                 </div>
+                <div className="modal__right" dangerouslySetInnerHTML={{ __html: currentMember.biography }}></div>
               </div>
-              <div className="modal__right" dangerouslySetInnerHTML={{ __html: currentMember.biography }}></div>
             </div>
           </Modal>
         </main>
