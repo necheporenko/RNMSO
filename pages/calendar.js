@@ -5,11 +5,34 @@ import { withI18next } from '../lib/withI18next';
 import callApi from '../utils/api';
 import Layout from '../layouts/Main';
 
+function getDaysArrayByMonth() {
+  var daysInMonth = moment().daysInMonth();
+  var arrDays = [];
+
+  while (daysInMonth) {
+    var current = moment().date(daysInMonth);
+    arrDays.push(current);
+    daysInMonth--;
+  }
+
+  return arrDays.reverse();
+}
+
 class Calendar extends React.Component {
   static async getInitialProps({ req, res }) {
+    const FirstDayOfMounth = moment().startOf('month').format("YYYY-MM-DD");
+    const LastDayOfMounth = moment().endOf('month').format("YYYY-MM-DD");
+
     const language = req || res ? req.language || res.locals.language : null;
-    const response = await callApi('/concerts/?limit=9&offset=0', language);
-    return { concerts: response, language }
+    const response = await callApi(`/concerts/?limit=1&offset=0&dt_after=${FirstDayOfMounth}&dt_before=${LastDayOfMounth}`, language);
+    // console.log(moment().startOf('month').format("YYYY-MM-DD"), moment().endOf('month').format("YYYY-MM-DD"));
+
+
+    var mounthCalendar = getDaysArrayByMonth();
+    // mounthCalendar.forEach(function (item) {
+    //   console.log(item.format("DD/ddd"));
+    // });
+    return { concerts: response, language, mounthCalendar }
   }
 
   state = {
@@ -18,24 +41,23 @@ class Calendar extends React.Component {
   }
 
   handlePageClick = () => {
-    // let selected = data.selected;
-    // let offset = Math.ceil(selected * limitNews);
+    const { offset } = this.state;
 
-    // this.setState({ offset: offset }, () => {
+    // this.setState({ offset: 0 }, () => {
     this.loadCommentsFromServer();
     // });
   };
 
   async loadCommentsFromServer() {
-    // const { offset } = this.state;
+    const { offset } = this.state;
     const { language } = this.props;
 
-    const response = await callApi(`/concerts/?offset=9`, language);
+    const response = await callApi(`/concerts/?offset=${offset}`, language);
     this.setState({ concerts: response });
   }
 
   render() {
-    const { t, language } = this.props;
+    const { t, language, mounthCalendar } = this.props;
     const { concerts } = this.state;
 
     moment.locale(language);
@@ -51,7 +73,54 @@ class Calendar extends React.Component {
                   </h1>
                 </div>
               </div>
-              {/* <div className="col-lg-10 col-9">
+
+
+              <div className="col-lg-10 col-9">
+                <div className="calendar__wrapper">
+                  <a href="#" className="calendar-slider__date">{moment(mounthCalendar[0]).format("MMMM YYYY")}</a>
+                  <div className="calendar-slider__mounth">
+                    {mounthCalendar.map((day, index) => (
+                      <div
+                        key={index}
+                        className={concerts.results.some(concert => moment(concert.dt).format("YYYY-MM-DD") === moment(day).format("YYYY-MM-DD"))
+                          ? "slider-mounth__day event"
+                          : "slider-mounth__day"}
+                      >
+                        <span>{moment(day).format("D")}</span>
+                        <span>{moment(day).format("ddd")}</span>
+
+                        {/* {concerts.results.some(concert => moment(concert.dt).format("YYYY-MM-DD") === moment(day).format("YYYY-MM-DD"))} */}
+
+                        <div className="tooltip">
+                          {concerts.results.filter(concert =>
+                            moment(concert.dt).format("YYYY-MM-DD") === moment(day).format("YYYY-MM-DD"))
+                            .map(concert => (
+                              <div className="tooltip__event" key={concert.id}>
+                                <Link href={`/program-page/${concert.id}`}>
+                                  <a className="tooltip__title">{concert.title}</a>
+                                </Link>
+                                <p className="tooltip__desc">{`${moment(day).format("HH:mm")}, ${concert.place}`}</p>
+                              </div>
+                            ))
+                          }
+                        </div>
+                      </div>
+                    ))}
+
+
+                    <div className="calendar-slider__nav">
+                      <i className="icon-arrow-left calendar-slider__arrow calendar-slider__arrow--prev "></i>
+                      <i className="icon-arrow-right calendar-slider__arrow calendar-slider__arrow--next "></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+              <div className="col-lg-10 col-9">
                 <div className="calendar__wrapper">
                   <a href="#" className="calendar-slider__date">Октябрь 2018</a>
                   <div className="calendar-slider__mounth">
@@ -271,7 +340,7 @@ class Calendar extends React.Component {
                     <i className="icon-arrow-right calendar-slider__arrow calendar-slider__arrow--next "></i>
                   </div>
                 </div>
-              </div> */}
+              </div>
             </div>
             <div className="row justify-content-center">
               {concerts.results.map(concert => (
@@ -318,7 +387,7 @@ class Calendar extends React.Component {
                 </div>
               ))}
             </div>
-            {concerts.count < concerts.results.length && (
+            {concerts.count > concerts.results.length && (
               <div className="row">
                 <div className="col-12">
                   <div className="event-button__wrapper">
