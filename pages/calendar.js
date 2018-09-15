@@ -33,19 +33,20 @@ class Calendar extends React.Component {
     return { concerts: response, language, mounthCalendar }
   }
 
-  constructor(props) {
 
-    super(props);
-    this.state = {
-      concerts: this.props.concerts,
-      offset: 0,
-      currentMounth: moment(),
-      mounthCalendar: this.props.mounthCalendar
-    }
+  state = {
+    concerts: this.props.concerts,
+    offset: 0,
+    currentMounth: moment(),
+    mounthCalendar: this.props.mounthCalendar
   }
 
+
   static getDerivedStateFromProps(nextProps, state) {
-    return { concerts: nextProps.concerts, mounthCalendar: nextProps.mounthCalendar }
+    if (nextProps.i18n.language !== i18n.language) {
+      return { concerts: nextProps.concerts, mounthCalendar: nextProps.mounthCalendar }
+    }
+    return null;
   }
 
   handlePageClick = () => {

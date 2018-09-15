@@ -31,7 +31,7 @@ class ProgramPage extends React.Component {
     const response = await callApi(`/concerts/?limit=9&offset=0&dt_after=${FirstDayOfMounth}&dt_before=${LastDayOfMounth}`, language);
 
 
-    var mounthCalendar = getDaysArrayByMonth(moment(), languai18n.languagege);
+    var mounthCalendar = getDaysArrayByMonth(moment(), i18n.languagege);
 
 
     const concertID = query.id;
@@ -48,7 +48,10 @@ class ProgramPage extends React.Component {
   }
 
   static getDerivedStateFromProps(nextProps) {
-    return { concerts: nextProps.concerts, mounthCalendar: nextProps.mounthCalendar }
+    if (nextProps.i18n.language !== i18n.language) {
+      return { concerts: nextProps.concerts, mounthCalendar: nextProps.mounthCalendar }
+    }
+    return null;
   }
 
   changeMounth = (direction) => {
