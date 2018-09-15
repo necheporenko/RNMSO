@@ -1,6 +1,7 @@
 const express = require('express')
 const path = require('path')
 const next = require('next')
+const nextConfig = require('./next.config');
 
 const dev = process.env.NODE_ENV !== 'production'
 const port = process.env.PORT || 3000;
