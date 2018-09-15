@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from '../layouts/Main';
 
-const Page = () => (
+const Page = (test) => (
   <Layout title="">
   </Layout>
 )
