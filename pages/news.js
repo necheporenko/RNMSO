@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import ReactPaginate from 'react-paginate';
 import moment from 'moment';
+import i18n from '../i18n';
 import { withI18next } from '../lib/withI18next';
 import callApi from '../utils/api';
 import Layout from '../layouts/Main';
@@ -23,7 +24,10 @@ class News extends React.Component {
   }
 
   static getDerivedStateFromProps(nextProps) {
-    return { news: nextProps.data }
+    if (nextProps.i18n.language !== i18n.language) {
+      return { news: nextProps.data }
+    }
+    return null;
   }
 
   handlePageClick = (data) => {

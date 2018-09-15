@@ -265,17 +265,21 @@ class ProgramPage extends React.Component {
                     <div className="program__short-descriotion">
                       <div className="short-descriotion__item">
                         <span>{t("AfishaPage.conductors")}:</span>
-                        <p>
-                          {concert.conductors.map(conductor => (
-                            <span key={conductor.id}>{`${conductor.first_name} ${conductor.last_name}`}</span>
-                          ))}
-                        </p>
+
+                        {concert.conductors.map(conductor => (
+                          <p key={conductor.id}>{`${conductor.first_name} ${conductor.last_name}`}
+                          </p>
+                        ))}
+
                       </div>
                       <div className="short-descriotion__item">
                         <span>{t("AfishaPage.soloists")}:</span>
                         <p>
                           {concert.soloists.map(soloist => (
-                            <span key={soloist.id}>{`${soloist.first_name} ${soloist.last_name} (${soloist.specialty})`}</span>
+                            <p key={soloist.id} style={{ display: 'flex' }}>
+                              {`${soloist.first_name} ${soloist.last_name} `}
+                              <span style={{ marginLeft: '5px' }}>{`(${soloist.specialty.toLowerCase()})`}</span>
+                            </p>
                           ))}
                         </p>
                       </div>

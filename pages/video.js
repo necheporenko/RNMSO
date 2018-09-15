@@ -110,7 +110,7 @@ class Video extends React.Component {
                       <ul className="hashtag">
                         {video.tags.split(" ").map((tag, index) => (
                           <li className="tags" key={index}>
-                            {tag}
+                            #{tag}
                           </li>
                         ))}
                       </ul>
