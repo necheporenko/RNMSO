@@ -72,6 +72,26 @@ i18n
           app.render(req, res, actualPage, queryParams)
         })
 
+        const robotsOptions = {
+          root: __dirname + '/static/',
+          headers: {
+            'Content-Type': 'text/plain;charset=UTF-8',
+          }
+        };
+        server.get('/robots.txt', (req, res) => (
+          res.status(200).sendFile('robots.txt', robotsOptions)
+        ));
+
+        const sitemapOptions = {
+          root: __dirname + '/static/',
+          headers: {
+            'Content-Type': 'text/xml;charset=UTF-8',
+          }
+        };
+        server.get('/sitemap.xml', (req, res) => (
+          res.status(200).sendFile('sitemap.xml', sitemapOptions)
+        ));
+
         // use next.js
         server.get('*', (req, res) => handle(req, res))
 
