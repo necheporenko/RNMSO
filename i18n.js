@@ -3,9 +3,9 @@ const XHR = require('i18next-xhr-backend')
 const LanguageDetector = require('i18next-browser-languagedetector')
 
 const options = {
-  fallbackLng: '',
-  load: 'languageOnly', // we only provide en, de -> no region specific locals like en-US, de-DE
-
+  fallbackLng: 'ru',
+  load: 'currentOnly', // we only provide en, de -> no region specific locals like en-US, de-DE
+  lng: 'ru',
   // have a common namespace used around the full app
   ns: ['common'],
   defaultNS: 'common',

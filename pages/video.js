@@ -93,8 +93,20 @@ class Video extends React.Component {
                     </div>
                     <figcaption>
                       <h3 className="video__title">{video.title}</h3>
-                      {video.place && <p className="director">{video.place}</p>}
-                      <div className="video__text" dangerouslySetInnerHTML={{ __html: video.text }}></div>
+                      <div className="video__text">
+                        {video.place && <p className="director">{video.place}</p>}
+
+                        <div dangerouslySetInnerHTML={{ __html: video.text }}></div>
+
+                        {video.conductors.length > 0 && (
+                          <p className="director">
+                            <span>{t("AfishaPage.conductors")}: </span>
+                            {video.conductors.map(conductor => (`${conductor.first_name} ${conductor.last_name}`))}
+                          </p>
+                        )}
+
+                        <p className="programm" dangerouslySetInnerHTML={{ __html: video.program }}></p>
+                      </div>
                       <ul className="hashtag">
                         {video.tags.split(" ").map((tag, index) => (
                           <li className="tags" key={index}>

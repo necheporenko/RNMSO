@@ -55,7 +55,8 @@
     "soloists": "Soloists",
     "conductors": "Conductors",
     "buyTicket": "Buy a ticket",
-    "showAllConcerts": "Show all concerts"
+    "showAllConcerts": "Show all concerts",
+    "noConcerts": "No concerts"
   },
   "ApplicationPage": {
     "application": "Application for participation in selection",

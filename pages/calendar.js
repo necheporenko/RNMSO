@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import moment from 'moment';
+import i18n from '../i18n';
 import { withI18next } from '../lib/withI18next';
 import callApi from '../utils/api';
 import Layout from '../layouts/Main';
@@ -27,17 +28,24 @@ class Calendar extends React.Component {
     const language = req || res ? req.language || res.locals.language : null;
     const response = await callApi(`/concerts/?limit=9&offset=0&dt_after=${FirstDayOfMounth}&dt_before=${LastDayOfMounth}`, language);
 
-
-    var mounthCalendar = getDaysArrayByMonth(moment(), language);
+    var mounthCalendar = getDaysArrayByMonth(moment(), i18n.language);
 
     return { concerts: response, language, mounthCalendar }
   }
 
-  state = {
-    concerts: this.props.concerts,
-    offset: 0,
-    currentMounth: moment(),
-    mounthCalendar: this.props.mounthCalendar
+  constructor(props) {
+
+    super(props);
+    this.state = {
+      concerts: this.props.concerts,
+      offset: 0,
+      currentMounth: moment(),
+      mounthCalendar: this.props.mounthCalendar
+    }
+  }
+
+  static getDerivedStateFromProps(nextProps, state) {
+    return { concerts: nextProps.concerts, mounthCalendar: nextProps.mounthCalendar }
   }
 
   handlePageClick = () => {
@@ -87,7 +95,7 @@ class Calendar extends React.Component {
     const { t, language } = this.props;
     const { concerts, mounthCalendar } = this.state;
 
-    moment.locale(language);
+    moment.locale(i18n.language);
     return (
       <Layout title={t("MainMenu.afisha")}>
         <main>
@@ -120,12 +128,12 @@ class Calendar extends React.Component {
                           {concerts.results.filter(concert =>
                             moment(concert.dt).format("YYYY-MM-DD") === moment(day).format("YYYY-MM-DD"))
                             .map(concert => (
-                              <div className="tooltip__event" key={concert.id}>
-                                <Link href={`/program-page/${concert.id}`}>
+                              <Link as={`/program-page/${concert.id}`} href={`/program-page?id=${concert.id}`} key={concert.id}>
+                                <div className="tooltip__event">
                                   <a className="tooltip__title">{concert.title}</a>
-                                </Link>
-                                <p className="tooltip__desc">{`${moment(day).format("HH:mm")}, ${concert.place}`}</p>
-                              </div>
+                                  <p className="tooltip__desc">{`${moment(concert.dt.slice(0, 16)).format("HH:mm")}, ${concert.place}`}</p>
+                                </div>
+                              </Link>
                             ))
                           }
                         </div>
@@ -152,10 +160,10 @@ class Calendar extends React.Component {
                       </sup> / {moment(concert.dt.slice(0, 16)).format("D")} / {moment(concert.dt.slice(0, 16)).format("HH:mm")}
                     </p>
                     <p className="event-cart__room">{concert.place}</p>
-                    <Link href={`/program-page/${concert.id}`}><a><img src={concert.image.replace('media/', 'media/small/')} alt="Первью события" /></a></Link>
+                    <Link as={`/program-page/${concert.id}`} href={`/program-page?id=${concert.id}`}><a><img src={concert.image.replace('media/', 'media/small/')} alt="Первью события" /></a></Link>
 
                     <h2 className="event-cart__title">
-                      <Link href={`/program-page/${concert.id}`}><a>{concert.title}</a></Link>
+                      <Link as={`/program-page/${concert.id}`} href={`/program-page?id=${concert.id}`}><a>{concert.title}</a></Link>
                     </h2>
                     <div className="event__participant-wrapper">
                       {concert.conductors.length > 0 &&
@@ -178,13 +186,17 @@ class Calendar extends React.Component {
                           </p>
                         </div>
                       }
-                      <Link href={concert.link_buy}>
+                      <a href={concert.link_buy} target="_blank">
                         <button className="act__btn event-cart__btn" type="button">{t("AfishaPage.buyTicket")}</button>
-                      </Link>
+                      </a>
                     </div>
                   </div>
                 </div>
               ))}
+
+              {concerts.results.length === 0 && (
+                <h2>{t("AfishaPage.noConcerts")}</h2>
+              )}
             </div>
             {concerts.count > concerts.results.length && (
               <div className="row">

@@ -1,8 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
+import Router from 'next/router';
 import i18n from '../../i18n';
 import { withI18next } from '../../lib/withI18next';
 import { OrchestraMenu, AfishaMenu, MediaMenu, PartnersMenu } from '../../constants';
+// import next from 'next';
+// const app = next({ dev })
 
 
 class Header extends React.Component {
@@ -13,13 +16,17 @@ class Header extends React.Component {
 
     state = {
         isOpenMobileOrchestraMenu: false,
-        isOpenMobileMediaMenu: false
+        isOpenMobileMediaMenu: false,
+        currentLanguage: ''
     }
 
     changeLanguage = lng => {
         i18n.changeLanguage(lng, (err, t) => {
             if (err) return console.log('something went wrong loading', err)
         })
+        this.setState({ currentLanguag: lng })
+        Router.push(`${Router.route}`)
+
         document.cookie = `i18next=${lng}`;
         //location.reload(); // only needed when library is not downloaded locally
     }
@@ -47,7 +54,7 @@ class Header extends React.Component {
                                             <img src="../../static/img/header_logo.png" alt="Российский Национальный Молодёжный Симфоический Оркестр" />
                                         </a>
                                     </Link>
-                                    <Link href='/'>
+                                    <Link href='https://xn--80afcdbalict6afooklqi5o.xn--p1ai/'>
                                         <a className="logo__link logo__linl--grants">
                                             <img src="../../static/img/grants_logo.png" alt="Фонд президентских грантов" />
                                         </a>

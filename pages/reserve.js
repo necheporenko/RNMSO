@@ -70,6 +70,7 @@ class Reserve extends React.Component {
                 <span className="participant__family-name">{member.last_name}</span>
               </p>
               {/* <p className="participant__progress">{member.status} </p> */}
+              {member.status && <span className="participant__progress">{member.status}</span>}
               {member.laureate && <p className="participant__progress">{member.laureate} </p>}
             </figcaption>
           </figure>
@@ -134,7 +135,8 @@ class Reserve extends React.Component {
                       <p className="modal__name">
                         <span className="modal__first-name">{currentMember.first_name}</span>
                         <span className="modal__family-name">{currentMember.last_name}</span>
-                        {currentMember.status && <span className="participant__progress--modal">{currentMember.laureate}</span>}
+                        {currentMember.status && <span className="participant__progress--modal">{currentMember.status}</span>}
+                        {currentMember.laureate && <span className="participant__progress--modal">{currentMember.laureate}</span>}
                       </p>
                     </div>
                   </div>

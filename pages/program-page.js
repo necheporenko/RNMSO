@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { withI18next } from '../lib/withI18next';
+import i18n from '../i18n';
 import moment from 'moment';
 import callApi from '../utils/api';
 import { getYouTubeVideoId } from '../utils/common';
@@ -30,7 +31,7 @@ class ProgramPage extends React.Component {
     const response = await callApi(`/concerts/?limit=9&offset=0&dt_after=${FirstDayOfMounth}&dt_before=${LastDayOfMounth}`, language);
 
 
-    var mounthCalendar = getDaysArrayByMonth(moment(), language);
+    var mounthCalendar = getDaysArrayByMonth(moment(), languai18n.languagege);
 
 
     const concertID = query.id;
@@ -44,6 +45,10 @@ class ProgramPage extends React.Component {
     offset: 0,
     currentMounth: moment(),
     mounthCalendar: this.props.mounthCalendar
+  }
+
+  static getDerivedStateFromProps(nextProps) {
+    return { concerts: nextProps.concerts, mounthCalendar: nextProps.mounthCalendar }
   }
 
   changeMounth = (direction) => {
@@ -76,7 +81,7 @@ class ProgramPage extends React.Component {
   render() {
     const { t, language, concert } = this.props;
     const { concerts, mounthCalendar } = this.state;
-    moment.locale(language);
+    moment.locale(i18n.language);
 
     return (
       <Layout title={concert.title}>
@@ -101,12 +106,12 @@ class ProgramPage extends React.Component {
                           {concerts.results.filter(concert =>
                             moment(concert.dt).format("YYYY-MM-DD") === moment(day).format("YYYY-MM-DD"))
                             .map(concert => (
-                              <div className="tooltip__event" key={concert.id}>
-                                <Link href={`/program-page/${concert.id}`}>
+                              <Link as={`/program-page/${concert.id}`} href={`/program-page?id=${concert.id}`} key={concert.id}>
+                                <div className="tooltip__event">
                                   <a className="tooltip__title">{concert.title}</a>
-                                </Link>
-                                <p className="tooltip__desc">{`${moment(day).format("HH:mm")}, ${concert.place}`}</p>
-                              </div>
+                                  <p className="tooltip__desc">{`${moment(concert.dt.slice(0, 16)).format("HH:mm")}, ${concert.place}`}</p>
+                                </div>
+                              </Link>
                             ))
                           }
                         </div>
@@ -161,18 +166,22 @@ class ProgramPage extends React.Component {
 
                   <div className="col-lg-2  d-none  d-xl-block">
                     <div className="program-button__wrapper">
-                      <button className="act__btn act__btn--program-page" type="button">
-                        {t("AfishaPage.buyTicket")}
-                      </button>
+                      <a href={concert.link_buy} target="_blank">
+                        <button className="act__btn act__btn--program-page" type="button">
+                          {t("AfishaPage.buyTicket")}
+                        </button>
+                      </a>
                     </div>
                   </div>
                 </div>
                 <div className="row">
                   <div className="col-md-3 d-block  d-xl-none ordercol">
                     <div className="program-button__wrapper program-button__wrapper--second">
-                      <button className="act__btn act__btn--program-page" type="button">
-                        {t("AfishaPage.buyTicket")}
-                      </button>
+                      <a href={concert.link_buy} target="_blank">
+                        <button className="act__btn act__btn--program-page" type="button">
+                          {t("AfishaPage.buyTicket")}
+                        </button>
+                      </a>
                     </div>
                   </div>
                   <div className="col-xl-6 offset-xl-2 col-md-9 offset-md-0 ">
@@ -285,9 +294,11 @@ class ProgramPage extends React.Component {
                 <div className="row">
                   <div className="col-12">
                     <div className="program-button__wrapper program-button__wrapper--bottom">
-                      <button className="act__btn act__btn--program-page bottom__btn--program-page" type="button">
-                        {t("AfishaPage.buyTicket")}
-                      </button>
+                      <a href={concert.link_buy} target="_blank">
+                        <button className="act__btn act__btn--program-page bottom__btn--program-page" type="button">
+                          {t("AfishaPage.buyTicket")}
+                        </button>
+                      </a>
                     </div>
                   </div>
                 </div>

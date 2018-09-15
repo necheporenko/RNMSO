@@ -55,7 +55,8 @@
     "soloists": "Солисты",
     "conductors": "Дирижёры",
     "buyTicket": "Купить билет",
-    "showAllConcerts": "Показать все концерты"
+    "showAllConcerts": "Показать все концерты",
+    "noConcerts": "Нет концертов"
   },
   "ApplicationPage": {
     "application": "Заявка на участие в отборе",

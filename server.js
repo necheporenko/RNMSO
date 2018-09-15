@@ -22,18 +22,24 @@ i18n
       addPath: path.join(__dirname, '/locales/{{lng}}/{{ns}}.missing.json')
     },
     detection: {
-      order: ['querystring', 'cookie', 'header'],
-      caches: ['cookie'],
+      order: ['cookie'],
+      caches: false,
       lookupQuerystring: 'lng',
       lookupCookie: 'i18next',
       lookupSession: 'lng',
       lookupPath: 'lng',
       lookupFromPathIndex: 0,
     },
+    whitelist: [
+      'ru',
+      'en'
+    ],
+    lng: 'ru',
+    load: 'currentOnly',
     fallbackLng: 'ru',
-    preload: ['en', 'ru'], // preload all langages
+    preload: ['ru', 'en'], // preload all langages
     saveMissing: true,
-    ns: ['common', 'home', 'page2'], // need to preload all the namespaces
+    ns: ['common'], // need to preload all the namespaces
   }, () => {
     // loaded translations we can bootstrap our routes
     app.prepare()

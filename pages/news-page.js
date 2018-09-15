@@ -47,12 +47,12 @@ const NewsPage = ({ t, news, language, nextNews, prevNews }) => {
             <div className="row justify-content-center">
               <div className="col-lg-4 col-md-6">
                 <div className="news__navigation news__navigation--left">
-                  {news.previous_id && <Link href={`/news/${news.previous_id}`}><button className="paginator-btn paginator-btn--pref" type="buttoh">{prevNews.title}</button></Link>}
+                  {news.previous_id && <Link as={`/news/${news.previous_id}`} href={`/news-page?id=${news.previous_id}`}><button className="paginator-btn paginator-btn--pref" type="buttoh">{prevNews.title}</button></Link>}
                 </div>
               </div>
               <div className="col-lg-4 col-md-6">
                 <div className="news__navigation news__navigation--right">
-                  {news.next_id && <Link href={`/news/${news.next_id}`}><button className="paginator-btn paginator-btn--next" type="buttoh">{nextNews.title}</button></Link>}
+                  {news.next_id && <Link as={`/news/${news.next_id}`} href={`/news-page?id=${news.next_id}`}><button className="paginator-btn paginator-btn--next" type="buttoh">{nextNews.title}</button></Link>}
                 </div>
               </div>
             </div>
@@ -75,11 +75,11 @@ NewsPage.getInitialProps = async ({ req, res, query }) => {
     responseNextNews = await callApi(`/news/${response.next_id}`, language);
   }
 
-  if (response.next_id) {
-    responsePrevNews = await callApi(`/news/${response.next_id}`, language);
+  if (response.previous_id) {
+    responsePrevNews = await callApi(`/news/${response.previous_id}`, language);
   }
 
   moment.locale(language);
-  return { news: response, language, nextNews: responsePrevNews, prevNews: responsePrevNews };
+  return { news: response, language, nextNews: responseNextNews, prevNews: responsePrevNews };
 }
 export default withI18next(['common'])(NewsPage);

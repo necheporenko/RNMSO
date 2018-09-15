@@ -22,6 +22,10 @@ class News extends React.Component {
     offset: 0
   }
 
+  static getDerivedStateFromProps(nextProps) {
+    return { news: nextProps.data }
+  }
+
   handlePageClick = (data) => {
     let selected = data.selected;
     let offset = Math.ceil(selected * limitNews);

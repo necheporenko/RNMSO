@@ -40,7 +40,7 @@ const Footer = ({ t }) => (
               </a>
             </div>
             <div className="footer__logo">
-              <a href="#" className="logo__link logo__link--footer logo__linl--grants">
+              <a href="https://xn--80afcdbalict6afooklqi5o.xn--p1ai/" className="logo__link logo__link--footer logo__linl--grants">
                 <img src="../static/img/footer-logo.png" alt="Фонд президентских грантов" />
               </a>
               <a href="# " className="logo__link logo__link--footer logo__linl--philharmonic" >
