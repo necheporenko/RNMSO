@@ -10,6 +10,6 @@ RUN yarn install
 # Bundle app source
 COPY . /app
 RUN yarn run build
-EXPOSE 3000
+EXPOSE 3000 
 
 CMD [ "node", "./server" ]
