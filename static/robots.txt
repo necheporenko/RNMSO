@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: http://rnmso.herokuapp.com/sitemap.xml
