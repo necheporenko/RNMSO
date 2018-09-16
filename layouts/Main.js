@@ -27,9 +27,7 @@ class Home extends React.Component {
       <div className={isOpenMobileMenu ? 'wrapper body-menu' : 'wrapper'} style={isOpenMobileMenu ? bodyStyles : { width: '100%' }}>
         <Head title={title} />
         <Header toggleMobileMenu={this.toggleMobileMenu} />
-        <main>
-          {children}
-        </main>
+        <main>{children}</main>
         <Footer />
       </div>
     )

@@ -8,6 +8,7 @@ import callApi from '../utils/api';
 import { getYouTubeVideoId } from '../utils/common';
 import Layout from '../layouts/Main';
 
+
 class Home extends React.Component {
   static async getInitialProps({ req, res }) {
     const language = req || res ? req.language || res.locals.language : null;
@@ -44,15 +45,9 @@ class Home extends React.Component {
       slidesToScroll: 1,
       nextArrow: <NextArrow />,
       prevArrow: <PrevArrow />,
-      adaptiveHeight: true,
       afterChange: current => this.setState({ currentConcert: current }),
       appendDots: dots => (
-        <div
-          style={{
-            padding: "10px",
-            cursor: 'pointer'
-          }}
-        >
+        <div style={{ padding: "10px",cursor: 'pointer'}}>
           <ul style={{ margin: "0px", display: 'flex', justifyContent: 'center' }}> {dots} </ul>
         </div>
       ),
@@ -128,58 +123,60 @@ class Home extends React.Component {
             <div className="row justify-content-center">
               <div className="col-12 col-lg-10">
                 <div className="carrousel__wrapper">
-                  <div className="owl-carousel event__slider">
+                  <div>
                     <Slider {...SliderSettings} ref={slider => (this.concertSlider = slider)}>
                       {concerts.slice(-5).map(concert => (
-                        <Link as={`/program-page/${concert.id}`} href={`/program-page?id=${concert.id}`} key={concert.id}>
-                          <a className="slide__link" target="_blank">
-                            <div className="slider__item">
-                              <div className="slider__left">
-                                <div className="slider__top-line">
-                                  <div className="slider__date">
-                                    <div className="date__day">
-                                      <span>{moment(concert.dt.slice(0, 16)).format("D")}</span>
-                                      <sup>
-                                        <small>{moment(concert.dt.slice(0, 16)).format("MMMM")}</small>
-                                      </sup>
+                        <div key={concert.id}>
+                          <Link as={`/program-page/${concert.id}`} href={`/program-page?id=${concert.id}`} >
+                            <a className="slide__link">
+                              <div className="slider__item">
+                                <div className="slider__left">
+                                  <div className="slider__top-line">
+                                    <div className="slider__date">
+                                      <div className="date__day">
+                                        <span>{moment(concert.dt.slice(0, 16)).format("D")}</span>
+                                        <sup>
+                                          <small>{moment(concert.dt.slice(0, 16)).format("MMMM")}</small>
+                                        </sup>
+                                      </div>
+                                      <div className="date__time">
+                                        <span className="day">{moment(concert.dt.slice(0, 16)).format("dd")}</span>
+                                        <span className="time">{moment(concert.dt.slice(0, 16)).format("HH:mm")}</span>
+                                      </div>
                                     </div>
-                                    <div className="date__time">
-                                      <span className="day">{moment(concert.dt.slice(0, 16)).format("dd")}</span>
-                                      <span className="time">{moment(concert.dt.slice(0, 16)).format("HH:mm")}</span>
+                                    <div className="slider__site">
+                                      <span className="site__sity">{concert.place}</span>
                                     </div>
                                   </div>
-                                  <div className="slider__site">
-                                    <span className="site__sity">{concert.place}</span>
+                                  <div className="slider__content">
+                                    <h3 className="slider__title">{concert.title}</h3>
+                                    <p className="slider__participants">
+                                      <span className="participants__post">{t("AfishaPage.conductors")}: </span>
+                                      {concert.conductors.map(conductor => (
+                                        <span className="participants__name" key={conductor.id}>{`${conductor.first_name} ${conductor.last_name}`}</span>
+                                      ))}
+                                    </p>
+                                    <p className="slider__participants">
+                                      <span className="participants__post">{t("AfishaPage.soloists")}: </span>
+                                      {concert.soloists.map(soloist => (
+                                        <span className="participants__name" key={soloist.id}>{`${soloist.first_name} ${soloist.last_name} (${soloist.specialty})`}</span>
+                                      ))}
+                                    </p>
+                                    <div className="slider__program">
+                                      <span className="program__title">{t("MainPage.inProgramme")}:</span>
+                                      <div dangerouslySetInnerHTML={{ __html: concert.event_program }}></div>
+                                    </div>
                                   </div>
                                 </div>
-                                <div className="slider__content">
-                                  <h3 className="slider__title">{concert.title}</h3>
-                                  <p className="slider__participants">
-                                    <span className="participants__post">{t("AfishaPage.conductors")}: </span>
-                                    {concert.conductors.map(conductor => (
-                                      <span className="participants__name" key={conductor.id}>{`${conductor.first_name} ${conductor.last_name}`}</span>
-                                    ))}
-                                  </p>
-                                  <p className="slider__participants">
-                                    <span className="participants__post">{t("AfishaPage.soloists")}: </span>
-                                    {concert.soloists.map(soloist => (
-                                      <span className="participants__name" key={soloist.id}>{`${soloist.first_name} ${soloist.last_name} (${soloist.specialty})`}</span>
-                                    ))}
-                                  </p>
-                                  <div className="slider__program">
-                                    <span className="program__title">{t("MainPage.inProgramme")}:</span>
-                                    <div dangerouslySetInnerHTML={{ __html: concert.event_program }}></div>
-                                  </div>
+                                <div className="slide__right">
+                                  {concert.images.length > 0 && concert.images.slice(0, 2).map((image, index) => (
+                                    <img key={index} src={`http://31.192.109.44/media/small/${image.image.substring(6)}`} alt="Участник концерта" />
+                                  ))}
                                 </div>
                               </div>
-                              <div className="slide__right">
-                                {concert.images.length > 0 && concert.images.slice(0, 2).map((image, index) => (
-                                  <img key={index} src={`http://31.192.109.44/media/small/${image.image.substring(6)}`} alt="Участник концерта" />
-                                ))}
-                              </div>
-                            </div>
-                          </a>
-                        </Link>
+                            </a>
+                          </Link>
+                        </div>
                       ))}
                     </Slider>
                   </div>

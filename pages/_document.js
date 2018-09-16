@@ -8,13 +8,14 @@ export default class MyDocument extends Document {
                     <link rel="stylesheet" href="/_next/static/style.css" />
                 </Head>
                 <body>
-                    <Main />
-                    <NextScript />
+                    <Main></Main>
+                    <NextScript></NextScript>
                 </body>
                 {/* FIXME    */}
                 <script src="../static/libs/jquery/dist/jquery.min.js"></script>
                 {/* <script src="../static/libs/remodal/dist/remodal.min.js"></script> */}
                 <script src="../static/scripts.min.js"></script>
+
             </html>
         )
     }
