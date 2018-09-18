@@ -7,7 +7,129 @@ import Submenu from '../components/moleculs/Submenu';
 import { Form, Text, TextArea, RadioGroup, Radio } from 'informed';
 
 class Application extends React.Component {
-  state = {}
+  constructor(props) {
+    super(props);
+    this.doForm = this.doForm.bind(this);
+    this.state = {
+    }
+  }
+
+  handleName = (e) => {
+    this.setState({
+      name: e.target.value
+    })
+  }
+
+  handlebDate = (e) => {
+    this.setState({
+      bDate: e.target.value.reverse().replace('.' , '-')
+    })
+  }
+
+
+  handleCitizenship = (e) => {
+    this.setState({
+      citizenship: e.target.value
+    })
+  }
+
+  handleEducation = (e) => {
+    this.setState({
+      education: e.target.value
+    })
+  }
+
+  handleAwards = (e) => {
+    this.setState({
+      awards: e.target.value
+    })
+  }
+
+  handleAddress = (e) => {
+    this.setState({
+      address: e.target.value
+    })
+  }
+
+  handlePassport = (e) => {
+    this.setState({
+      passport: e.target.value
+    })
+  }
+
+  handleActualAddress = (e) => {
+    this.setState({
+      actualAddress: e.target.value
+    })
+  }
+
+  handlePhone = (e) => {
+    this.setState({
+      phone: e.target.value
+    })
+  }
+
+  handleRadioFirstLineTrue = (e) => {
+    this.setState({
+      radioFirstLineTrue: e.target.checked
+    })
+  }
+
+  handleRadioFirstLineFalse = (e) => {
+    this.setState({
+      radioFirstLineFalse: e.target.checked
+    })
+  }
+
+  handleRadioSecondLineTrue = (e) => {
+    this.setState({
+      radioSecondLineTrue: e.target.checked
+    })
+  }
+
+  handleRadioSecondLineFalse = (e) => {
+    this.setState({
+      radioSecondLineFalse: e.target.checked
+    })
+  }
+
+
+  doForm = (e) => {
+    const dataObj = {
+      name: this.state.name,
+      birthdayDate: this.state.bDay,
+      citizenship: this.state.citizenship,
+      education: this.state.education,
+      awards: this.state.awards,
+      address: this.state.address,
+      actualAdress: this.state.address,
+      phone: this.state.phone,
+      passport: this.state.passport,
+      radioFirstLineTrue: this.state.radioFirstLineTrue,
+      radioFirstLineFalse: this.state.radioFirstLineFalse,
+      radioSecondLineTrue: this.state.radioFirstLineTrue,
+      radioSecondLineFalse: this.state.radioFirstLineFalse
+
+    }
+
+    this.setState({
+      newObj: this.dataObj
+    })
+
+    submitForm(JSON.stringify(this.state.dataObj))
+
+  }
+
+
+
+  submitForm = async (data) => {
+    await callApi('/request', "ru", {
+      method: 'POST',
+      body: {data}
+    })
+  };
+
+
 
   // submitForm = async () => {
   //   await callApi('/request', "ru", {
@@ -133,65 +255,61 @@ class Application extends React.Component {
                     <form className="application__form" method="post" action="http://31.192.109.44/api/request/">
                       <label>
                         <span>{t("ApplicationPage.form.name")}</span>
-                        <input type="text" className="form__input" name="name" required />
+                        <input type="text" className="form__input" name="name" required value={this.state.name} onChange={this.handleName} />
                         <b className="danger">* Это поле обязательно</b>
                       </label>
                       <label>
                         <span>{t("ApplicationPage.form.bDay")}</span>
-                        <input type="text" id="date" placeholder={t("ApplicationPage.form.dayFormat")} name="birth" className="form__input" required />
+                        <input type="text" id="date" placeholder={t("ApplicationPage.form.dayFormat")} name="birth" className="form__input" required value={this.state.bDate} onChange={this.handlebDate} />
                         <b className="danger">* Это поле обязательно</b>
                       </label>
-                      <label>
-                        <span>{t("ApplicationPage.form.placeOfBirth")}</span>
-                        <input type="text" className="form__input" name="birth_place" required />
-                        <b className="danger">* Это поле обязательно</b>
-                      </label>
+
                       <label>
                         <span>{t("ApplicationPage.form.citizenship")}</span>
-                        <input type="text" className="form__input" name="citizenship" required />
+                        <input type="text" className="form__input" name="citizenship" required value={this.state.citizenship} onChange={this.handleCitizenship} />
                         <b className="danger">* Это поле обязательно</b>
                       </label>
                       <label>
                         <span>{t("ApplicationPage.form.education")}</span>
-                        <input type="text" className="form__input" name="education" required />
+                        <input type="text" className="form__input" name="education" required value={this.state.education} onChange={this.handleEducation}/>
                         <b className="danger">* Это поле обязательно</b>
                         <span className="additional-description">{t("ApplicationPage.form.educationInfo")}	</span>
                       </label>
                       <label>
                         <span>{t("ApplicationPage.form.awards")}</span>
-                        <textarea className="form__input" rows="4" name="rewards" required></textarea>
+                        <textarea className="form__input" rows="4" name="rewards" required value={this.state.awards} onChange={this.handleAwards}></textarea>
                         <b className="danger">* Это поле обязательно</b>
                       </label>
                       <label>
                         <span>{t("ApplicationPage.form.passport")}</span>
-                        <input type="text" className="form__input" name="passport" required />
+                        <input type="text" className="form__input" name="passport" required value={this.state.passport} onChange={this.handlePassport}/>
                         <span className="additional-description">{t("ApplicationPage.form.passportInfo")}</span>
                         <b className="danger">* Это поле обязательно</b>
                       </label>
                       <label>
                         <span>{t("ApplicationPage.form.homeAddress")}</span>
-                        <textarea className="form__input" rows="4" name="propiska" required></textarea>
+                        <textarea className="form__input" rows="4" name="propiska" required value={this.state.address} onChange={this.handleAddress}></textarea>
                         <b className="danger">* Это поле обязательно</b>
                       </label>
                       <label>
                         <span>{t("ApplicationPage.form.actualAddress")}с</span>
-                        <textarea className="form__input" rows="4" name="address" required></textarea>
+                        <textarea className="form__input" rows="4" name="address" required value={this.state.actualAdress} onChange={this.handleActualAdress}></textarea>
                         <b className="danger">* Это поле обязательно</b>
                       </label>
                       <label>
                         <span>{t("ApplicationPage.form.phone")}</span>
-                        <input type="tel" className="form__input" name="phone" required />
+                        <input type="tel" className="form__input" name="phone" required value={this.state.phone} onChange={this.handlePhone} />
                         <b className="danger">* Это поле обязательно</b>
                       </label>
                       <div className="radio__button">
                         <p> {t("ApplicationPage.form.accompanist")} </p>
                         <label>
-                          <input className="radio" type="radio" name="is_need_endmaster" value="true" />
+                          <input className="radio" type="radio" name="is_need_endmaster" value="true" value={this.state.radioFirstLineTrue} onChange={this.handleRadioFirstLineTrue}/>
                           <span className="radio-custom"></span>
                           <span className="label">{t("ApplicationPage.form.yes")} </span>
                         </label>
                         <label>
-                          <input className="radio" type="radio" name="is_need_endmaster" value="false" defaultChecked />
+                          <input className="radio" type="radio" name="is_need_endmaster" value="false" defaultChecked value={this.state.radioFirstLineFalse} onChange={this.handleRadioFirstLineFalse} />
                           <span className="radio-custom"></span>
                           <span className="label">{t("ApplicationPage.form.no")}</span>
                         </label>
@@ -199,12 +317,12 @@ class Application extends React.Component {
                       <div className="radio__button">
                         <p> {t("ApplicationPage.form.needHouse")}</p>
                         <label>
-                          <input className="radio" type="radio" name="is_need_housing" value="true" />
+                          <input className="radio" type="radio" name="is_need_housing" value="true" value={this.state.radioSecondLineTrue} onChange={this.handleRadioSecondLineTrue}/>
                           <span className="radio-custom"></span>
                           <span className="label">{t("ApplicationPage.form.yes")} </span>
                         </label>
                         <label>
-                          <input className="radio" type="radio" name="is_need_housing" value="false" defaultChecked />
+                          <input className="radio" type="radio" name="is_need_housing" value="false" defaultChecked value={this.state.radioSecondLineFalse} onChange={this.handleRadioSecondLineFalse}/>
                           <span className="radio-custom"></span>
                           <span className="label">{t("ApplicationPage.form.no")} </span>
                         </label>
@@ -219,7 +337,7 @@ class Application extends React.Component {
                       <button
                         className="act__btn application-form__btn"
                         // onClick={() => this.submitForm()}
-                        type="submit"
+                         onClick={() => this.doForm()}
                       >
                         {t("ApplicationPage.form.sendApplication")}
                       </button>
