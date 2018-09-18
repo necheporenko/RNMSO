@@ -186,12 +186,12 @@ class Application extends React.Component {
                       <div className="radio__button">
                         <p> {t("ApplicationPage.form.accompanist")} </p>
                         <label>
-                          <input className="radio" type="radio" name="is_need_endmaster" value="Yes" />
+                          <input className="radio" type="radio" name="is_need_endmaster" value="true" />
                           <span className="radio-custom"></span>
                           <span className="label">{t("ApplicationPage.form.yes")} </span>
                         </label>
                         <label>
-                          <input className="radio" type="radio" name="is_need_endmaster" value="No" defaultChecked />
+                          <input className="radio" type="radio" name="is_need_endmaster" value="false" defaultChecked />
                           <span className="radio-custom"></span>
                           <span className="label">{t("ApplicationPage.form.no")}</span>
                         </label>
@@ -199,12 +199,12 @@ class Application extends React.Component {
                       <div className="radio__button">
                         <p> {t("ApplicationPage.form.needHouse")}</p>
                         <label>
-                          <input className="radio" type="radio" name="is_need_housing" value="Yes" />
+                          <input className="radio" type="radio" name="is_need_housing" value="true" />
                           <span className="radio-custom"></span>
                           <span className="label">{t("ApplicationPage.form.yes")} </span>
                         </label>
                         <label>
-                          <input className="radio" type="radio" name="is_need_housing" value="No" defaultChecked />
+                          <input className="radio" type="radio" name="is_need_housing" value="false" defaultChecked />
                           <span className="radio-custom"></span>
                           <span className="label">{t("ApplicationPage.form.no")} </span>
                         </label>
