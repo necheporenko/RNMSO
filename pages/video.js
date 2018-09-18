@@ -17,7 +17,7 @@ class Video extends React.Component {
     // get video tags
     response.results.map(video => {
       video.tags.split(" ").map(tag => {
-        if (tag && !tags.includes(tag)) {
+        if (tag && !tags.indexOf(tag)) {
           tags.push(tag);
         }
       }
@@ -84,7 +84,7 @@ class Video extends React.Component {
             <div className="row justify-content-center">
 
               <div className="col-lg-8" style={{ paddingBottom: '20px' }}>
-                {notMainVideos[0] && notMainVideos.filter(video => currentFilter === t("VideosPage.allVideos") ? video : video.tags.includes(currentFilter)).slice(0, 1).map(video => (
+                {notMainVideos[0] && notMainVideos.filter(video => currentFilter === t("VideosPage.allVideos") ? video : video.tags.indexOf(currentFilter)).slice(0, 1).map(video => (
                   <figure className="video__carts top__cart" key={video.id}>
                     <div className="link__frame">
                       <a data-fancybox href={video.video} className="popap__video" id="autoplay">
@@ -122,7 +122,7 @@ class Video extends React.Component {
 
             </div>
             <div className="video-carts__flex-wrapper">
-              {notMainVideos.length > 1 && notMainVideos.filter(video => currentFilter === t("VideosPage.allVideos") ? video : video.tags.includes(currentFilter)).slice(1).map(video => (
+              {notMainVideos.length > 1 && notMainVideos.filter(video => currentFilter === t("VideosPage.allVideos") ? video : video.tags.indexOf(currentFilter)).slice(1).map(video => (
                 <div className="mix video__basis videoblog concert repetition" key={video.id}>
                   <figure className="video__carts">
                     <div className="link__frame">
