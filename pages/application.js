@@ -22,7 +22,13 @@ class Application extends React.Component {
 
   handlebDate = (e) => {
     this.setState({
-      bDate: e.target.value.reverse().replace('.' , '-')
+      bDate: e.target.value
+    })
+  }
+
+  handleBirthPlace = (e) => {
+    this.setState({
+      birthPlace: e.target.value,
     })
   }
 
@@ -97,7 +103,8 @@ class Application extends React.Component {
   doForm = (e) => {
     const dataObj = {
       name: this.state.name,
-      birthdayDate: this.state.bDay,
+      birthdayDateFormat: this.state.bDate,
+      birthPlace: this.state.birthPlace,
       citizenship: this.state.citizenship,
       education: this.state.education,
       awards: this.state.awards,
@@ -116,7 +123,7 @@ class Application extends React.Component {
       newObj: this.dataObj
     })
 
-    submitForm(JSON.stringify(this.state.dataObj))
+    submitForm(JSON.stringify(this.state.dataObj));
 
   }
 
@@ -263,7 +270,11 @@ class Application extends React.Component {
                         <input type="text" id="date" placeholder={t("ApplicationPage.form.dayFormat")} name="birth" className="form__input" required value={this.state.bDate} onChange={this.handlebDate} />
                         <b className="danger">* Это поле обязательно</b>
                       </label>
-
+                      <label>
+                        <span>{t("ApplicationPage.form.placeOfBirth")}</span>
+                        <input type="text" className="form__input" name="birth_place" required value={this.state.birthPlace} onChange={this.handleBirthPlace}/>
+                        <b className="danger">* Это поле обязательно</b>
+                      </label>
                       <label>
                         <span>{t("ApplicationPage.form.citizenship")}</span>
                         <input type="text" className="form__input" name="citizenship" required value={this.state.citizenship} onChange={this.handleCitizenship} />

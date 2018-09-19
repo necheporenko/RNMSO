@@ -83,7 +83,7 @@
       "no": "No",
       "educationInfo": "name of educational institution / faculty or department / instrument / teacher / year of admission / year of graduation / specialty / diploma No.",
       "passportInfo": "series, number, by whom, when issued",
-      "dayFormat": "DD.MM.YYYY",
+      "dayFormat": "YYYY-MM-DD",
       "apply": "apply"
     }
   },

@@ -29,13 +29,13 @@ const Footer = ({ t }) => (
         <div className="col-lg-2 col-sm-6">
           <div className="footer__link-block">
             <div className="footer__social">
-              <a href="#">
+              <a target="_blank" href="https://www.facebook.com/rnmso/">
                 <i className="icon-icon-facebook"></i>
               </a>
-              <a href="#">
+              <a target="_blank" href="https://vk.com/rnmso">
                 <i className="icon-icon-vk"></i>
               </a>
-              <a href="#">
+              <a target="_blank" href="https://www.instagram.com/rnmso/">
                 <i className="icon-icon-instagram"></i>
               </a>
             </div>
