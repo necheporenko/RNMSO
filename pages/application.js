@@ -20,9 +20,9 @@ class Application extends React.Component {
     })
   }
 
-  handlebDate = (e) => {
+  handleBirthday = (e) => {
     this.setState({
-      bDate: e.target.value
+      birthday: e.target.value
     })
   }
 
@@ -101,9 +101,10 @@ class Application extends React.Component {
 
 
   doForm = (e) => {
+    e.preventDefault();
     const dataObj = {
       name: this.state.name,
-      birthdayDateFormat: this.state.bDate,
+      birthday: this.state.bDateNext,
       birthPlace: this.state.birthPlace,
       citizenship: this.state.citizenship,
       education: this.state.education,
@@ -122,6 +123,8 @@ class Application extends React.Component {
     this.setState({
       newObj: this.dataObj
     })
+
+    //console.log(JSON.stringify(dataObj))
 
     submitForm(JSON.stringify(this.state.dataObj));
 
@@ -259,7 +262,7 @@ class Application extends React.Component {
                       <button type="submit">Submit</button>
                     </Form> */}
 
-                    <form className="application__form" method="post" action="http://31.192.109.44/api/request/">
+                    <form className="application__form" /*onSubmit={() => this.doForm()}*/>
                       <label>
                         <span>{t("ApplicationPage.form.name")}</span>
                         <input type="text" className="form__input" name="name" required value={this.state.name} onChange={this.handleName} />
@@ -267,7 +270,7 @@ class Application extends React.Component {
                       </label>
                       <label>
                         <span>{t("ApplicationPage.form.bDay")}</span>
-                        <input type="text" id="date" placeholder={t("ApplicationPage.form.dayFormat")} name="birth" className="form__input" required value={this.state.bDate} onChange={this.handlebDate} />
+                        <input type="text" placeholder={t("ApplicationPage.form.dayFormat")} name="birth" className="form__input" required value={this.state.birthday} onChange={this.handleBirthday} />
                         <b className="danger">* Это поле обязательно</b>
                       </label>
                       <label>
@@ -315,12 +318,12 @@ class Application extends React.Component {
                       <div className="radio__button">
                         <p> {t("ApplicationPage.form.accompanist")} </p>
                         <label>
-                          <input className="radio" type="radio" name="is_need_endmaster" value="true" value={this.state.radioFirstLineTrue} onChange={this.handleRadioFirstLineTrue}/>
+                          <input className="radio" type="radio" name="is_need_endmaster" required value={this.state.radioFirstLineTrue} onChange={this.handleRadioFirstLineTrue}/>
                           <span className="radio-custom"></span>
                           <span className="label">{t("ApplicationPage.form.yes")} </span>
                         </label>
                         <label>
-                          <input className="radio" type="radio" name="is_need_endmaster" value="false" defaultChecked value={this.state.radioFirstLineFalse} onChange={this.handleRadioFirstLineFalse} />
+                          <input className="radio" type="radio" name="is_need_endmaster" value={this.state.radioFirstLineFalse} onChange={this.handleRadioFirstLineFalse} />
                           <span className="radio-custom"></span>
                           <span className="label">{t("ApplicationPage.form.no")}</span>
                         </label>
@@ -328,12 +331,12 @@ class Application extends React.Component {
                       <div className="radio__button">
                         <p> {t("ApplicationPage.form.needHouse")}</p>
                         <label>
-                          <input className="radio" type="radio" name="is_need_housing" value="true" value={this.state.radioSecondLineTrue} onChange={this.handleRadioSecondLineTrue}/>
+                          <input className="radio" type="radio" name="is_need_housing" required value={this.state.radioSecondLineTrue} onChange={this.handleRadioSecondLineTrue}/>
                           <span className="radio-custom"></span>
                           <span className="label">{t("ApplicationPage.form.yes")} </span>
                         </label>
                         <label>
-                          <input className="radio" type="radio" name="is_need_housing" value="false" defaultChecked value={this.state.radioSecondLineFalse} onChange={this.handleRadioSecondLineFalse}/>
+                          <input className="radio" type="radio" name="is_need_housing" value={this.state.radioSecondLineFalse} onChange={this.handleRadioSecondLineFalse}/>
                           <span className="radio-custom"></span>
                           <span className="label">{t("ApplicationPage.form.no")} </span>
                         </label>
@@ -348,7 +351,7 @@ class Application extends React.Component {
                       <button
                         className="act__btn application-form__btn"
                         // onClick={() => this.submitForm()}
-                         onClick={() => this.doForm()}
+                        onClick={() => this.doForm()}
                       >
                         {t("ApplicationPage.form.sendApplication")}
                       </button>
