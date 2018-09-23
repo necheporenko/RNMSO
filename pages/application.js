@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import fetch from 'isomorphic-unfetch';
 import { withI18next } from '../lib/withI18next';
 import callApi from '../utils/api';
 import Layout from '../layouts/Main';
@@ -11,6 +12,7 @@ class Application extends React.Component {
     super(props);
     this.doForm = this.doForm.bind(this);
     this.state = {
+      dataObj: {}
     }
   }
 
@@ -101,7 +103,7 @@ class Application extends React.Component {
 
 
   doForm = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     const dataObj = {
       name: this.state.name,
       birthday: this.state.bDateNext,
@@ -121,23 +123,44 @@ class Application extends React.Component {
     }
 
     this.setState({
-      newObj: this.dataObj
+      newObj: dataObj
     })
 
     //console.log(JSON.stringify(dataObj))
-
-    submitForm(JSON.stringify(this.state.dataObj));
+    console.log(dataObj)
+    this.submitForm(dataObj);
 
   }
 
 
 
-  submitForm = async (data) => {
-    await callApi('/request', "ru", {
-      method: 'POST',
-      body: {data}
+  // submitForm = async (data) => {
+  //   await console.log(data)
+  //   await callApi('/request', "ru")
+  //   console.log(2)
+  // };
+
+  submitForm = (dataObj) => {
+    var myHeaders = new Headers();
+
+    myHeaders.append('Content-Type', 'application/json');
+    console.log(myHeaders, dataObj)
+    fetch('http://31.192.109.44/api/request/', {
+      method: "POST",
+      headers: {
+        // 'Access-Control-Allow-Origin': '*',
+        // 'Access-Control-Allow-Origin': 'http://localhost:3002',
+        // 'Access-Control-Allow-Credentials': true,
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        // 'Host': '31.192.109.44'
+        // 'Cookie': 'csrftoken=ydCDOcCJgMYC0lzN2zrBxbbAdMXjpu68py6alSBl6wYwJShR9vN3DseahCqT5Gtu; sessionid=4ytzi3yt4n2a5xa84d5902eiijhovvq1',
+        // 'X-CSRFToken': 'XbzEVU56DDdgWBUvfhf13QJb068ZMWmmOw3bsA4ItndaF8CzmdBt97ML4WBzs8JI'
+      },
+      method: 'no-cors',
+      body: JSON.stringify(dataObj)
     })
-  };
+  }
 
 
 
@@ -275,7 +298,7 @@ class Application extends React.Component {
                       </label>
                       <label>
                         <span>{t("ApplicationPage.form.placeOfBirth")}</span>
-                        <input type="text" className="form__input" name="birth_place" required value={this.state.birthPlace} onChange={this.handleBirthPlace}/>
+                        <input type="text" className="form__input" name="birth_place" required value={this.state.birthPlace} onChange={this.handleBirthPlace} />
                         <b className="danger">* Это поле обязательно</b>
                       </label>
                       <label>
@@ -285,7 +308,7 @@ class Application extends React.Component {
                       </label>
                       <label>
                         <span>{t("ApplicationPage.form.education")}</span>
-                        <input type="text" className="form__input" name="education" required value={this.state.education} onChange={this.handleEducation}/>
+                        <input type="text" className="form__input" name="education" required value={this.state.education} onChange={this.handleEducation} />
                         <b className="danger">* Это поле обязательно</b>
                         <span className="additional-description">{t("ApplicationPage.form.educationInfo")}	</span>
                       </label>
@@ -296,7 +319,7 @@ class Application extends React.Component {
                       </label>
                       <label>
                         <span>{t("ApplicationPage.form.passport")}</span>
-                        <input type="text" className="form__input" name="passport" required value={this.state.passport} onChange={this.handlePassport}/>
+                        <input type="text" className="form__input" name="passport" required value={this.state.passport} onChange={this.handlePassport} />
                         <span className="additional-description">{t("ApplicationPage.form.passportInfo")}</span>
                         <b className="danger">* Это поле обязательно</b>
                       </label>
@@ -318,7 +341,7 @@ class Application extends React.Component {
                       <div className="radio__button">
                         <p> {t("ApplicationPage.form.accompanist")} </p>
                         <label>
-                          <input className="radio" type="radio" name="is_need_endmaster" required value={this.state.radioFirstLineTrue} onChange={this.handleRadioFirstLineTrue}/>
+                          <input className="radio" type="radio" name="is_need_endmaster" required value={this.state.radioFirstLineTrue} onChange={this.handleRadioFirstLineTrue} />
                           <span className="radio-custom"></span>
                           <span className="label">{t("ApplicationPage.form.yes")} </span>
                         </label>
@@ -331,12 +354,12 @@ class Application extends React.Component {
                       <div className="radio__button">
                         <p> {t("ApplicationPage.form.needHouse")}</p>
                         <label>
-                          <input className="radio" type="radio" name="is_need_housing" required value={this.state.radioSecondLineTrue} onChange={this.handleRadioSecondLineTrue}/>
+                          <input className="radio" type="radio" name="is_need_housing" required value={this.state.radioSecondLineTrue} onChange={this.handleRadioSecondLineTrue} />
                           <span className="radio-custom"></span>
                           <span className="label">{t("ApplicationPage.form.yes")} </span>
                         </label>
                         <label>
-                          <input className="radio" type="radio" name="is_need_housing" value={this.state.radioSecondLineFalse} onChange={this.handleRadioSecondLineFalse}/>
+                          <input className="radio" type="radio" name="is_need_housing" value={this.state.radioSecondLineFalse} onChange={this.handleRadioSecondLineFalse} />
                           <span className="radio-custom"></span>
                           <span className="label">{t("ApplicationPage.form.no")} </span>
                         </label>
@@ -348,14 +371,15 @@ class Application extends React.Component {
                           <span className="label">{t("ApplicationPage.form.agree")}</span>
                         </label>
                       </div>
-                      <button
-                        className="act__btn application-form__btn"
-                        // onClick={() => this.submitForm()}
-                        onClick={() => this.doForm()}
-                      >
-                        {t("ApplicationPage.form.sendApplication")}
-                      </button>
+
                     </form>
+                    <button
+                      className="act__btn application-form__btn"
+                      // onClick={() => this.submitForm()}
+                      onClick={() => this.doForm()}
+                    >
+                      {t("ApplicationPage.form.sendApplication")}
+                    </button>
                   </div>
                 </div>
               </div>

@@ -1,10 +1,12 @@
 const express = require('express')
+const bodyParser = require('body-parser')
+const cors = require('cors')
 const path = require('path')
 const next = require('next')
 const nextConfig = require('./next.config');
 
 const dev = process.env.NODE_ENV !== 'production'
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3002;
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
@@ -47,8 +49,30 @@ i18n
       .then(() => {
         const server = express()
 
+        server.use(cors())
+        server.use(bodyParser.json())
+        server.use(function (req, res, next) {
+
+          // Website you wish to allow to connect
+          res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8888');
+
+          // Request methods you wish to allow
+          res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+          // Request headers you wish to allow
+          res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+          // Set to true if you need the website to include cookies in the requests sent
+          // to the API (e.g. in case you use sessions)
+          res.setHeader('Access-Control-Allow-Credentials', true);
+
+          // Pass to next layer of middleware
+          next();
+        });
+
         // enable middleware for i18next
         server.use(i18nextMiddleware.handle(i18n))
+
 
         // serve locales for client
         server.use('/locales', express.static(path.join(__dirname, '/locales')))
