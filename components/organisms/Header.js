@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Router from 'next/router';
 import i18n from '../../i18n';
 import { withI18next } from '../../lib/withI18next';
-import { OrchestraMenu, AfishaMenu, MediaMenu, PartnersMenu } from '../../constants';
+import { OrchestraMenu, AfishaMenu, MediaMenu, PartnersMenu, YEARS } from '../../constants';
 // import next from 'next';
 // const app = next({ dev })
 
@@ -85,7 +85,7 @@ class Header extends React.Component {
                                                                 <div className="ul__wraper">
                                                                     {OrchestraMenu.map((menu, index) => (
                                                                         <div className="ul__list" key={index}>
-                                                                            <Link href={menu.href}><a>{t(menu.name)}</a></Link>
+                                                                            <Link href={menu.href}><a>{menu.name.includes('OrchestraMenu.soloists') || menu.name.includes('OrchestraMenu.conductors') ? `${t(menu.name)} ${YEARS}` : t(menu.name)}</a></Link>
                                                                         </div>
                                                                     ))}
                                                                 </div>
@@ -160,7 +160,7 @@ class Header extends React.Component {
                                     <div className="ul__wraper">
                                         {OrchestraMenu.map((menu, index) => (
                                             <div className="ul__list" key={index}>
-                                                <Link href={menu.href}><a>{t(menu.name)}</a></Link>
+                                                <Link href={menu.href}><a>{menu.name.includes('OrchestraMenu.soloists') || menu.name.includes('OrchestraMenu.conductors') ? `${t(menu.name)} ${YEARS}` : t(menu.name)}</a></Link>
                                             </div>
                                         ))}
                                     </div>

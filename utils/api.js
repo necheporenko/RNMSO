@@ -1,8 +1,8 @@
 import fetch from 'isomorphic-unfetch';
 import i18n from '../i18n';
 import moment from 'moment';
+import { apiUrl } from '../constants/settings';
 
-const apiUrl = 'http://31.192.109.44/api';
 
 export default async (url, language, options) => {
   const res = await fetch(`${apiUrl}${url}`, {

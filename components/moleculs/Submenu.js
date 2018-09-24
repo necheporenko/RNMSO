@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { withI18next } from '../../lib/withI18next';
-import { OrchestraMenu, MediaMenu } from '../../constants';
+import { OrchestraMenu, MediaMenu, YEARS } from '../../constants';
 
 const SubMenus = menu => {
   switch (menu) {
@@ -22,7 +22,7 @@ const Submenu = ({ t, menu, activePage }) => (
     {SubMenus(menu, activePage).map((menu, index) => (
       <li key={index}>
         <Link href={menu.href}>
-          <a className={menu.href === `/${activePage}` ? 'active' : ''}>{t(menu.name)}</a>
+          <a className={menu.href === `/${activePage}` ? 'active' : ''}>{menu.name.includes('OrchestraMenu.soloists') || menu.name.includes('OrchestraMenu.conductors') ? `${t(menu.name)} ${YEARS}` : t(menu.name)}</a>
         </Link>
       </li>
     ))}

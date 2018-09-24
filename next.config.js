@@ -2,11 +2,13 @@ const withPlugins = require("next-compose-plugins");
 const withSass = require('@zeit/next-sass');
 const withImages = require("next-images");
 const withFonts = require('next-fonts');
+// const withCSS = require('@zeit/next-css');
 
 const plugins = [
   withSass,
   withImages,
-  withFonts
+  withFonts,
+  // withCSS
 ];
 
 module.exports = withPlugins([...plugins], {

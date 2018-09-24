@@ -47,7 +47,7 @@ class Home extends React.Component {
       prevArrow: <PrevArrow />,
       afterChange: current => this.setState({ currentConcert: current }),
       appendDots: dots => (
-        <div style={{ padding: "10px",cursor: 'pointer'}}>
+        <div style={{ padding: "10px", cursor: 'pointer' }}>
           <ul style={{ margin: "0px", display: 'flex', justifyContent: 'center' }}> {dots} </ul>
         </div>
       ),

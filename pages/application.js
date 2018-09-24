@@ -6,6 +6,9 @@ import callApi from '../utils/api';
 import Layout from '../layouts/Main';
 import Submenu from '../components/moleculs/Submenu';
 import { Form, Text, TextArea, RadioGroup, Radio } from 'informed';
+import { apiUrl } from '../constants/settings';
+import { toast, ToastContainer } from 'react-toastify';
+import '../static/sass/toast.sass';
 
 class Application extends React.Component {
   constructor(props) {
@@ -106,34 +109,32 @@ class Application extends React.Component {
     // e.preventDefault();
     const dataObj = {
       name: this.state.name,
-      birthday: this.state.bDateNext,
-      birthPlace: this.state.birthPlace,
+      birth: this.state.birthday,
+      birth_place: this.state.birthPlace,
       citizenship: this.state.citizenship,
       education: this.state.education,
-      awards: this.state.awards,
+      rewards: this.state.awards,
+      propiska: this.state.address,
       address: this.state.address,
-      actualAdress: this.state.address,
       phone: this.state.phone,
       passport: this.state.passport,
-      radioFirstLineTrue: this.state.radioFirstLineTrue,
-      radioFirstLineFalse: this.state.radioFirstLineFalse,
-      radioSecondLineTrue: this.state.radioFirstLineTrue,
-      radioSecondLineFalse: this.state.radioFirstLineFalse
-
+      is_need_endmaster: this.state.radioFirstLineTrue ? this.state.radioFirstLineTrue : false,
+      // radioFirstLineFalse: this.state.radioFirstLineFalse,
+      is_need_housing: this.state.radioSecondLineTrue ? this.state.radioSecondLineTrue : false,
+      // radioSecondLineFalse: this.state.radioFirstLineFalse
     }
 
     this.setState({
       newObj: dataObj
     })
+    console.log(dataObj)
 
     //console.log(JSON.stringify(dataObj))
-    console.log(dataObj)
+    // console.log(dataObj)
     this.submitForm(dataObj);
 
+
   }
-
-
-
   // submitForm = async (data) => {
   //   await console.log(data)
   //   await callApi('/request', "ru")
@@ -141,77 +142,35 @@ class Application extends React.Component {
   // };
 
   submitForm = (dataObj) => {
+    const { t } = this.props;
     var myHeaders = new Headers();
 
     myHeaders.append('Content-Type', 'application/json');
-    console.log(myHeaders, dataObj)
-    fetch('http://31.192.109.44/api/request/', {
+    // console.log(myHeaders, dataObj)
+    fetch(`${apiUrl}/request/`, {
       method: "POST",
       headers: {
         // 'Access-Control-Allow-Origin': '*',
         // 'Access-Control-Allow-Origin': 'http://localhost:3002',
         // 'Access-Control-Allow-Credentials': true,
+
         'Accept': '*/*',
         'Content-Type': 'application/json',
+
         // 'Host': '31.192.109.44'
         // 'Cookie': 'csrftoken=ydCDOcCJgMYC0lzN2zrBxbbAdMXjpu68py6alSBl6wYwJShR9vN3DseahCqT5Gtu; sessionid=4ytzi3yt4n2a5xa84d5902eiijhovvq1',
         // 'X-CSRFToken': 'XbzEVU56DDdgWBUvfhf13QJb068ZMWmmOw3bsA4ItndaF8CzmdBt97ML4WBzs8JI'
       },
       method: 'no-cors',
       body: JSON.stringify(dataObj)
-    })
+    }).then(result => toast.success(t("ApplicationPage.form.succes"), {
+      position: toast.POSITION.TOP_CENTER
+    }))
+      .catch(toast.error(t("ApplicationPage.form.error"), {
+        position: toast.POSITION.TOP_CENTER
+      }))
   }
 
-
-
-  // submitForm = async () => {
-  //   await callApi('/request', "ru", {
-  //     method: 'POST', body: {
-  //       address
-  //         :
-  //         "string",
-  //       birth
-  //         :
-  //         "2000-08-08",
-  //       birth_place
-  //         :
-  //         "22",
-  //       citizenship
-  //         :
-  //         "string",
-  //       created
-  //         :
-  //         "2018-09-13T11:04:17.211871Z",
-  //       education
-  //         :
-  //         "string",
-  //       id
-  //         :
-  //         1,
-  //       is_need_endmaster
-  //         :
-  //         true,
-  //       is_need_housing
-  //         :
-  //         true,
-  //       name
-  //         :
-  //         "string",
-  //       passport
-  //         :
-  //         "string",
-  //       phone
-  //         :
-  //         "string",
-  //       propiska
-  //         :
-  //         "string",
-  //       rewards
-  //         :
-  //         "string"
-  //     }
-  //   });
-  // }
 
   render() {
     const { t } = this.props;
@@ -284,6 +243,7 @@ class Application extends React.Component {
                       </div>
                       <button type="submit">Submit</button>
                     </Form> */}
+
 
                     <form className="application__form" /*onSubmit={() => this.doForm()}*/>
                       <label>
@@ -371,15 +331,13 @@ class Application extends React.Component {
                           <span className="label">{t("ApplicationPage.form.agree")}</span>
                         </label>
                       </div>
-
+                      <button
+                        className="act__btn application-form__btn"
+                        onClick={() => this.doForm()}
+                      >
+                        {t("ApplicationPage.form.sendApplication")}
+                      </button>
                     </form>
-                    <button
-                      className="act__btn application-form__btn"
-                      // onClick={() => this.submitForm()}
-                      onClick={() => this.doForm()}
-                    >
-                      {t("ApplicationPage.form.sendApplication")}
-                    </button>
                   </div>
                 </div>
               </div>
@@ -388,6 +346,8 @@ class Application extends React.Component {
             </div>
           </section>
         </main>
+
+        <ToastContainer />
       </Layout>
     )
   }

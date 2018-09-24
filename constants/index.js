@@ -1,3 +1,7 @@
+import moment from 'moment';
+
+export const YEARS = `${moment().format('YYYY')} - ${moment().add(1, 'years').format('YYYY')}`;
+
 export const OrchestraMenu = [
   { href: '/staff', name: 'OrchestraMenu.staff' },
   // { href: '/team', name: 'OrchestraMenu.team' },

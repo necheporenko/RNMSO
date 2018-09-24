@@ -14,8 +14,8 @@
     "team": "Team",
     "academy": "Symphony academy",
     "academy-masters": "Pedagogues of the academy",
-    "conductors": "onductors season 2018-2019",
-    "soloists": "Soloists season 2018-2019",
+    "conductors": "Conductors season",
+    "soloists": "Soloists season",
     "application": " Application",
     "contacts": "Contacts"
   },
@@ -84,7 +84,9 @@
       "educationInfo": "name of educational institution / faculty or department / instrument / teacher / year of admission / year of graduation / specialty / diploma No.",
       "passportInfo": "series, number, by whom, when issued",
       "dayFormat": "YYYY-MM-DD",
-      "apply": "apply"
+      "apply": "apply",
+      "success": "Succes",
+      "error": "Error"
     }
   },
   "ReservePage": {
