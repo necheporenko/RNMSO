@@ -13,7 +13,7 @@ class Home extends React.Component {
   static async getInitialProps({ req, res }) {
     const language = req || res ? req.language || res.locals.language : null;
     const responseVideo = await callApi('/video/?is_index=true', language);
-    const responseNews = await callApi('/news/?limit=2&offset=0', language);
+    const responseNews = await callApi('/news/?limit=2&offset=0&is_index=true', language);
     const responseConcerts = await callApi(`/concerts/?offset=0`, language);
 
     return { videos: responseVideo.results, news: responseNews.results, concerts: responseConcerts.results, language }

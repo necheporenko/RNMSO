@@ -14,7 +14,7 @@ class News extends React.Component {
   static async getInitialProps({ req, res }) {
     const language = req || res ? req.language || res.locals.language : null;
     const response = await callApi(`/news/?limit=${limitNews}&offset=0`, language);
-    moment.locale(language);
+
     return { data: response, language };
   }
 
@@ -24,7 +24,7 @@ class News extends React.Component {
   }
 
   static getDerivedStateFromProps(nextProps) {
-    if (nextProps.i18n.language !== i18n.language) {
+    if (nextProps.i18n.language === i18n.language) {
       return { news: nextProps.data }
     }
     return null;
@@ -52,7 +52,7 @@ class News extends React.Component {
     const { t, language } = this.props;
     const { news } = this.state;
 
-    moment.locale(language);
+    moment.locale(i18n.language);
     return (
       <Layout title={t("MediaMenu.news")}>
         <main className="m-before">
@@ -71,8 +71,8 @@ class News extends React.Component {
               <div className="row" key={post.id}>
                 <div className="col-xl-3 col-md-3">
                   <div className="news__date">
-                    <span className="news__year">{moment(post.date.slice(0, 16)).locale(language).format("YYYY")}</span>
-                    <span className="news__day">{moment(post.date.slice(0, 16)).locale(language).format("D MMMM")} </span>
+                    <span className="news__year">{moment(post.date.slice(0, 16)).locale(i18n.language).format("YYYY")}</span>
+                    <span className="news__day">{moment(post.date.slice(0, 16)).locale(i18n.language).format("D MMMM")} </span>
                   </div>
                 </div>
                 <div className="col-lg-8 col-md-9">

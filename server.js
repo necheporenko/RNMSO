@@ -1,9 +1,20 @@
 const express = require('express')
+const request = require('request');
 const bodyParser = require('body-parser')
+const fs = require('fs');
 const cors = require('cors')
 const path = require('path')
 const next = require('next')
-const nextConfig = require('./next.config');
+const nextConfig = require('./next.config')
+const sitemap = require('sitemap')
+
+
+// import { HOST, apiUrl } from './constants/settings'
+const HOST = 'http:/localhost';
+const API = 'http://31.192.109.44/api';
+
+
+
 
 const dev = process.env.NODE_ENV !== 'production'
 const port = process.env.PORT || 3002;
@@ -94,6 +105,7 @@ i18n
         server.get('/program-page/:id', (req, res) => {
           const actualPage = '/program-page';
           const queryParams = { id: req.params.id };
+          sitemap.add({ url: `/program-page/${req.params.id}` });
           app.render(req, res, actualPage, queryParams)
         })
 
@@ -107,15 +119,55 @@ i18n
           res.status(200).sendFile('robots.txt', robotsOptions)
         ));
 
-        const sitemapOptions = {
-          root: __dirname + '/static/',
-          headers: {
-            'Content-Type': 'text/xml;charset=UTF-8',
-          }
+
+        const faviconOptions = {
+          root: __dirname + '/static/'
         };
-        server.get('/sitemap.xml', (req, res) => (
-          res.status(200).sendFile('sitemap.xml', sitemapOptions)
+        server.get('/img/favicon.ico', (req, res) => (
+          res.status(200).sendFile('favicon.ico', faviconOptions)
         ));
+
+
+        const pages = fs.readdirSync('./pages/').map(file => {
+          if (!file.includes('_') || !file.includes('-')) {
+            return { url: file.slice(0, -3), changefreq: 'weekly' }
+          }
+        })
+
+        sm = sitemap.createSitemap({
+          hostname: `${HOST}:${port}`,
+          cacheTime: 1000 * 60 * 24 * 7,
+          urls: pages
+        });
+
+        server.get('/sitemap.xml', function (req, res) {
+          sm.toXML(function (err, xml) {
+            if (err) {
+              return res.status(500).end();
+            }
+            res.header('Content-Type', 'application/xml');
+            res.send(xml);
+          });
+        });
+
+        function addDynamicRoute(url, id) {
+          var ID = id;
+
+          while (ID >= 1) {
+            sm.add({ url: `${url}/${ID}` });
+            ID--;
+          }
+        }
+
+        request({ url: `${API}/news/`, json: true }, function (err, res, json) {
+          addDynamicRoute('news', json.count);
+        })
+        request({ url: `${API}/gallery/`, json: true }, function (err, res, json) {
+          addDynamicRoute('album', json.count);
+        })
+        request({ url: `${API}/concerts/`, json: true }, function (err, res, json) {
+          addDynamicRoute('program-page', json.count);
+        })
 
         // use next.js
         server.get('*', (req, res) => handle(req, res))

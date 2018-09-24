@@ -42,8 +42,12 @@ class Calendar extends React.Component {
   }
 
 
-  static getDerivedStateFromProps(nextProps, state) {
-    if (nextProps.i18n.language !== i18n.language) {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (moment().format("YYYY-MM-DD") != moment(prevState.currentMounth).format("YYYY-MM-DD")) {
+      return { concerts: prevState.concerts, mounthCalendar: prevState.mounthCalendar }
+    }
+
+    else if (nextProps.i18n.language === i18n.language) {
       return { concerts: nextProps.concerts, mounthCalendar: nextProps.mounthCalendar }
     }
     return null;

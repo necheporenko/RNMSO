@@ -52,6 +52,8 @@
     "react-slick": "^0.23.1",
     "react-toastify": "^4.3.1",
     "react-yandex-maps": "^2.2.1",
+    "request": "^2.88.0",
+    "sitemap": "^2.0.1",
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {}

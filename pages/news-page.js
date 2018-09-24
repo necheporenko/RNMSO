@@ -2,11 +2,12 @@ import React from 'react';
 import Link from 'next/link';
 import moment from 'moment';
 import { withI18next } from '../lib/withI18next';
+import i18n from '../i18n';
 import callApi from '../utils/api';
 import Layout from '../layouts/Main';
 
 const NewsPage = ({ t, news, language, nextNews, prevNews }) => {
-  moment.locale(language);
+  moment.locale(i18n.language);
   return (
     <Layout title={news.title}>
       <main>
@@ -20,8 +21,8 @@ const NewsPage = ({ t, news, language, nextNews, prevNews }) => {
               </div>
               <div className="col-xl-3">
                 <div className="news__date news__date--page">
-                  <span className="news__year">{moment(news.date.slice(0, 16)).locale(language).format("YYYY")}</span>
-                  <span className="news__day">{moment(news.date.slice(0, 16)).locale(language).format("D MMMM")}</span>
+                  <span className="news__year">{moment(news.date.slice(0, 16)).locale(i18n.language).format("YYYY")}</span>
+                  <span className="news__day">{moment(news.date.slice(0, 16)).locale(i18n.language).format("D MMMM")}</span>
                 </div>
               </div>
             </div>
@@ -65,6 +66,7 @@ const NewsPage = ({ t, news, language, nextNews, prevNews }) => {
 
 
 NewsPage.getInitialProps = async ({ req, res, query }) => {
+  console.log(req, res, query);
   const language = req || res ? req.language || res.locals.language : null;
   const newsID = query.id;
   const response = await callApi(`/news/${newsID}`, language);

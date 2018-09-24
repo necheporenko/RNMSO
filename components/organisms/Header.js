@@ -25,7 +25,7 @@ class Header extends React.Component {
             if (err) return console.log('something went wrong loading', err)
         })
         this.setState({ currentLanguag: lng })
-        Router.push(`${Router.route}`)
+        Router.push(`${Router.asPath}`)
 
         document.cookie = `i18next=${lng}`;
         //location.reload(); // only needed when library is not downloaded locally

@@ -163,9 +163,14 @@ class Application extends React.Component {
       },
       method: 'no-cors',
       body: JSON.stringify(dataObj)
-    }).then(result => toast.success(t("ApplicationPage.form.succes"), {
-      position: toast.POSITION.TOP_CENTER
-    }))
+    })
+      .then((function (response) {
+        if (response.ok) {
+          toast.success(t("ApplicationPage.form.succes"), {
+            position: toast.POSITION.TOP_CENTER
+          })
+        }
+      }))
       .catch(toast.error(t("ApplicationPage.form.error"), {
         position: toast.POSITION.TOP_CENTER
       }))

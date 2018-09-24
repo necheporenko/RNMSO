@@ -1,5 +1,6 @@
 import React from 'react';
 import { withI18next } from '../lib/withI18next';
+import i18n from '../i18n';
 import callApi from '../utils/api';
 import { getYouTubeVideoId } from '../utils/common';
 import Layout from '../layouts/Main';
@@ -17,7 +18,7 @@ class Video extends React.Component {
     // get video tags
     response.results.map(video => {
       video.tags.split(" ").map(tag => {
-        if (tag && !tags.indexOf(tag)) {
+        if (tag && !tags.includes(tag)) {
           tags.push(tag);
         }
       }
@@ -28,14 +29,24 @@ class Video extends React.Component {
 
   state = {
     videos: this.props.videos,
-    currentFilter: this.props.t("VideosPage.allVideos"),
+    currentFilter: '',
     isSelected: false,
     notMainVideos: this.props.notMainVideos
   };
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.i18n.language === i18n.language) {
+      return { videos: nextProps.videos, notMainVideos: nextProps.notMainVideos }
+    }
+
+    return null;
+  }
+
+
   render() {
     const { t, tags } = this.props;
     const { videos, currentFilter, notMainVideos } = this.state;
+
     return (
       <Layout title={t("MediaMenu.video")}>
         <main className="m-before m-video">
@@ -65,7 +76,7 @@ class Video extends React.Component {
               <div className="col-12">
                 <div className="controls top__controls">
                   <button className="filter__btn filter"
-                    style={currentFilter === t("VideosPage.allVideos") ? StyleActiveTag : {}}
+                    style={currentFilter === '' ? StyleActiveTag : {}}
                     onClick={() => this.setState({ currentFilter: '' })}>{t("VideosPage.allVideos")}</button>
 
                   {tags.map((tag, index) => (
@@ -84,7 +95,7 @@ class Video extends React.Component {
             <div className="row justify-content-center">
 
               <div className="col-lg-8" style={{ paddingBottom: '20px' }}>
-                {notMainVideos[0] && notMainVideos.filter(video => currentFilter === t("VideosPage.allVideos") ? video : video.tags.indexOf(currentFilter)).slice(0, 1).map(video => (
+                {notMainVideos[0] && notMainVideos.filter(video => currentFilter === t("VideosPage.allVideos") ? video : video.tags.includes(currentFilter)).slice(0, 1).map(video => (
                   <figure className="video__carts top__cart" key={video.id}>
                     <div className="link__frame">
                       <a data-fancybox href={video.video} className="popap__video" id="autoplay">

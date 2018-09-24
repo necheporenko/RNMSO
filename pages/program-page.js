@@ -48,7 +48,7 @@ class ProgramPage extends React.Component {
   }
 
   static getDerivedStateFromProps(nextProps) {
-    if (nextProps.i18n.language !== i18n.language) {
+    if (nextProps.i18n.language === i18n.language) {
       return { concerts: nextProps.concerts, mounthCalendar: nextProps.mounthCalendar }
     }
     return null;

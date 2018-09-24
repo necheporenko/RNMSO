@@ -51,9 +51,9 @@ const Contacts = ({ t }) => (
           <div className="row">
             <div className="col-12 d-none d-md-block d-lg-block d-xl-block">
               <div className="contacts__social-block">
-                <a href="#" className=" contacts__link contacts__link--facebook"><i className="icon-icon-facebook"></i>facebook</a>
-                <a href="#" className="contacts__link contacts__link--vk"><i className="icon-icon-vk"></i>vkontakte</a>
-                <a href="#" className="contacts__link contacts__link--instagram"><i className="icon-icon-instagram"></i>instagram</a>
+                <a href="https://www.facebook.com/rnmso/" className=" contacts__link contacts__link--facebook"><i className="icon-icon-facebook"></i>facebook</a>
+                <a href="https://vk.com/rnmso" className="contacts__link contacts__link--vk"><i className="icon-icon-vk"></i>vkontakte</a>
+                <a href="https://www.instagram.com/rnmso/" className="contacts__link contacts__link--instagram"><i className="icon-icon-instagram"></i>instagram</a>
               </div>
             </div>
           </div>
