@@ -127,9 +127,6 @@ class Application extends React.Component {
     this.setState({
       newObj: dataObj
     })
-    console.log(dataObj)
-
-    //console.log(JSON.stringify(dataObj))
     // console.log(dataObj)
     this.submitForm(dataObj);
 
