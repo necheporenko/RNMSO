@@ -4,6 +4,7 @@ import { withI18next } from '../lib/withI18next';
 import callApi from '../utils/api';
 import Layout from '../layouts/Main';
 import Submenu from '../components/moleculs/Submenu';
+import { IP } from '../constants/settings';
 
 const Photo = ({ t, gallery }) => (
   <Layout title={t("MediaMenu.photo")}>
@@ -25,7 +26,7 @@ const Photo = ({ t, gallery }) => (
               <div className="gallery__flex-wrapper">
                 <Link as={`/album/${album.id}`} href={`/album?id=${album.id}`}>
                   <a className="gallery__link">
-                    {album.main_photo && <img src={`http://31.192.109.44/media/small/${album.main_photo.image.substring(6)}`} alt="Фотогаллерея" />}
+                    {album.main_photo && <img src={`${IP}/media/small/${album.main_photo.image.substring(6)}`} alt="Фотогаллерея" />}
                     <div className="gallery__desk">
                       <h5 className="gallery__title">{album.title}</h5>
                       <p className="gallery__quantity">

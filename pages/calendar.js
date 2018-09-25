@@ -7,7 +7,7 @@ import callApi from '../utils/api';
 import Layout from '../layouts/Main';
 
 function getDaysArrayByMonth(currentMounth, language) {
-  currentMounth.locale(language);
+  currentMounth.locale(i18n.language);
   var daysInMonth = moment(currentMounth).daysInMonth();
   var arrDays = [];
 
@@ -190,9 +190,10 @@ class Calendar extends React.Component {
                           </p>
                         </div>
                       }
-                      <a href={concert.link_buy} target="_blank">
+                      {concert.link_buy && <a href={concert.link_buy} target="_blank">
                         <button className="act__btn event-cart__btn" type="button">{t("AfishaPage.buyTicket")}</button>
                       </a>
+                      }
                     </div>
                   </div>
                 </div>

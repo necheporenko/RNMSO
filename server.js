@@ -9,11 +9,9 @@ const nextConfig = require('./next.config')
 const sitemap = require('sitemap')
 
 
-// import { HOST, apiUrl } from './constants/settings'
-const HOST = 'http:/localhost';
-const API = 'http://31.192.109.44/api';
 
-
+const HOST = require('./constants/settingsServer.js').HOST;
+const API = require('./constants/settingsServer.js').apiUrl;
 
 
 const dev = process.env.NODE_ENV !== 'production'
@@ -95,43 +93,30 @@ i18n
         server.get('/news/:id', (req, res) => {
           const actualPage = '/news-page';
           const queryParams = { id: req.params.id };
-          request({ url: `${API}/news/`, json: true }, function (err, res, json) {
-            addDynamicRoute('news', json.count);
-          })
+          // request({ url: `${API}/news/`, json: true }, function (err, res, json) {
+          //   addDynamicRoute('news', json.count);
+          // })
           app.render(req, res, actualPage, queryParams)
         })
-        server.get('/news', (req, res) => {
-          request({ url: `${API}/news/`, json: true }, function (err, res, json) {
-            addDynamicRoute('news', json.count);
-          })
-        })
+
 
         server.get('/album/:id', (req, res) => {
           const actualPage = '/album';
           const queryParams = { id: req.params.id };
-          request({ url: `${API}/gallery/`, json: true }, function (err, res, json) {
-            addDynamicRoute('album', json.count);
-          })
+          // request({ url: `${API}/gallery/`, json: true }, function (err, res, json) {
+          //   addDynamicRoute('album', json.count);
+          // })
           app.render(req, res, actualPage, queryParams)
         })
-        server.get('/album', (req, res) => {
-          request({ url: `${API}/gallery/`, json: true }, function (err, res, json) {
-            addDynamicRoute('album', json.count);
-          })
-        })
+
 
         server.get('/program-page/:id', (req, res) => {
           const actualPage = '/program-page';
           const queryParams = { id: req.params.id };
-          request({ url: `${API}/concerts/`, json: true }, function (err, res, json) {
-            addDynamicRoute('program-page', json.count);
-          })
+          // request({ url: `${API}/concerts/`, json: true }, function (err, res, json) {
+          //   addDynamicRoute('program-page', json.count);
+          // })
           app.render(req, res, actualPage, queryParams)
-        })
-        server.get('/program-page', (req, res) => {
-          request({ url: `${API}/concerts/`, json: true }, function (err, res, json) {
-            addDynamicRoute('program-page', json.count);
-          })
         })
 
         const robotsOptions = {
@@ -161,7 +146,7 @@ i18n
 
         sm = sitemap.createSitemap({
           hostname: `${HOST}:${port}`,
-          cacheTime: 1000 * 60 * 24 * 7,
+          cacheTime: 1000 * 60 * 3,
           urls: pages
         });
 
@@ -179,27 +164,40 @@ i18n
           var ID = id;
 
           while (ID >= 1) {
+            sm.del({ url: `${url}/${ID}` });
             sm.add({ url: `${url}/${ID}` });
             ID--;
           }
         }
 
         request({ url: `${API}/news/`, json: true }, function (err, res, json) {
-          addDynamicRoute('news', json.count);
+          json && addDynamicRoute('news', json.count);
         })
         request({ url: `${API}/gallery/`, json: true }, function (err, res, json) {
-          addDynamicRoute('album', json.count);
+          json && addDynamicRoute('album', json.count);
         })
         request({ url: `${API}/concerts/`, json: true }, function (err, res, json) {
-          addDynamicRoute('program-page', json.count);
+          json && addDynamicRoute('program-page', json.count);
         })
+
+        setInterval(function () {
+          request({ url: `${API}/news/`, json: true }, function (err, res, json) {
+            json && addDynamicRoute('news', json.count);
+          })
+          request({ url: `${API}/gallery/`, json: true }, function (err, res, json) {
+            json && addDynamicRoute('album', json.count);
+          })
+          request({ url: `${API}/concerts/`, json: true }, function (err, res, json) {
+            json && addDynamicRoute('program-page', json.count);
+          })
+        }, 1000 * 60 * 3)
 
         // use next.js
         server.get('*', (req, res) => handle(req, res))
 
         server.listen(port, (err) => {
           if (err) throw err
-          console.log(`Listening on http://localhost:${port}`);
+          console.log(`Listening on http://${HOST}:${port}`);
         })
       })
   })

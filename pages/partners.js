@@ -21,9 +21,7 @@ const Partners = ({ t, partners }) => (
           {partners.map(partner => (
             <div className="col-lg-3 col-sm-7 mycol" key={partner.id}>
               <div className="partner__block">
-                <Link href={partner.link}>
-                  <a><img src={partner.image} alt="Парнер" className="img-responsive partner__logo" /></a>
-                </Link>
+                <a target="_blank" href={partner.link}><img src={partner.image} alt="Парнер" className="img-responsive partner__logo" /></a>
               </div>
             </div>
           ))}

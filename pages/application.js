@@ -106,7 +106,7 @@ class Application extends React.Component {
 
 
   doForm = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     const dataObj = {
       name: this.state.name,
       birth: this.state.birthday,
@@ -127,37 +127,20 @@ class Application extends React.Component {
     this.setState({
       newObj: dataObj
     })
-    // console.log(dataObj)
+
     this.submitForm(dataObj);
-
-
   }
-  // submitForm = async (data) => {
-  //   await console.log(data)
-  //   await callApi('/request', "ru")
-  //   console.log(2)
-  // };
 
   submitForm = (dataObj) => {
     const { t } = this.props;
-    var myHeaders = new Headers();
 
-    myHeaders.append('Content-Type', 'application/json');
     fetch(`${apiUrl}/request/`, {
       method: "POST",
       headers: {
-        // 'Access-Control-Allow-Origin': '*',
-        // 'Access-Control-Allow-Origin': 'http://localhost:3002',
-        // 'Access-Control-Allow-Credentials': true,
-
-        // 'Accept': '*/*',
-        'Content-Type': 'application/json',
-
-        // 'Host': '31.192.109.44'
-        // 'Cookie': 'csrftoken=ydCDOcCJgMYC0lzN2zrBxbbAdMXjpu68py6alSBl6wYwJShR9vN3DseahCqT5Gtu; sessionid=4ytzi3yt4n2a5xa84d5902eiijhovvq1',
-        // 'X-CSRFToken': 'XbzEVU56DDdgWBUvfhf13QJb068ZMWmmOw3bsA4ItndaF8CzmdBt97ML4WBzs8JI'
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
       },
-      // method: 'no-cors',
+      credentials: 'omit',
       body: JSON.stringify(dataObj)
     })
       .then((function (response) {
@@ -334,7 +317,7 @@ class Application extends React.Component {
                       </div>
                       <button
                         className="act__btn application-form__btn"
-                        onClick={() => this.doForm()}
+                        onClick={(e) => this.doForm(e)}
                       >
                         {t("ApplicationPage.form.sendApplication")}
                       </button>

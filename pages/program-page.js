@@ -7,6 +7,7 @@ import callApi from '../utils/api';
 import { getYouTubeVideoId } from '../utils/common';
 import Lightbox from 'react-images';
 import Layout from '../layouts/Main';
+import { IP } from '../constants/settings';
 
 function getDaysArrayByMonth(currentMounth, language) {
   currentMounth.locale(language);
@@ -37,7 +38,18 @@ class ProgramPage extends React.Component {
     const concertID = query.id;
     const responseConcert = await callApi(`/concerts/${concertID}`, language);
 
-    return { concert: responseConcert, concerts: response, mounthCalendar, language };
+    let responseNextConcert;
+    let responsePrevConcert;
+
+    if (responseConcert.next_id) {
+      responseNextConcert = await callApi(`/concerts/${responseConcert.next_id}`, language);
+    }
+
+    if (responseConcert.previous_id) {
+      responsePrevConcert = await callApi(`/concerts/${responseConcert.previous_id}`, language);
+    }
+
+    return { concert: responseConcert, concerts: response, mounthCalendar, language, nextConcerts: responseNextConcert, prevConcerts: responsePrevConcert };
   }
 
   state = {
@@ -86,7 +98,7 @@ class ProgramPage extends React.Component {
   }
 
   render() {
-    const { t, language, concert } = this.props;
+    const { t, language, concert, nextConcerts, prevConcerts } = this.props;
     const { concerts, mounthCalendar } = this.state;
     moment.locale(i18n.language);
 
@@ -137,10 +149,12 @@ class ProgramPage extends React.Component {
             <div className="row">
               <div className="col-12">
                 <div className="affiche__comeback">
-                  {concerts.previous &&
-                    <Link href={`/calendar/${concerts.previous}`}>
+
+                  {concert.previous_id &&
+                    <Link href={`/program-page/${concert.previous_id}`}>
                       <a className="event__toglle prev__event">
-                        {/* 14 сентября <sup><small>2018</small></sup> */}
+                        {moment(prevConcerts.dt.slice(0, 16)).locale(i18n.language).format("D MMMM")}
+                        <sup><small>{moment(prevConcerts.dt.slice(0, 16)).locale(i18n.language).format("YYYY")}</small></sup>
                       </a>
                     </Link>
                   }
@@ -149,10 +163,11 @@ class ProgramPage extends React.Component {
                     <a className="affiche__comeback-link">{t("AfishaPage.backAfisha")}</a>
                   </Link>
 
-                  {concerts.next &&
-                    <Link href={`/calendar/${concerts.next}`}>
+                  {concert.next_id &&
+                    <Link href={`/program-page/${concert.next_id}`}>
                       <a className="event__toglle next__event">
-                        {/* 2 октября <sup><small>2018</small></sup> */}
+                        {moment(nextConcerts.dt.slice(0, 16)).locale(i18n.language).format("D MMMM")}
+                        <sup><small>{moment(nextConcerts.dt.slice(0, 16)).locale(i18n.language).format("YYYY")}</small></sup>
                       </a>
                     </Link>
                   }
@@ -225,8 +240,8 @@ class ProgramPage extends React.Component {
 
                         {concert.images.map(image => (
                           <div className="photo-gallery__item" key={image.id}>
-                            <a data-fancybox="group" href={`http://31.192.109.44${image.image}`}>
-                              <img src={`http://31.192.109.44${image.image}`} />
+                            <a data-fancybox="group" href={`http://${IP}${image.image}`}>
+                              <img src={`http://${IP}${image.image}`} />
                             </a>
                           </div>
                         ))}
@@ -249,7 +264,7 @@ class ProgramPage extends React.Component {
                     <div className="owl-carousel program-page__carousel">
                       <a data-fancybox="gallery" rel="carousel" href="img/gallery/big/program/program-title-photo1.jpg">
                         <img src="../static/img/gallery/small/program/program-title-photo1.jpg" />>
-          </a>
+                      </a>
                       <a data-fancybox href="https://www.youtube.com/watch?v=fQmvMavhmco;autoplay=1" className="popap__video popap__video--program-page"
                         rel="carousel" id="autoplay">
                         <img src="../static/img/gallery/small/program/program1.jpg" alt="Фотогалерея" className="program1" />
@@ -317,11 +332,12 @@ class ProgramPage extends React.Component {
                 <div className="row">
                   <div className="col-12">
                     <div className="program-button__wrapper program-button__wrapper--bottom">
-                      <a href={concert.link_buy} target="_blank">
+                      {concert.link_buy && <a href={concert.link_buy} target="_blank">
                         <button className="act__btn act__btn--program-page bottom__btn--program-page" type="button">
                           {t("AfishaPage.buyTicket")}
                         </button>
                       </a>
+                      }
                     </div>
                   </div>
                 </div>

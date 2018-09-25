@@ -66,7 +66,6 @@ const NewsPage = ({ t, news, language, nextNews, prevNews }) => {
 
 
 NewsPage.getInitialProps = async ({ req, res, query }) => {
-  console.log(req, res, query);
   const language = req || res ? req.language || res.locals.language : null;
   const newsID = query.id;
   const response = await callApi(`/news/${newsID}`, language);

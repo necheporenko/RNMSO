@@ -54,11 +54,11 @@ class Header extends React.Component {
                                             <img src="../../static/img/header_logo.png" alt="Российский Национальный Молодёжный Симфоический Оркестр" />
                                         </a>
                                     </Link>
-                                    <Link href='https://xn--80afcdbalict6afooklqi5o.xn--p1ai/'>
-                                        <a className="logo__link logo__linl--grants">
-                                            <img src="../../static/img/grants_logo.png" alt="Фонд президентских грантов" />
-                                        </a>
-                                    </Link>
+
+                                    <a href='https://xn--80afcdbalict6afooklqi5o.xn--p1ai/' target="_blank" className="logo__link logo__linl--grants">
+                                        <img src="../../static/img/grants_logo.png" alt="Фонд президентских грантов" />
+                                    </a>
+
                                 </div>
                             </div>
                             <div className="col-2 d-block d-lg-none d-xl-none">

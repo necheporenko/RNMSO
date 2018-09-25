@@ -7,6 +7,7 @@ import { withI18next } from '../lib/withI18next';
 import callApi from '../utils/api';
 import { getYouTubeVideoId } from '../utils/common';
 import Layout from '../layouts/Main';
+import { IP } from '../constants/settings';
 
 
 class Home extends React.Component {
@@ -169,8 +170,11 @@ class Home extends React.Component {
                                   </div>
                                 </div>
                                 <div className="slide__right">
-                                  {concert.images.length > 0 && concert.images.slice(0, 2).map((image, index) => (
-                                    <img key={index} src={`http://31.192.109.44/media/small/${image.image.substring(6)}`} alt="Участник концерта" />
+                                  {concert.image &&
+                                    <img src={concert.image} alt="Участник концерта" />
+                                  }
+                                  {concert.images.length > 0 && concert.images.slice(0, 1).map((image, index) => (
+                                    <img key={index} src={`http://${IP}/media/small/${image.image.substring(6)}`} alt="Участник концерта" />
                                   ))}
                                 </div>
                               </div>

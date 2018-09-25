@@ -1,5 +1,3 @@
-const IP = 'http://31.192.109.44';
-
-export const apiUrl = `${IP}/api`;
-
-export const HOST = 'http:/localhost';
+export const apiUrl = require('./settingsServer.js').apiUrl;
+export const HOST = require('./settingsServer.js').HOST;
+export const IP = require('./settingsServer.js').IP;

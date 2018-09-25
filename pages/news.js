@@ -23,7 +23,10 @@ class News extends React.Component {
     offset: 0
   }
 
-  static getDerivedStateFromProps(nextProps) {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.data.next !== prevState.news.next) {
+      return { news: prevState.news }
+    }
     if (nextProps.i18n.language === i18n.language) {
       return { news: nextProps.data }
     }
