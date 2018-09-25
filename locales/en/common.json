@@ -56,7 +56,8 @@
     "conductors": "Conductors",
     "buyTicket": "Buy a ticket",
     "showAllConcerts": "Show all concerts",
-    "noConcerts": "No concerts"
+    "noConcerts": "No concerts",
+    "backAfisha": "Back to the afisha"
   },
   "ApplicationPage": {
     "application": "Application for participation in selection",

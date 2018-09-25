@@ -92,8 +92,8 @@ class Video extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="row justify-content-center">
 
+            <div className="row justify-content-center">
               <div className="col-lg-8" style={{ paddingBottom: '20px' }}>
                 {notMainVideos[0] && notMainVideos.filter(video => currentFilter === t("VideosPage.allVideos") ? video : video.tags.includes(currentFilter)).slice(0, 1).map(video => (
                   <figure className="video__carts top__cart" key={video.id}>
@@ -133,7 +133,7 @@ class Video extends React.Component {
 
             </div>
             <div className="video-carts__flex-wrapper">
-              {notMainVideos.length > 1 && notMainVideos.filter(video => currentFilter === t("VideosPage.allVideos") ? video : video.tags.indexOf(currentFilter)).slice(1).map(video => (
+              {notMainVideos.length > 1 && notMainVideos.filter(video => currentFilter === '' ? video : video.tags.includes(currentFilter)).slice(1).map(video => (
                 <div className="mix video__basis videoblog concert repetition" key={video.id}>
                   <figure className="video__carts">
                     <div className="link__frame">

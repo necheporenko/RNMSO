@@ -47,7 +47,11 @@ class ProgramPage extends React.Component {
     mounthCalendar: this.props.mounthCalendar
   }
 
-  static getDerivedStateFromProps(nextProps) {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (moment().format("YYYY-MM-DD") != moment(prevState.currentMounth).format("YYYY-MM-DD")) {
+      return { concerts: prevState.concerts, mounthCalendar: prevState.mounthCalendar }
+    }
+
     if (nextProps.i18n.language === i18n.language) {
       return { concerts: nextProps.concerts, mounthCalendar: nextProps.mounthCalendar }
     }
@@ -130,19 +134,31 @@ class ProgramPage extends React.Component {
                 </div>
               </div>
             </div>
-            {/* <div className="row">
-            <div className="col-12">
-              <div className="affiche__comeback">
-                <a href="#" className="event__toglle prev__event">
-                  14 сентября <sup><small>2018</small></sup>
-                </a>
-                <a href="calendar.html" className="affiche__comeback-link">Вернуться в афишу</a>
-                <a href="#" className="event__toglle next__event">
-                  2 октября <sup><small>2018</small></sup>
-                </a>
+            <div className="row">
+              <div className="col-12">
+                <div className="affiche__comeback">
+                  {concerts.previous &&
+                    <Link href={`/calendar/${concerts.previous}`}>
+                      <a className="event__toglle prev__event">
+                        {/* 14 сентября <sup><small>2018</small></sup> */}
+                      </a>
+                    </Link>
+                  }
+
+                  <Link href='/calendar'>
+                    <a className="affiche__comeback-link">{t("AfishaPage.backAfisha")}</a>
+                  </Link>
+
+                  {concerts.next &&
+                    <Link href={`/calendar/${concerts.next}`}>
+                      <a className="event__toglle next__event">
+                        {/* 2 октября <sup><small>2018</small></sup> */}
+                      </a>
+                    </Link>
+                  }
+                </div>
               </div>
             </div>
-          </div> */}
             {concert.id && (
               <div>
                 <div className="row">

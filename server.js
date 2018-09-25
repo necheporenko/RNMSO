@@ -95,18 +95,43 @@ i18n
         server.get('/news/:id', (req, res) => {
           const actualPage = '/news-page';
           const queryParams = { id: req.params.id };
+          request({ url: `${API}/news/`, json: true }, function (err, res, json) {
+            addDynamicRoute('news', json.count);
+          })
           app.render(req, res, actualPage, queryParams)
         })
+        server.get('/news', (req, res) => {
+          request({ url: `${API}/news/`, json: true }, function (err, res, json) {
+            addDynamicRoute('news', json.count);
+          })
+        })
+
         server.get('/album/:id', (req, res) => {
           const actualPage = '/album';
           const queryParams = { id: req.params.id };
+          request({ url: `${API}/gallery/`, json: true }, function (err, res, json) {
+            addDynamicRoute('album', json.count);
+          })
           app.render(req, res, actualPage, queryParams)
         })
+        server.get('/album', (req, res) => {
+          request({ url: `${API}/gallery/`, json: true }, function (err, res, json) {
+            addDynamicRoute('album', json.count);
+          })
+        })
+
         server.get('/program-page/:id', (req, res) => {
           const actualPage = '/program-page';
           const queryParams = { id: req.params.id };
-          sitemap.add({ url: `/program-page/${req.params.id}` });
+          request({ url: `${API}/concerts/`, json: true }, function (err, res, json) {
+            addDynamicRoute('program-page', json.count);
+          })
           app.render(req, res, actualPage, queryParams)
+        })
+        server.get('/program-page', (req, res) => {
+          request({ url: `${API}/concerts/`, json: true }, function (err, res, json) {
+            addDynamicRoute('program-page', json.count);
+          })
         })
 
         const robotsOptions = {

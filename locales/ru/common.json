@@ -56,7 +56,8 @@
     "conductors": "Дирижёры",
     "buyTicket": "Купить билет",
     "showAllConcerts": "Показать все концерты",
-    "noConcerts": "Нет концертов"
+    "noConcerts": "Нет концертов",
+    "backAfisha": "Вернуться в афишу"
   },
   "ApplicationPage": {
     "application": "Заявка на участие в отборе",

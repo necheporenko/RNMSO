@@ -146,7 +146,6 @@ class Application extends React.Component {
     var myHeaders = new Headers();
 
     myHeaders.append('Content-Type', 'application/json');
-    // console.log(myHeaders, dataObj)
     fetch(`${apiUrl}/request/`, {
       method: "POST",
       headers: {
@@ -154,14 +153,14 @@ class Application extends React.Component {
         // 'Access-Control-Allow-Origin': 'http://localhost:3002',
         // 'Access-Control-Allow-Credentials': true,
 
-        'Accept': '*/*',
+        // 'Accept': '*/*',
         'Content-Type': 'application/json',
 
         // 'Host': '31.192.109.44'
         // 'Cookie': 'csrftoken=ydCDOcCJgMYC0lzN2zrBxbbAdMXjpu68py6alSBl6wYwJShR9vN3DseahCqT5Gtu; sessionid=4ytzi3yt4n2a5xa84d5902eiijhovvq1',
         // 'X-CSRFToken': 'XbzEVU56DDdgWBUvfhf13QJb068ZMWmmOw3bsA4ItndaF8CzmdBt97ML4WBzs8JI'
       },
-      method: 'no-cors',
+      // method: 'no-cors',
       body: JSON.stringify(dataObj)
     })
       .then((function (response) {

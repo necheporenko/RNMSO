@@ -114,7 +114,6 @@ class Calendar extends React.Component {
                 </div>
               </div>
 
-
               <div className="col-lg-10 col-9">
                 <div className="calendar__wrapper">
                   <a href="#" className="calendar-slider__date">{moment(mounthCalendar[0]).format("MMMM YYYY")}</a>
@@ -162,7 +161,7 @@ class Calendar extends React.Component {
                       {moment(concert.dt.slice(0, 16)).format("D MMMM")}
                       <sup>
                         <small>{moment(concert.dt.slice(0, 16)).format("YYYY")}</small>
-                      </sup> / {moment(concert.dt.slice(0, 16)).format("D")} / {moment(concert.dt.slice(0, 16)).format("HH:mm")}
+                      </sup> / {moment(concert.dt.slice(0, 16)).format("dd")} / {moment(concert.dt.slice(0, 16)).format("HH:mm")}
                     </p>
                     <p className="event-cart__room">{concert.place}</p>
                     <Link as={`/program-page/${concert.id}`} href={`/program-page?id=${concert.id}`}><a><img src={concert.image.replace('media/', 'media/small/')} alt="Первью события" /></a></Link>
